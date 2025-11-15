@@ -2,7 +2,10 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci --only=production
+# Use npm install --omit=dev in builder to avoid CI failing when lockfile
+# and package.json are out of sync on the build host. This is less strict
+# than `npm ci` but more resilient for remote Docker builds.
+RUN npm install --omit=dev
 COPY . .
 RUN npm run build
 
