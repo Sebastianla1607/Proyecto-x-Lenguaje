@@ -1,12 +1,273 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Proyecto X - App</title>
-  </head>
-  <body>
-    <noscript>Necesitas habilitar JavaScript para usar esta app.</noscript>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title data-i18n="title">Elecciones Perú 2026</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Config Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#FFCB05",
+            "background-light": "#FFFFFF",
+            "background-dark": "#101622",
+            "text-light": "#000000",
+            "text-dark": "#F5F5F5",
+            "card-light": "#FFFFFF",
+            "card-dark": "#1A202C",
+            "secondary-text-light": "#616f89",
+            "secondary-text-dark": "#A0AEC0",
+            "border-light": "#dbdfe6",
+            "border-dark": "#4A5568",
+            "accent-blue": "#0D47A1"
+          },
+          fontFamily: {
+            "display": ["Public Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="stylesheet" href="../assets/css/index.css">
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .translate-panel {
+      position: fixed;
+      right: 1rem;
+      top: 4.25rem;
+      z-index: 60;
+      width: 260px;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.2);
+      padding: 0.5rem;
+    }
+
+    .translate-panel .lang-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem;
+      border-radius: .5rem;
+      cursor: pointer;
+    }
+
+    .translate-panel .lang-item:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .translate-panel .lang-item.active {
+      background: rgba(13, 71, 161, 0.08);
+    }
+
+    .translate-panel::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid white;
+    }
+  </style>
+
+</head>
+
+<body class="font-display">
+
+  <div
+    class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
+
+    <!-- HEADER -->
+    <div
+      class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
+
+      <!-- LOGO CENTRAL -->
+      <div class="flex-1 flex justify-center">
+        <img src="../assets/img/logo.png" alt="Nisqamanta" class="h-8 object-contain" />
+      </div>
+
+      <!-- BOTONES -->
+      <div class="flex items-center gap-2">
+
+        <!-- Botón idioma -->
+        <div class="relative">
+          <button id="translateBtn"
+            class="translate-btn flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Cambiar idioma">
+            <span class="material-symbols-outlined">translate</span>
+          </button>
+
+          <!-- Panel -->
+          <div id="translatePanel"
+            class="translate-panel hidden border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+            <div class="text-sm font-semibold px-2 py-1">Idioma</div>
+            <div id="langList" class="px-1 pb-1"></div>
+            <div class="px-2 py-2 text-xs text-secondary-text-light dark:text-secondary-text-dark">
+              El idioma se guarda y se aplica a todas las páginas.
+            </div>
+          </div>
+        </div>
+
+        <!-- Notificaciones -->
+        <div class="flex w-12 items-center justify-end">
+          <a href="Notifications.html"
+            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0">
+            <span class="material-symbols-outlined">notifications</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="flex-grow pb-24">
+
+      <div class="p-4 pt-6">
+        <h1 data-i18n="hero.title" class="text-text-light dark:text-text-dark text-3xl font-bold text-center">
+          Tu Guía para las Elecciones Generales 2026
+        </h1>
+        <p data-i18n="hero.subtitle" class="text-secondary-text-light dark:text-secondary-text-dark text-center mt-2">
+          Infórmate y participa. Todo lo que necesitas saber.
+        </p>
+      </div>
+
+      <!-- CONTADOR -->
+      <div class="p-4 pt-2">
+        <h3 data-i18n="countdown.title" class="text-text-light dark:text-text-dark text-lg font-bold text-center pb-2">
+          Faltan para el día de la elección
+        </h3>
+
+        <div class="flex gap-4 pb-4">
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.months"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Meses</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.days"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Días</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.hours"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Horas</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.minutes"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Minutos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="grid grid-cols-2 gap-4 p-4 pt-0">
+        <a href="Noticias.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">feed</span>
+          <h2 data-i18n="nav.news" class="text-base font-bold">Noticias</h2>
+        </a>
+
+        <a href="Candidatos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">campaign</span>
+          <h2 data-i18n="nav.candidates" class="text-base font-bold">Candidatos</h2>
+        </a>
+
+        <a href="Calendario_unido.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">calendar_month</span>
+          <h2 data-i18n="nav.calendar" class="text-base font-bold">Calendario</h2>
+        </a>
+
+        <a href="Partido_politicos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">groups</span>
+          <h2 data-i18n="nav.parties" class="text-base font-bold">Partidos</h2>
+        </a>
+      </div>
+
+      <!-- UBICACION -->
+      <div class="px-4 pb-4">
+        <a href="Ubicacion.html"
+          class="flex items-center gap-4 p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl">where_to_vote</span>
+          <div class="flex flex-col">
+            <h3 data-i18n="location.title" class="text-lg font-bold">Ubica tu Local de Votación</h3>
+            <p data-i18n="location.subtitle" class="text-sm">Consulta dónde te toca votar con tu DNI.</p>
+          </div>
+          <span class="material-symbols-outlined ml-auto">arrow_forward_ios</span>
+        </a>
+      </div>
+
+      <!-- SABÍAS QUE -->
+      <div class="p-4">
+        <div class="rounded-xl border p-4 bg-card-light dark:bg-card-dark">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-primary dark:text-sky-400">lightbulb</span>
+            <h3 data-i18n="didyouknow.title" class="text-lg font-bold">¿Sabías que?</h3>
+          </div>
+          <p data-i18n="didyouknow.content">
+            El voto en blanco se diferencia del voto viciado.
+          </p>
+        </div>
+      </div>
+
+    </main>
+
+    <div id="site-footer"></div>
+
+    <!-- Cargar footer -->
+    <script>
+      fetch('footer.html')
+        .then(r => r.text())
+        .then(html => document.getElementById('site-footer').innerHTML = html)
+        .catch(err => console.warn("No se pudo cargar footer:", err));
+    </script>
+
+    <!-- Temporizador -->
+    <script src="../assets/js/index-timer.js" defer></script>
+
+    <!-- i18n -->
+    <script src="../assets/js/i18n.js"></script>
+
+  </div>
+
+</body>
+
 </html>

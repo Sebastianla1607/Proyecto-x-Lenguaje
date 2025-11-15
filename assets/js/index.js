@@ -1,56 +1,19 @@
-// index.js - control del contador y utilidades mínimas
-// Fecha oficial de las Elecciones Generales del Perú 2026 (ajustable)
-const ELECTION_ISO = '2026-04-12T07:00:00-05:00';
-const TARGET = new Date(ELECTION_ISO);
+const express = require('express');
+const path = require('path');
+const app = express();
 
-function addMonths(date, months) {
-  const d = new Date(date.getTime());
-  const day = d.getDate();
-  d.setMonth(d.getMonth() + months);
-  if (d.getDate() !== day) d.setDate(0);
-  return d;
-}
+// Middleware para JSON (API)
+app.use(express.json());
 
-function updateCountdownIndex() {  
-  const now = new Date();
-  if (isNaN(TARGET.getTime())) return;
-  if (now >= TARGET) {
-    const el = document.getElementById('countdown');
-    if (el) el.innerText = '¡Día de las Elecciones!';
-    return;
-  }
+// --- API Endpoints ---
+app.get('/pedidos', (req, res) => res.json([{ id: 1, detalle: "Pedido 1" }]));
 
-  let months = (TARGET.getFullYear() - now.getFullYear()) * 12 + (TARGET.getMonth() - now.getMonth());
-  let anchor = addMonths(now, months);
-  if (anchor > TARGET) { months -= 1; anchor = addMonths(now, months); }
-  let remainder = TARGET.getTime() - anchor.getTime();
-  if (remainder < 0) remainder = 0;
+// --- Servir Flutter Web ---
+app.use(express.static(path.join(__dirname, 'build/web')));
 
-  const MS_DAY = 24*60*60*1000;
-  const MS_HOUR = 60*60*1000;
-  const MS_MIN = 60*1000;
+// Todas las rutas que no sean API van a index.html
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'build/web', 'index.html')));
 
-  const days = Math.floor(remainder / MS_DAY);
-  remainder -= days * MS_DAY;
-  const hours = Math.floor(remainder / MS_HOUR);
-  remainder -= hours * MS_HOUR;
-  const minutes = Math.floor(remainder / MS_MIN);
-  remainder -= minutes * MS_MIN;
-  
-
-  const monthsEl = document.getElementById('months');
-  const daysEl = document.getElementById('days');
-  const hoursEl = document.getElementById('hours');
-  const minutesEl = document.getElementById('minutes');
-  const secondsEl = document.getElementById('seconds');
-
-  if (monthsEl) monthsEl.textContent = String(months);
-  if (daysEl) daysEl.textContent = String(days);
-  if (hoursEl) hoursEl.textContent = String(hours).padStart(2,'0');
-  if (minutesEl) minutesEl.textContent = String(minutes).padStart(2,'0');
-  if (secondsEl) secondsEl.textContent = String(seconds).padStart(2,'0');
-}
-
-// Ejecutar inmediatamente y cada segundo
-updateCountdownIndex();
-setInterval(updateCountdownIndex, 1000);
+// Puerto dinámico para Railway
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
