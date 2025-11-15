@@ -11,7 +11,7 @@ function addMonths(date, months) {
   return d;
 }
 
-function updateCountdownIndex() {
+function updateCountdownIndex() {  
   const now = new Date();
   if (isNaN(TARGET.getTime())) return;
   if (now >= TARGET) {
