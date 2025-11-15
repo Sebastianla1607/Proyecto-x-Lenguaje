@@ -1,24 +1,185 @@
-function showPanel(name) {
-  const panels = document.getElementsByClassName('panel');
-  for (const p of panels) p.classList.add('hidden');
-  const target = document.getElementById(name);
-  if (target) target.classList.remove('hidden');
+/* Calendario dinámico: renderiza meses, permite navegar y filtrar por panel (todos/votantes/miembros).
+   Inicializa mostrando el mes de la fecha de votación. */
 
-  const events = document.getElementsByClassName('events-panel');
-  for (const e of events) e.classList.add('hidden');
-  if (name === 'panel-todos') document.getElementById('events-panel-todos').classList.remove('hidden');
-  if (name === 'panel-votantes') document.getElementById('events-panel-votantes').classList.remove('hidden');
-  if (name === 'panel-miembros') document.getElementById('events-panel-miembros').classList.remove('hidden');
+(function () {
+  const votingDate = new Date(2026, 3, 12); // 12 April 2026 (meses 0-indexados)
+  let current = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
+  let currentFilter = 'todos'; // 'todos' | 'votantes' | 'miembros'
 
-  const btns = document.getElementsByClassName('filter-btn');
-  for (const b of btns) b.classList.remove('bg-primary','text-black','font-semibold');
-  const btn = document.getElementById('btn-' + name);
-  if (btn) btn.classList.add('bg-primary','text-black','font-semibold');
-}
+  // Eventos extraídos de las páginas originales. Ajusta/añade según necesites.
+  const events = [
+    { date: '2026-02-01', title: 'Cierre de Padrón Electoral', types: ['todos'] },
+    { date: '2026-02-18', title: 'Sorteo de Miembros de Mesa', types: ['miembros'] },
+    { date: '2026-02-25', title: 'Capacitación Miembros de Mesa', types: ['miembros'] },
+    { date: '2026-04-12', title: 'Día de la Votación — 1ª Vuelta', types: ['todos', 'votantes'] },
+    { date: '2026-05-23', title: 'Día de la Votación — 2ª Fecha (anterior)', types: ['todos', 'votantes'] },
+    { date: '2026-06-22', title: 'Resultados Preliminares', types: ['todos'] },
+    { date: '2026-07-20', title: '2ª Vuelta', types: ['todos', 'votantes'] },
+    { date: '2026-06-23', title: 'Pago de Compensación', types: ['miembros'] }
+  ];
 
-document.addEventListener('DOMContentLoaded', function () {
-  showPanel('panel-todos');
-  document.getElementById('btn-panel-todos').addEventListener('click', ()=> showPanel('panel-todos'));
-  document.getElementById('btn-panel-votantes').addEventListener('click', ()=> showPanel('panel-votantes'));
-  document.getElementById('btn-panel-miembros').addEventListener('click', ()=> showPanel('panel-miembros'));
-});
+  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+  function formatYMD(dateObj) {
+    const y = dateObj.getFullYear();
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+
+  function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    const title = document.getElementById('mes-titulo');
+    if (!grid || !title) return;
+
+    const year = current.getFullYear();
+    const month = current.getMonth();
+    title.textContent = `${monthNames[month]} ${year}`;
+
+    // Primer día del mes (0 domingo ... 6 sábado), queremos semana que inicia Lunes
+    const firstDay = new Date(year, month, 1).getDay();
+    const offset = (firstDay + 6) % 7; // convierte domingo(0) a 6, lunes(1) a 0, etc.
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Construir celdas
+    let html = '';
+    // vacíos por offset
+    for (let i = 0; i < offset; i++) {
+      html += `<div></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateObj = new Date(year, month, day);
+      const ymd = formatYMD(dateObj);
+      const dayEvents = events.filter(e => e.date === ymd);
+
+      // Determinar si alguna de las events coincide con el filtro activo
+      let highlight = '';
+      if (dayEvents.length > 0) {
+        // si filtro es 'todos' mostramos todos como marcado
+        if (currentFilter === 'todos') {
+          // preferencia de color: miembros > votantes > default
+          if (dayEvents.some(ev => ev.types.includes('miembros'))) highlight = 'bg-filter-member text-black font-semibold';
+          else if (dayEvents.some(ev => ev.types.includes('votantes'))) highlight = 'bg-filter-voter text-black font-semibold';
+          else highlight = 'bg-primary text-black font-semibold';
+        } else {
+          // Si el día tiene evento del tipo activo, se resalta
+          if (dayEvents.some(ev => ev.types.includes(currentFilter))) {
+            highlight = currentFilter === 'miembros' ? 'bg-filter-member text-black font-semibold' : 'bg-filter-voter text-black font-semibold';
+          }
+        }
+      }
+
+      // Si el día es la fecha exacta de votación, agregar clase primaria
+      if (ymd === formatYMD(votingDate)) {
+        highlight = 'bg-primary text-black font-semibold';
+      }
+
+      const todayYmd = formatYMD(new Date());
+      const isToday = ymd === todayYmd;
+      const isVotingDay = ymd === formatYMD(votingDate);
+
+      const dotColor = dayEvents.some(ev=>ev.types.includes('miembros')) ? 'bg-filter-member' : (dayEvents.some(ev=>ev.types.includes('votantes')) ? 'bg-filter-voter' : 'bg-primary');
+      const dotHtml = dayEvents.length > 0 ? `<div class="absolute bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full ${dotColor} ${isVotingDay ? 'now-dot' : ''}"></div>` : '';
+
+      const extraClasses = isToday ? ' now-day' : '';
+
+      html += `<div class="flex items-center justify-center">
+            <div class="relative flex size-8 items-center justify-center rounded-full ${highlight || 'font-medium text-slate-700 dark:text-slate-300'}${extraClasses}">
+              <span>${day}</span>
+              ${dotHtml}
+            </div>
+          </div>`;
+    }
+
+    grid.innerHTML = html;
+  }
+
+  function changeMonth(delta) {
+    current = new Date(current.getFullYear(), current.getMonth() + delta, 1);
+    renderCalendar();
+  }
+
+  // showPanel mantiene compatibilidad con botones previos
+  window.showPanel = function showPanel(name) {
+    // name expected: 'panel-todos' | 'panel-votantes' | 'panel-miembros'
+    const map = { 'panel-todos': 'todos', 'panel-votantes': 'votantes', 'panel-miembros': 'miembros' };
+    currentFilter = map[name] || 'todos';
+
+    // Ajusta clases de botón activo
+    const btns = document.getElementsByClassName('filter-btn');
+    for (const b of btns) {
+      b.classList.remove('bg-primary', 'text-black', 'font-semibold');
+    }
+    const activeBtn = document.getElementById('btn-' + name);
+    if (activeBtn) activeBtn.classList.add('bg-primary', 'text-black', 'font-semibold');
+
+    // Mostrar la sección de eventos correspondiente
+    const eventsPanels = document.getElementsByClassName('events-panel');
+    for (const ep of eventsPanels) {
+      ep.classList.add('hidden');
+    }
+    const evId = 'events-panel-' + (map[name] || 'todos');
+    const evTarget = document.getElementById(evId);
+    if (evTarget) evTarget.classList.remove('hidden');
+
+    renderCalendar();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Buttons for selecting panels
+    const btnTodos = document.getElementById('btn-panel-todos');
+    const btnVotantes = document.getElementById('btn-panel-votantes');
+    const btnMiembros = document.getElementById('btn-panel-miembros');
+    if (btnTodos) btnTodos.addEventListener('click', function () { window.showPanel('panel-todos'); });
+    if (btnVotantes) btnVotantes.addEventListener('click', function () { window.showPanel('panel-votantes'); });
+    if (btnMiembros) btnMiembros.addEventListener('click', function () { window.showPanel('panel-miembros'); });
+
+    // Month navigation
+    const prev = document.getElementById('btn-prev-month');
+    const next = document.getElementById('btn-next-month');
+    if (prev) prev.addEventListener('click', function () { changeMonth(-1); });
+    if (next) next.addEventListener('click', function () { changeMonth(1); });
+
+    // Iniciar mostrando el mes de la votación y el panel 'todos'
+    current = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
+    window.showPanel('panel-todos');
+    renderCalendar();
+    // Reloj en tiempo real y comprobación de día de votación
+    function updateClock() {
+      const now = new Date();
+      const clockEl = document.getElementById('current-clock');
+      if (clockEl) {
+        const opts = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        // forzar formato en español sin AM/PM
+        const s = now.toLocaleString('es-ES', { ...opts, hour12: false });
+        clockEl.textContent = s.replace(/\./g, '');
+      }
+
+      // Si hoy es el día de votación, asegurarse de mostrar ese mes y refrescar resaltado
+      const todayYmd = formatYMD(now);
+      if (todayYmd === formatYMD(votingDate)) {
+        const votingMonthStart = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
+        // Si no estamos en el mes de votación, muévelo
+        if (current.getFullYear() !== votingMonthStart.getFullYear() || current.getMonth() !== votingMonthStart.getMonth()) {
+          current = votingMonthStart;
+          renderCalendar();
+        } else {
+          // Re-render para actualizar resaltado del día actual
+          renderCalendar();
+        }
+      } else {
+        // Si no es día de votación, también queremos resaltar el día actual en el calendario
+        // si el mes visible es el mes actual
+        if (current.getFullYear() === now.getFullYear() && current.getMonth() === now.getMonth()) {
+          renderCalendar();
+        }
+      }
+    }
+
+    // Actualiza el reloj y el calendario cada segundo
+    updateClock();
+    setInterval(updateClock, 1000);
+  });
+
+})();

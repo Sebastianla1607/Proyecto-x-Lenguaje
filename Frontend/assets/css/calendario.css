@@ -17,3 +17,34 @@ body {
 .filter-btn.text-black {
   color: #000 !important;
 }
+
+/* Colores usados por el calendario dinámico */
+.bg-primary {
+  background-color: #FFCB05 !important;
+}
+.bg-filter-voter {
+  background-color: #60A5FA !important; /* azul */
+}
+.bg-filter-member {
+  background-color: #FB923C !important; /* naranja */
+}
+
+.text-black {
+  color: #000 !important;
+}
+
+/* Estilo para el día 'ahora' (actual) y para el día de votación en tiempo real */
+.now-day {
+  outline: 3px solid rgba(255, 203, 5, 0.95);
+  outline-offset: 2px;
+}
+
+.now-dot {
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}

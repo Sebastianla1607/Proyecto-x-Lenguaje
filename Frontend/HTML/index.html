@@ -106,16 +106,25 @@
         <div class="flex gap-4 pb-4">
           <div class="flex grow basis-0 flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-              <p class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">824</p>
+              <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">0</p>
             </div>
             <div class="flex items-center justify-center">
-              <p class="text-secondary-text-light dark:text-secondary-text-dark text-sm font-normal leading-normal">Días
+              <p class="text-secondary-text-light dark:text-secondary-text-dark text-sm font-normal leading-normal">Meses
               </p>
             </div>
           </div>
           <div class="flex grow basis-0 flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-              <p class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">16</p>
+              <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">0</p>
+            </div>
+            <div class="flex items-center justify-center">
+              <p class="text-secondary-text-light dark:text-secondary-text-dark text-sm font-normal leading-normal">
+                Días</p>
+            </div>
+          </div>
+          <div class="flex grow basis-0 flex-col items-stretch gap-2">
+            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">0</p>
             </div>
             <div class="flex items-center justify-center">
               <p class="text-secondary-text-light dark:text-secondary-text-dark text-sm font-normal leading-normal">
@@ -124,7 +133,7 @@
           </div>
           <div class="flex grow basis-0 flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-              <p class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">45</p>
+              <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black leading-tight tracking-[-0.015em]">0</p>
             </div>
             <div class="flex items-center justify-center">
               <p class="text-secondary-text-light dark:text-secondary-text-dark text-sm font-normal leading-normal">
@@ -133,7 +142,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4 p-4 pt-0">
+        <div class="grid grid-cols-2 gap-4 p-4 pt-0">
         <div
           class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">feed</span>
@@ -144,16 +153,14 @@
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">campaign</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Candidatos</h2>
         </div>
-        <div
-          class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
+        <a href="Calendario_unido.html" class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">calendar_month</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Calendario</h2>
-        </div>
-        <div
-          class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
+        </a>
+        <a href="Partido_politicos.html" class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">groups</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Partidos</h2>
-        </div>
+        </a>
       </div>
       <div class="px-4 pb-4">
         <div
@@ -205,6 +212,7 @@
         </button>
       </div>
     </div>
+    <script src="../assets/js/index-timer.js" defer></script>
   </div>
 </body>
 

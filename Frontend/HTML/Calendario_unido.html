@@ -54,11 +54,14 @@
         <div class="px-4 pt-2 pb-4">
             <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
                 <div class="flex items-center justify-between pb-3">
-                    <button class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <button id="btn-prev-month" class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
                         <span class="material-symbols-outlined !text-xl">chevron_left</span>
                     </button>
-                    <h3 class="text-base font-semibold text-slate-900 dark:text-slate-50">Febrero 2026</h3>
-                    <button class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <div class="flex flex-col items-center">
+                        <h3 id="mes-titulo" class="text-base font-semibold text-slate-900 dark:text-slate-50">Mes Año</h3>
+                        <p id="current-clock" class="text-xs text-slate-500 dark:text-slate-400 mt-1"></p>
+                    </div>
+                    <button id="btn-next-month" class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
                         <span class="material-symbols-outlined !text-xl">chevron_right</span>
                     </button>
                 </div>
@@ -72,115 +75,10 @@
                     <div>D</div>
                 </div>
 
-                <div id="panel-todos" class="panel mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
-                    <div class="col-start-6 flex items-center justify-center">
-                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
-                            <span>1</span>
-                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
-                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-primary font-semibold text-black"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-member"></div></div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
-                </div>
+                <div id="calendar-grid" class="mt-2 grid grid-cols-7 gap-y-1 text-center text-sm"></div>
 
                 <!-- Panel: Votantes (copia fiel de Calendario2.html) -->
-                <div id="panel-votantes" class="panel hidden mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
-                    <div class="col-start-6 flex items-center justify-center">
-                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
-                            <span>1</span>
-                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
-                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-filter-voter font-semibold text-black dark:text-slate-900"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-member"></div></div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
-                </div>
-
-                <!-- Panel: Miembros (copia fiel de Calendario3.html) -->
-                <div id="panel-miembros" class="panel hidden mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
-                    <div class="col-start-6 flex items-center justify-center">
-                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
-                            <span>1</span>
-                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
-                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-filter-member font-semibold text-black dark:text-slate-900"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div></div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
-                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
-                </div>
+                
 
             </div>
         </div>
