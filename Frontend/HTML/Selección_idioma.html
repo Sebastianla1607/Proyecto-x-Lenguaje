@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Selecciona tu idioma</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f4e225",
+              "background-light": "#f8f8f5",
+              "background-dark": "#222110",
+              "content-light": "#181711",
+              "content-dark": "#e6e5db",
+              "subtle-light": "#8a8760",
+              "subtle-dark": "#8a8760",
+              "border-light": "#e6e5db",
+              "border-dark": "#3d3c2d"
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-display bg-background-light dark:bg-background-dark text-content-light dark:text-content-dark;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col font-display group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-10 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined text-content-light dark:text-content-dark">arrow_back</span>
+</div>
+<h1 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center text-content-light dark:text-content-dark">Selecciona tu idioma</h1>
+<div class="flex size-12 shrink-0"></div>
+</div>
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-subtle-light dark:text-subtle-dark flex border-none bg-background-dark/5 dark:bg-background-light/5 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-0 border-none bg-background-dark/5 dark:bg-background-light/5 focus:border-none h-full placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-4 pl-2 text-base font-normal leading-normal" placeholder="Buscar idioma..." value=""/>
+</div>
+</label>
+</div>
+</header>
+<main class="flex-grow pb-28">
+<div class="flex flex-col gap-3 p-4">
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Achuar</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Aimara</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Amahuaca</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Arabela</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Ashaninka</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Asheninka</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Awajún</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Bora</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Cashinahua</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Chamikuro</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Ese eja</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-primary bg-primary/10 dark:bg-primary/20 p-4 flex-row-reverse cursor-pointer">
+<input checked="" class="form-radio h-5 w-5 border-2 border-primary bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-bold leading-normal text-content-light dark:text-content-dark">Español</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Harakbut</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Ikitu</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Iñapari</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Iskonawa</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Jaqaru</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kakataibo</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kakinte</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kandozi-Chapra</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kapanawa</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kawki</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Kukama Kukamiria</p></div>
+</label>
+<label class="flex items-center gap-4 rounded-lg border border-solid border-border-light dark:border-border-dark p-4 flex-row-reverse bg-background-light dark:bg-background-dark cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<input class="form-radio h-5 w-5 border-2 border-border-light dark:border-border-dark bg-transparent text-primary checked:bg-primary focus:outline-none focus:ring-0 focus:ring-offset-0 checked:border-primary" name="language-select" type="radio"/>
+<div class="flex grow flex-col"><p class="text-sm font-medium leading-normal">Madija</p></div>
+</label>
+<!-- Add the rest of the languages following the same pattern -->
+</div>
+</main>
+<footer class="fixed bottom-0 left-0 right-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex px-4 py-3">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-primary text-content-light text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Confirmar</span>
+</button>
+</div>
+</footer>
+</div>
+</body></html>
