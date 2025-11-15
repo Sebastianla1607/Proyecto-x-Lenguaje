@@ -71,8 +71,8 @@
   </style>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark">
-  <div class="relative flex h-auto min-h-screen w-full flex-col">
+<body class="font-display bg-white dark:bg-background-dark">
+  <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
 
     <header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
       <div class="flex items-center p-4">
@@ -111,7 +111,36 @@
               class="logo">Fuerza Popular</a></li>
       </ul>
     </main>
-  </div>
+    </main>
+
+    <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
+      <div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="index.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">home</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Calendario_unido.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+          <div class="flex h-8 items-center justify-end">
+            <span class="material-symbols-outlined">campaign</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Partido_politicos.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">groups</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Partidos</p>
+        </a>
+      </div>
+    </div>
 
   <script>
     const input = document.getElementById("searchInput");
@@ -120,10 +149,10 @@
     input.addEventListener("input", () => {
       const text = input.value.toLowerCase();
 
-      parties.forEach(party => {
+      for (const party of parties) {
         const name = party.innerText.toLowerCase();
         party.style.display = name.includes(text) ? "" : "none";
-      });
+      }
     });
   </script>
 

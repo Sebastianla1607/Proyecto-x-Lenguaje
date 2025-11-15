@@ -75,8 +75,7 @@
 </head>
 
 <body class="font-display">
-  <div
-    class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+  <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
     <div
       class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
       <div class="text-text-light dark:text-text-dark flex h-12 w-12 shrink-0 items-center justify-start">
@@ -188,28 +187,32 @@
         </div>
       </div>
     </main>
-    <div
-      class="fixed bottom-0 left-0 right-0 z-10 border-t border-border-light dark:border-border-dark bg-card-light/80 dark:bg-card-dark/80 backdrop-blur-sm">
-      <div class="grid grid-cols-4 h-16">
-        <button class="flex flex-col items-center justify-center gap-1 text-text-light dark:text-text-dark">
-          <span class="material-symbols-outlined">home</span>
-          <span class="text-xs font-medium">Inicio</span>
-        </button>
-        <button
-          class="flex flex-col items-center justify-center gap-1 text-secondary-text-light dark:text-secondary-text-dark">
-          <span class="material-symbols-outlined">feed</span>
-          <span class="text-xs font-medium">Noticias</span>
-        </button>
-        <button
-          class="flex flex-col items-center justify-center gap-1 text-secondary-text-light dark:text-secondary-text-dark">
-          <span class="material-symbols-outlined">campaign</span>
-          <span class="text-xs font-medium">Candidatos</span>
-        </button>
-        <button
-          class="flex flex-col items-center justify-center gap-1 text-secondary-text-light dark:text-secondary-text-dark">
-          <span class="material-symbols-outlined">account_circle</span>
-          <span class="text-xs font-medium">Mi Perfil</span>
-        </button>
+    <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
+      <div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="index.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">home</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Calendario_unido.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+          <div class="flex h-8 items-center justify-end">
+            <span class="material-symbols-outlined">campaign</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
+        </a>
+        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Partido_politicos.html">
+          <div class="flex h-8 items-center justify-center">
+            <span class="material-symbols-outlined">groups</span>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Partidos</p>
+        </a>
       </div>
     </div>
     <script src="../assets/js/index-timer.js" defer></script>
