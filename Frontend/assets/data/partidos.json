@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nombre": "Fuerza Popular",
+    "sigla": "FP",
+    "descripcion": "Partido peruano de orientación conservadora-liberal.",
+    "ideologia": "Derecha liberal-conservadora",
+    "logo_url": "https://i.postimg.cc/QMyDMpTZ/fplogo.png",
+    "sitio_web": "https://fuerzapopular.com.pe/",
+    "fecha_fundacion": "2010-03-28T00:00:00.000Z",
+    "lider": "Keiko Fujimori",
+    "estado": "Activo",
+    "foto_url": "https://i.postimg.cc/WbBJdk0d/3AVL3R5MVNAQHDI4FYX5ASRB34.jpg",
+    "created_at": "2025-11-15T07:11:30.668Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Renovación Popular",
+    "sigla": "RP",
+    "descripcion": "Partido conservador centrado en orden y seguridad.",
+    "ideologia": "Derecha conservadora",
+    "logo_url": "https://i.postimg.cc/SjFNxc3w/R.jpg",
+    "sitio_web": "https://renovacionpopular.org",
+    "fecha_fundacion": "2020-10-07T00:00:00.000Z",
+    "lider": "Rafael López Aliaga",
+    "estado": "Activo",
+    "foto_url": "https://i.postimg.cc/25KqfLkP/foto-1-70.jpg",
+    "created_at": "2025-11-15T07:11:30.668Z"
+  }
+]
