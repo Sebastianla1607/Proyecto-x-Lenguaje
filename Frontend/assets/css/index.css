@@ -1,0 +1,15 @@
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Base adjustments moved from inline styles */
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Small helper styles in case Tailwind isn't fully configured */
+.header { text-align: center; padding: 1rem; }
+.countdown { display:flex; gap:1rem; justify-content:center; }
+.countdown > div { text-align:center; }
+.modules .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
+.card { display:block; padding:1rem; border-radius:0.5rem; text-decoration:none; }
