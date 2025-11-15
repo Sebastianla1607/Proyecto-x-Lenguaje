@@ -41,8 +41,20 @@
 
 <body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
     <main class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+        <header class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border-light bg-card-light/90 p-4 backdrop-blur-sm">
+            <div class="justify-self-start">
+                <button onclick="history.back()" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+            </div>
+            <h2 class="text-xl font-bold text-text-light dark:text-text-dark text-center">Presidenciales</h2>
+            <div class="flex items-center gap-4 justify-self-end">
+                <a href="Notifications.html" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                    <span class="material-symbols-outlined">notifications</span>
+                </a>
+            </div>
+        </header>
         <div class="px-4 pt-4">
-            <h2 class="text-xl font-bold text-text-light dark:text-text-dark">Presidenciales</h2>
             <p id="candidate-count" class="text-sm text-secondary-text-light dark:text-secondary-text-dark">Cargando candidatos...</p>
         </div>
         <div id="candidates-list" class="flex flex-col px-4 gap-3">

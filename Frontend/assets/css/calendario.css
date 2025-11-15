@@ -48,3 +48,49 @@ body {
   50% { transform: scale(1.4); opacity: 0.6; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* Mejoras visuales profesionales para el panel de eventos */
+.event-card {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--tw-border-color, #e6edf8);
+  background-color: var(--card-bg, #ffffff);
+  align-items: flex-start;
+}
+.event-card .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.event-list .meta { font-size: 0.8125rem; color: #94a3b8; }
+.event-list .title { font-weight: 700; color: #0f172a; }
+
+/* Estilo para el día resaltado cuando se selecciona desde el panel */
+.highlighted-day {
+  box-shadow: 0 6px 18px rgba(16,24,40,0.12);
+  transform: translateY(-2px);
+  transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+}
+
+/* Animación breve que ayuda al usuario a ver el foco */
+.pulse-highlight {
+  animation: pulse 1.2s ease-in-out 1;
+}
+
+/* Botones dentro de los panels */
+.event-action {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+.event-action:focus { outline: 2px solid rgba(13,18,27,0.08); }
+
+/* Suavizar scroll cuando hacemos focus/scroll a calendario */
+html { scroll-behavior: smooth; }

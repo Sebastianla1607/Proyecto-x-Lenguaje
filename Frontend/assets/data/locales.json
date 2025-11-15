@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "nombre": "Colegio José Antonio Encinas",
+    "direccion": "Av. Universitaria 3000",
+    "distrito": "Los Olivos",
+    "provincia": "Lima",
+    "region": "Lima",
+    "lat": -11.973,
+    "lon": -77.068,
+    "created_at": "2025-11-15T07:18:45.682Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Colegio Bartolomé Herrera",
+    "direccion": "Av. La Marina 1500",
+    "distrito": "San Miguel",
+    "provincia": "Lima",
+    "region": "Lima",
+    "lat": -12.084,
+    "lon": -77.07,
+    "created_at": "2025-11-15T07:18:45.682Z"
+  }
+]

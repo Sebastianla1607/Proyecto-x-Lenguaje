@@ -8,7 +8,9 @@
 
   // Eventos extraídos de las páginas originales. Ajusta/añade según necesites.
   const events = [
-    { date: '2026-02-01', title: 'Cierre de Padrón Electoral', types: ['todos'] },
+    // 1 Febrero: cierre de padrón — también relevante para el sorteo/miembros
+    { date: '2026-02-01', title: 'Cierre de Padrón Electoral (plazo máximo para sorteo)', types: ['todos','miembros','votantes'] },
+    { date: '2026-02-11', title: 'Fecha límite: renuncia de candidatos y retiro de listas', types: ['todos','miembros'] },
     { date: '2026-02-18', title: 'Sorteo de Miembros de Mesa', types: ['miembros'] },
     { date: '2026-02-25', title: 'Capacitación Miembros de Mesa', types: ['miembros'] },
     { date: '2026-04-12', title: 'Día de la Votación — 1ª Vuelta', types: ['todos', 'votantes'] },
@@ -84,7 +86,8 @@
 
       const extraClasses = isToday ? ' now-day' : '';
 
-      html += `<div class="flex items-center justify-center">
+      // Incluir data-ymd para permitir selección desde panel
+      html += `<div class="flex items-center justify-center" data-ymd="${ymd}">
             <div class="relative flex size-8 items-center justify-center rounded-full ${highlight || 'font-medium text-slate-700 dark:text-slate-300'}${extraClasses}">
               <span>${day}</span>
               ${dotHtml}
@@ -93,6 +96,86 @@
     }
 
     grid.innerHTML = html;
+  }
+
+  // Genera dinámicamente los panels de eventos desde el array `events`
+  function renderEventPanels() {
+    const groups = { todos: [], votantes: [], miembros: [] };
+    for (const ev of events.slice().sort((a,b) => a.date.localeCompare(b.date))) {
+      const item = ev;
+      if (Array.isArray(ev.types)) {
+        if (ev.types.includes('todos')) groups.todos.push(item);
+        if (ev.types.includes('votantes')) groups.votantes.push(item);
+        if (ev.types.includes('miembros')) groups.miembros.push(item);
+      }
+    }
+
+    for (const key of ['todos','votantes','miembros']) {
+      const container = document.getElementById('events-panel-' + key);
+      if (!container) continue;
+      const inner = document.createElement('div');
+      inner.className = 'flex flex-col gap-3 event-list';
+      if (!groups[key].length) {
+        inner.innerHTML = `<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">No hay eventos para esta categoría.</p>`;
+        container.innerHTML = '';
+        container.appendChild(inner);
+        continue;
+      }
+      for (const ev of groups[key]) {
+        const card = document.createElement('article');
+        card.className = 'event-card';
+        card.innerHTML = `
+          <div class="icon bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-50">
+            <span class="material-symbols-outlined">${ev.icon || 'event'}</span>
+          </div>
+          <div class="flex-1">
+            <div class="text-sm meta">${(new Date(ev.date)).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'})}</div>
+            <div class="title">${ev.title}</div>
+            ${ev.description ? `<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark mt-1">${ev.description}</p>` : ''}
+            <div class="mt-2">
+              <button class="event-action" data-evdate="${ev.date}">Ver en calendario</button>
+            </div>
+          </div>`;
+        inner.appendChild(card);
+      }
+      container.innerHTML = '';
+      container.appendChild(inner);
+    }
+
+    // Delegación: escuchar clicks en botones 'Ver en calendario'
+    document.querySelectorAll('.event-action').forEach(b => {
+      b.addEventListener('click', (e) => {
+        const date = e.currentTarget.dataset.evdate;
+        if (date) {
+          // Mover calendario al mes y destacar el día
+          highlightDay(date);
+          // Dar foco al calendario
+          const grid = document.getElementById('calendar-grid');
+          if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+  }
+
+  // Resaltar un día (centrar mes y aplicar clase temporal)
+  function highlightDay(ymd) {
+    try {
+      const d = new Date(ymd);
+      current = new Date(d.getFullYear(), d.getMonth(), 1);
+      renderCalendar();
+      // esperar a que DOM se actualice
+      setTimeout(() => {
+        const el = document.querySelector(`[data-ymd='${ymd}'] .relative`);
+        if (el) {
+          el.classList.add('highlighted-day', 'pulse-highlight');
+          setTimeout(() => {
+            el.classList.remove('pulse-highlight');
+          }, 1400);
+          // quitar highlight después de un tiempo
+          setTimeout(() => { el.classList.remove('highlighted-day'); }, 4000);
+        }
+      }, 80);
+    } catch (e) { console.warn('highlightDay error', e); }
   }
 
   function changeMonth(delta) {
@@ -123,6 +206,25 @@
     const evTarget = document.getElementById(evId);
     if (evTarget) evTarget.classList.remove('hidden');
 
+    // Navegación inteligente: si hay eventos para este filtro, mover el calendario
+    try {
+      const filterType = currentFilter;
+      const today = new Date();
+      const matchingDates = events
+        .filter(e => Array.isArray(e.types) && e.types.includes(filterType))
+        .map(e => new Date(e.date))
+        .sort((a,b) => a - b);
+
+      if (matchingDates.length) {
+        // intentar elegir la próxima fecha >= hoy, si no existe elegir la primera
+        let chosen = matchingDates.find(d => d >= new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+        if (!chosen) chosen = matchingDates[0];
+        current = new Date(chosen.getFullYear(), chosen.getMonth(), 1);
+      }
+    } catch (e) {
+      console.debug('calendar smart-nav error', e);
+    }
+
     renderCalendar();
   }
 
@@ -143,6 +245,7 @@
 
     // Iniciar mostrando el mes de la votación y el panel 'todos'
     current = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
+    renderEventPanels();
     window.showPanel('panel-todos');
     renderCalendar();
     // Reloj en tiempo real y comprobación de día de votación

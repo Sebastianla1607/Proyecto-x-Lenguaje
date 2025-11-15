@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ubicación - Elecciones 2026</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    body { min-height: 100dvh; }
-  </style>
-</head>
-<body class="font-display bg-white">
-  <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
-    <header class="p-4">
-      <button onclick="history.back()" class="mr-2 text-black"><span class="material-symbols-outlined">arrow_back</span></button>
-      <h1 class="text-lg font-bold">Ubica tu Local de Votación</h1>
-    </header>
-    <main class="flex-1 p-4">
-      <p class="text-sm text-gray-600">Placeholder para la funcionalidad de ubicación de locales de votación.</p>
-    </main>
 
-    
-    <div id="site-footer"></div>
-    <script>
-      (function(){
-        fetch('footer.html')
-          .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-          .then(html => { document.getElementById('site-footer').innerHTML = html; })
-          .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
-      })();
-    </script>
-  </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ubicación - Elecciones 2026</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 0.5rem;
+        }
+
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+        <header class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border-light bg-card-light/90 p-4 backdrop-blur-sm">
+            <div class="justify-self-start">
+                <button onclick="history.back()" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+            </div>
+            <h2 class="text-xl font-bold text-text-light dark:text-text-dark text-center">Ubica tu Local de Votación</h2>
+            <div class="flex items-center gap-4 justify-self-end">
+                <a href="Notifications.html" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                    <span class="material-symbols-outlined">notifications</span>
+                </a>
+            </div>
+        </header>
+
+        <main class="flex-grow pb-24 p-4">
+            <div class="mb-4">
+                <input id="loc-search" type="search" placeholder="Busca por distrito, colegio o dirección..." class="w-full p-3 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-secondary-text-light dark:text-secondary-text-dark" />
+            </div>
+
+            <div id="locationsList" class="space-y-3"></div>
+
+            <div id="map" class="mt-4 rounded-xl overflow-hidden" style="height:320px;"></div>
+
+            <p id="loc-status" class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-3"></p>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script>
+            (function () {
+                fetch('footer.html')
+                    .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+                    .then(html => { document.getElementById('site-footer').innerHTML = html; })
+                    .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+            })();
+        </script>
+
+        <script src="../assets/js/ubicacion.js" defer></script>
+    </div>
 </body>
+
 </html>
