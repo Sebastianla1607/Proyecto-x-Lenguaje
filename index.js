@@ -59,12 +59,14 @@ app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', api_url: API_URL });
 });
 
-// Servir los archivos estáticos de la aplicación (CRA `build/`)
-app.use(express.static(path.join(__dirname, 'build')));
+// Servir archivos estáticos: carpeta `HTML/` y `assets/`
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'HTML')));
 
-// Todas las rutas van al index.html (soporta client-side routing)
+// Todas las rutas que no sean /api/* devuelven el `HTML/index.html`
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
+  res.sendFile(path.join(__dirname, 'HTML', 'index.html'));
 });
 
 // Puerto dinámico para Railway

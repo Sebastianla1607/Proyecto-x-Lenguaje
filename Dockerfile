@@ -1,16 +1,13 @@
-### Multi-stage Dockerfile: build with Node, serve with nginx
-FROM node:18-alpine AS builder
+### Dockerfile: Node server that serves `HTML/` and endpoints via `index.js`
+FROM node:18-alpine
 WORKDIR /app
-COPY package.json package-lock.json* ./
-# Use npm install --omit=dev in builder to avoid CI failing when lockfile
-# and package.json are out of sync on the build host. This is less strict
-# than `npm ci` but more resilient for remote Docker builds.
-RUN npm install --omit=dev
-COPY . .
-RUN npm run build
 
-FROM nginx:stable-alpine
-COPY --from=builder /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Install only production deps (express/cors/axios are runtime)
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev
+
+# Copy the full project
+COPY . .
+
+EXPOSE 8080
+CMD ["node", "index.js"]
