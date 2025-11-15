@@ -85,10 +85,9 @@
         class="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
         Nisqamanta</h2>
       <div class="flex w-12 items-center justify-end">
-        <button
-          class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+        <a href="Notifications.html" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
           <span class="material-symbols-outlined">notifications</span>
-        </button>
+        </a>
       </div>
     </div>
     <main class="flex-grow pb-24">
@@ -142,16 +141,16 @@
         </div>
       </div>
         <div class="grid grid-cols-2 gap-4 p-4 pt-0">
-        <div
+        <a href="Noticias.html"
           class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">feed</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Noticias</h2>
-        </div>
-        <div
+        </a>
+        <a href="Candidatos.html"
           class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">campaign</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Candidatos</h2>
-        </div>
+        </a>
         <a href="Calendario_unido.html" class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 text-center transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-sky-400">calendar_month</span>
           <h2 class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Calendario</h2>
@@ -162,8 +161,7 @@
         </a>
       </div>
       <div class="px-4 pb-4">
-        <div
-          class="flex cursor-pointer items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 transition-transform hover:scale-105">
+        <a href="Ubicacion.html" class="flex cursor-pointer items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 transition-transform hover:scale-105">
           <span class="material-symbols-outlined text-4xl text-text-light dark:text-text-dark">where_to_vote</span>
           <div class="flex flex-col">
             <h3 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight">Ubica tu Local de Votación
@@ -173,7 +171,7 @@
           </div>
           <span
             class="material-symbols-outlined ml-auto text-secondary-text-light dark:text-secondary-text-dark">arrow_forward_ios</span>
-        </div>
+        </a>
       </div>
       <div class="p-4">
         <div class="rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4">
@@ -187,34 +185,16 @@
         </div>
       </div>
     </main>
-    <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
-      <div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
-        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="index.html">
-          <div class="flex h-8 items-center justify-center">
-            <span class="material-symbols-outlined">home</span>
-          </div>
-          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
-        </a>
-        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Calendario_unido.html">
-          <div class="flex h-8 items-center justify-center">
-            <span class="material-symbols-outlined">calendar_month</span>
-          </div>
-          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
-        </a>
-        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
-          <div class="flex h-8 items-center justify-end">
-            <span class="material-symbols-outlined">campaign</span>
-          </div>
-          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
-        </a>
-        <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="Partido_politicos.html">
-          <div class="flex h-8 items-center justify-center">
-            <span class="material-symbols-outlined">groups</span>
-          </div>
-          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Partidos</p>
-        </a>
-      </div>
-    </div>
+    <div id="site-footer"></div>
+    <script>
+      // Carga el footer común desde footer.html y lo inyecta
+      (function(){
+        fetch('footer.html')
+          .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+          .then(html => { document.getElementById('site-footer').innerHTML = html; })
+          .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+      })();
+    </script>
     <script src="../assets/js/index-timer.js" defer></script>
   </div>
 </body>

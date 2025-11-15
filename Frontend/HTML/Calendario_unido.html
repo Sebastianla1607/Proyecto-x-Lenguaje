@@ -41,9 +41,9 @@
     <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
         <div class="sticky top-0 z-10 flex flex-col bg-white dark:bg-background-dark">
             <div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between">
-                <div class="flex size-12 shrink-0 items-center justify-start text-slate-800 dark:text-slate-200">
+                <button type="button" onclick="history.back()" class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800 dark:text-slate-200">
                     <span class="material-symbols-outlined !text-2xl">arrow_back</span>
-                </div>
+                </button>
                 <h2 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-900 dark:text-slate-50">Calendario Electoral 2026</h2>
                 <div class="size-12 shrink-0"></div>
             </div>
@@ -216,34 +216,15 @@
 
         </main>
 
-        <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
-            <div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
-                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
-                    <div class="flex h-8 items-center justify-center">
-                        <span class="material-symbols-outlined">home</span>
-                    </div>
-                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
-                </a>
-                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-black dark:text-primary" href="#">
-                    <div class="flex h-8 items-center justify-center">
-                        <span class="material-symbols-outlined fill">calendar_month</span>
-                    </div>
-                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
-                </a>
-                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
-                    <div class="flex h-8 items-center justify-end">
-                        <span class="material-symbols-outlined">groups</span>
-                    </div>
-                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
-                </a>
-                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
-                    <div class="flex h-8 items-center justify-center">
-                        <span class="material-symbols-outlined">person</span>
-                    </div>
-                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
-                </a>
-            </div>
-        </div>
+        <div id="site-footer"></div>
+        <script>
+          (function(){
+            fetch('footer.html')
+              .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+              .then(html => { document.getElementById('site-footer').innerHTML = html; })
+              .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+          })();
+        </script>
 
     </div>
 
