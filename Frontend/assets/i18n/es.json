@@ -1,0 +1,28 @@
+{
+  "title": "Elecciones Perú 2026",
+  "hero": {
+    "title": "Tu Guía para las Elecciones Generales 2026",
+    "subtitle": "Infórmate y participa. Todo lo que necesitas saber sobre el próximo proceso electoral en un solo lugar."
+  },
+  "countdown": {
+    "title": "Faltan para el día de la elección",
+    "months": "Meses",
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos"
+  },
+  "nav": {
+    "news": "Noticias",
+    "candidates": "Candidatos",
+    "calendar": "Calendario",
+    "parties": "Partidos"
+  },
+  "location": {
+    "title": "Ubica tu Local de Votación",
+    "subtitle": "Consulta dónde te toca votar con tu DNI."
+  },
+  "didyouknow": {
+    "title": "¿Sabías que?",
+    "content": "El voto en blanco se diferencia del voto viciado. Mientras que el voto viciado se anula por completo, los votos en blanco se suman y pueden influir en el cálculo de la valla electoral para los partidos políticos."
+  }
+}

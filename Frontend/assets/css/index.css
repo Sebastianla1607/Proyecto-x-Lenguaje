@@ -13,3 +13,53 @@ body {
 .countdown > div { text-align:center; }
 .modules .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
 .card { display:block; padding:1rem; border-radius:0.5rem; text-decoration:none; }
+.translate-panel {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    width: 160px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 999;
+}
+
+.translate-panel.hidden {
+    display: none;
+}
+
+.translate-panel h3 {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.translate-panel ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.translate-panel li {
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.translate-panel li:hover {
+    background: #f0f0f0;
+}
+
+/* Dark Mode */
+.dark .translate-panel {
+    background: #1f1f1f;
+    border-color: #444;
+}
+
+.dark .translate-panel li:hover {
+    background: #333;
+}

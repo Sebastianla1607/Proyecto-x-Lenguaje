@@ -1,0 +1,28 @@
+{
+  "title": "Perú 2026 Rimaykuna",
+  "hero": {
+    "title": "2026 Mitu Elecciónkunaq Guía",
+    "subtitle": "Rimaykuykita yachaykuy. Tukuymi rikch’ayku yachaykunata."
+  },
+  "countdown": {
+    "title": "Elección watayuqkama",
+    "months": "Killa",
+    "days": "Punchay",
+    "hours": "Rikhuy",
+    "minutes": "Minutu"
+  },
+  "nav": {
+    "news": "Notisiakuna",
+    "candidates": "Kandidatokuna",
+    "calendar": "Kalendario",
+    "parties": "Partidokuna"
+  },
+  "location": {
+    "title": "Tukuy ñuqanchikpi votoniyoq",
+    "subtitle": "DNI-man chaypi qam votoyta rikhuy."
+  },
+  "didyouknow": {
+    "title": "Imayna rimaykuyki?",
+    "content": "Blanco votoyoq chaymi viciado votoyoq hamuqninataqa allichayku."
+  }
+}

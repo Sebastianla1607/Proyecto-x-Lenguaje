@@ -1,0 +1,28 @@
+{
+  "title": "Perú 2026 Sartasiwi",
+  "hero": {
+    "title": "2026 Maran Sartasiwina Yatiyawipa",
+    "subtitle": "Yatiñani, uñakipañani, elecciones tuqita yatiyawinaka."
+  },
+  "countdown": {
+    "title": "Sartasiwiri uru qhiparu",
+    "months": "Phaxsi",
+    "days": "Uru",
+    "hours": "Urujapa",
+    "minutes": "Minutu"
+  },
+  "nav": {
+    "news": "Yatiyawinaka",
+    "candidates": "Ajllinaka",
+    "calendar": "Pacha phuqhawi",
+    "parties": "Partidonaka"
+  },
+  "location": {
+    "title": "Jumampi jutaski uka uñtasa",
+    "subtitle": "DNI apnaqasina mayi."
+  },
+  "didyouknow": {
+    "title": "¿Uñt’atati?",
+    "content": "Ch’usa voto viciado votompi janiw kikpa."
+  }
+}
