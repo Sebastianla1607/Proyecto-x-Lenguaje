@@ -1,0 +1,19 @@
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-outlined.fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Small helper so the active button retains visual weight when toggled by JS */
+.filter-btn.bg-primary {
+  background-color: #FFCB05 !important;
+}
+.filter-btn.text-black {
+  color: #000 !important;
+}
