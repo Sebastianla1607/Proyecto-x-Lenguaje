@@ -103,46 +103,10 @@
       </div>
     </header>
 
-    <!-- Lista -->
+    <!-- Lista dinámica de partidos -->
     <main class="flex-1 px-4 pb-20">
       <ul id="partyList" class="space-y-2">
-
-        <!-- ACCIÓN POPULAR -->
-        <li class="party">
-          <a class="item" href="#">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuClm-xhi3wxezEC0VzMbj9xhW6my3izDQg1TX7U3SI0PqRy7oo0SS9-B5VYsWTwhpGIJN0dL71LJVj61qLUq6A_SpXBam2g6sd4i5C3YMJmNvcG-2fbIgfrPYodIRhYGTmQExMT2-RWB5IegGFgUPPH2FYYqjgug4w6Xwg6Zq8IWnvOvfLEkQE87fbvC62f8oRYNmxolUGWMlsVf2yQs9VU-t9CKwVlxE2NwnAFh7NA0L6IvjvBDC0RsIgcUvyLiXkZonykJY6wYg8"
-              class="logo">
-            Acción Popular
-          </a>
-        </li>
-
-        <!-- APP -->
-        <li class="party">
-          <a class="item" href="#">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTtgxBqHIAi9BQmmNpNKRKuDsFl79qP5jnfKKooN3QQ8cQT9rZDpjX_i7OQuUPhIU2Tuud7hGiNypj_uR4EZM-udz4XMW_17-jRkUFtKbUSlTugWh_EU4ZRYoiDwdLt1yfkQYh6eAiw1OreFsyh5yEzABFr2Od0pW27qiefEoTjGDCA3QofxqEkMKOPVajhvgxxNsj6JC59QsMo06I64U65OVUJ-WBwpd-m7-h7tV2ma-_S1tN6y0By-_LWEvscLZxb4dM0-oEHLs"
-              class="logo">
-            Alianza para el Progreso
-          </a>
-        </li>
-
-        <!-- AVANZA PAÍS -->
-        <li class="party">
-          <a class="item" href="#">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf0ErBKn0VWy3qjzmItStxj9tUj_X8QAkKq4yLais3AvdW67jTO_iDFpWIqIKQeFTVgerKG7udxSiUJiXbNPycTrlOfaoxX-yH2DZ4c2lu4Tygm97xvFmw2WoQwNaXaPwEwtMfxgi5_BOkSXV5piZwGhBtFLcoTiVDjEliLRRK3IMdI_bhwmuv-GgLswutZ3S7Bkds20fNHkPQtSACzjMxS3jKF26d-8Pp6B3ABqVweEwZC1hbnoIq47-gMTiDYXfIvEd5jf1RP30"
-              class="logo">
-            Avanza País
-          </a>
-        </li>
-
-        <!-- FUERZA POPULAR -->
-        <li class="party">
-          <a class="item" href="#">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7BZti8ihiiCSP46tvZEzm1Hr8nDS5nt1dkuOs25o2TLIk_99S6O3p2-NrRpPgOhMtHbxWHq0zPqiz4mkYl37HUJ6nwy1WMXmsOg-f4VJbtcehc6rsuUEOLihip_l2qVzE98f0k5dRLxk8nwdKe4fArJa2vFQF0KZnwenO_iLWS2fn7WJQMJ-JJX7nWrE-sRAZSyzicihwmeLPAnxtNSEO6owOyL5NAru1crjgGS1dA_kIqWf__FEo8_gZswrZO5nBvLPifCoNQwc"
-              class="logo">
-            Fuerza Popular
-          </a>
-        </li>
-
+        <!-- se llenará dinámicamente desde assets/js/partidos.js -->
       </ul>
     </main>
   </div>
@@ -150,10 +114,10 @@
 
   <script>
     const input = document.getElementById("searchInput");
-    const parties = document.querySelectorAll(".party");
 
     input.addEventListener("input", () => {
       const text = input.value.trim().toLowerCase();
+      const parties = document.querySelectorAll('#partyList .party');
 
       for (const party of parties) {
         const name = party.innerText.toLowerCase();
@@ -161,6 +125,7 @@
       }
     });
   </script>
+  <script src="../assets/js/partidos.js"></script>
   <div id="site-footer"></div>
     <script>
       // Carga el footer común desde footer.html y lo inyecta
