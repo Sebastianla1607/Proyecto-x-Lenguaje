@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Calendario Electoral 2026 — Unificado</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFCB05",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "filter-voter": "#38BDF8",
+                        "filter-member": "#94A3B8"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-background-dark font-display">
+    <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+        <div class="sticky top-0 z-10 flex flex-col bg-white dark:bg-background-dark">
+            <div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between">
+                <div class="flex size-12 shrink-0 items-center justify-start text-slate-800 dark:text-slate-200">
+                    <span class="material-symbols-outlined !text-2xl">arrow_back</span>
+                </div>
+                <h2 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-900 dark:text-slate-50">Calendario Electoral 2026</h2>
+                <div class="size-12 shrink-0"></div>
+            </div>
+        </div>
+
+        
+
+        <div class="px-4 pt-2 pb-4">
+            <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+                <div class="flex items-center justify-between pb-3">
+                    <button class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                        <span class="material-symbols-outlined !text-xl">chevron_left</span>
+                    </button>
+                    <h3 class="text-base font-semibold text-slate-900 dark:text-slate-50">Febrero 2026</h3>
+                    <button class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                        <span class="material-symbols-outlined !text-xl">chevron_right</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-7 gap-y-2 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
+                    <div>L</div>
+                    <div>M</div>
+                    <div>M</div>
+                    <div>J</div>
+                    <div>V</div>
+                    <div>S</div>
+                    <div>D</div>
+                </div>
+
+                <div id="panel-todos" class="panel mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
+                    <div class="col-start-6 flex items-center justify-center">
+                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
+                            <span>1</span>
+                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
+                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-primary font-semibold text-black"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-member"></div></div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
+                </div>
+
+                <!-- Panel: Votantes (copia fiel de Calendario2.html) -->
+                <div id="panel-votantes" class="panel hidden mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
+                    <div class="col-start-6 flex items-center justify-center">
+                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
+                            <span>1</span>
+                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
+                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-filter-voter font-semibold text-black dark:text-slate-900"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-member"></div></div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
+                </div>
+
+                <!-- Panel: Miembros (copia fiel de Calendario3.html) -->
+                <div id="panel-miembros" class="panel hidden mt-2 grid grid-cols-7 gap-y-1 text-center text-sm">
+                    <div class="col-start-6 flex items-center justify-center">
+                        <div class="relative flex size-8 items-center justify-center rounded-full font-semibold text-slate-900 dark:text-slate-50">
+                            <span>1</span>
+                            <div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">2</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">3</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">4</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">5</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">6</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">7</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">8</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">9</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">10</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">11</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">12</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">13</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">14</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">15</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">16</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">17</div></div>
+                    <div class="flex items-center justify-center"><div class="relative flex size-8 items-center justify-center rounded-full bg-filter-member font-semibold text-black dark:text-slate-900"><span>18</span><div class="absolute bottom-1 h-1 w-1 rounded-full bg-filter-voter"></div></div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">19</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">20</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">21</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">22</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">23</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">24</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">25</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">26</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">27</div></div>
+                    <div class="flex items-center justify-center"><div class="flex size-8 items-center justify-center rounded-full font-medium text-slate-700 dark:text-slate-300">28</div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Botones/pestañas (movidos debajo del calendario) -->
+        <div class="flex justify-center gap-2 px-4 pt-4 pb-2">
+            <button id="btn-panel-todos" class="filter-btn flex-1 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-black">Todos</button>
+            <button id="btn-panel-votantes" class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Votantes</button>
+            <button id="btn-panel-miembros" class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Miembros de Mesa</button>
+        </div>
+
+        <!-- Secciones de eventos: copiadas de cada HTML original -->
+        <div class="flex items-center gap-4 px-4 pt-4 pb-2">
+            <hr class="w-full flex-1 border-t border-slate-200 dark:border-slate-800" />
+            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">PRÓXIMOS EVENTOS</p>
+            <hr class="w-full flex-1 border-t border-slate-200 dark:border-slate-800" />
+        </div>
+
+        <main class="flex-1 overflow-y-auto px-4 pb-24">
+            <div id="events-panel-todos" class="events-panel">
+                <div class="grid grid-cols-[auto_1fr] gap-x-4">
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-slate-900/10 dark:bg-slate-50/10 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">how_to_reg</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">01 FEB 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Cierre de Padrón Electoral</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día para el cambio de domicilio en DNI.</p>
+                        <div class="mt-2 text-sm font-medium text-slate-900 dark:text-slate-50">Completado</div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">groups</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">18 FEB 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección aleatoria de ciudadanos para las mesas de sufragio.</p>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 95 días</span>
+                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                                <span class="material-symbols-outlined !text-base">add_alarm</span>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">ballot</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 MAY 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la Votación: Primera Vuelta</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada electoral nacional para elegir a nuestras autoridades.</p>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 120 días</span>
+                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                                <span class="material-symbols-outlined !text-base">add_alarm</span>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos Votantes -->
+            <div id="events-panel-votantes" class="events-panel hidden">
+                <div class="grid grid-cols-[auto_1fr] gap-x-4">
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">groups</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">18 FEB 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección aleatoria de ciudadanos para las mesas de sufragio.</p>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 95 días</span>
+                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                                <span class="material-symbols-outlined !text-base">add_alarm</span>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">ballot</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 MAY 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la Votación: Primera Vuelta</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada electoral nacional para elegir a nuestras autoridades.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos Miembros -->
+            <div id="events-panel-miembros" class="events-panel hidden">
+                <div class="grid grid-cols-[auto_1fr] gap-x-4">
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">school</span>
+                        </div>
+                        <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">25 FEB 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Capacitación de Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio de las jornadas de capacitación obligatorias.</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                            <span class="material-symbols-outlined !text-xl">payments</span>
+                        </div>
+                        <div class="w-px grow bg-transparent"></div>
+                    </div>
+                    <div class="flex flex-col pb-6">
+                        <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 JUN 2026</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Pago de Compensación Económica</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio del pago a los miembros de mesa que cumplieron su labor.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
+            <div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
+                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+                    <div class="flex h-8 items-center justify-center">
+                        <span class="material-symbols-outlined">home</span>
+                    </div>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
+                </a>
+                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-black dark:text-primary" href="#">
+                    <div class="flex h-8 items-center justify-center">
+                        <span class="material-symbols-outlined fill">calendar_month</span>
+                    </div>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
+                </a>
+                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+                    <div class="flex h-8 items-center justify-end">
+                        <span class="material-symbols-outlined">groups</span>
+                    </div>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
+                </a>
+                <a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+                    <div class="flex h-8 items-center justify-center">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showPanel(name) {
+            const panels = document.getElementsByClassName('panel');
+            for (const p of panels) p.classList.add('hidden');
+            const target = document.getElementById(name);
+            if (target) target.classList.remove('hidden');
+
+            const events = document.getElementsByClassName('events-panel');
+            for (const e of events) e.classList.add('hidden');
+            if (name === 'panel-todos') document.getElementById('events-panel-todos').classList.remove('hidden');
+            if (name === 'panel-votantes') document.getElementById('events-panel-votantes').classList.remove('hidden');
+            if (name === 'panel-miembros') document.getElementById('events-panel-miembros').classList.remove('hidden');
+
+            const btns = document.getElementsByClassName('filter-btn');
+            for (const b of btns) b.classList.remove('bg-primary','text-black','font-semibold');
+            const btn = document.getElementById('btn-' + name);
+            if (btn) btn.classList.add('bg-primary','text-black','font-semibold');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showPanel('panel-todos');
+            // wire buttons
+            document.getElementById('btn-panel-todos').addEventListener('click', ()=> showPanel('panel-todos'));
+            document.getElementById('btn-panel-votantes').addEventListener('click', ()=> showPanel('panel-votantes'));
+            document.getElementById('btn-panel-miembros').addEventListener('click', ()=> showPanel('panel-miembros'));
+        });
+    </script>
+
+</body>
+
+</html>
