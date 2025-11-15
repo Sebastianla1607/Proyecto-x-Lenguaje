@@ -25,8 +25,32 @@
     const img = document.createElement('img');
     img.className = 'h-56 w-full object-cover';
     img.alt = n.titulo || 'Noticia';
-    // fallback image placeholder
-    img.src = n.foto_url || n.imagen || 'https://via.placeholder.com/800x400?text=Noticia';
+    // seleccionar posible URL de imagen desde varias claves
+    const imgUrl = n.foto_url || n.imagen || n.image || n.urlToImage || (n.media && n.media.url) || '';
+    // si es una página/álbum de Imgur, intentar construir enlace directo i.imgur.com/<id>.jpg
+    let finalImg = '';
+    try{
+      if(imgUrl){
+        const albumMatch = imgUrl.match(/imgur\.com\/(?:a|gallery)\/([A-Za-z0-9]+)/i);
+        const directMatch = imgUrl.match(/imgur\.com\/([A-Za-z0-9]+)(?:\.[a-z]{2,4})?$/i);
+        if(albumMatch){
+          finalImg = 'https://i.imgur.com/' + albumMatch[1] + '.jpg';
+        } else if(directMatch){
+          finalImg = 'https://i.imgur.com/' + directMatch[1] + '.jpg';
+        } else {
+          finalImg = imgUrl;
+        }
+      }
+    }catch(e){
+      console.debug('noticias.js: error parsing img url', imgUrl, e);
+      finalImg = imgUrl;
+    }
+    img.src = finalImg || 'https://via.placeholder.com/800x400?text=Noticia';
+    img.addEventListener('error', ()=>{
+      console.warn('noticias.js: error cargando imagen, usando placeholder', finalImg, n);
+      img.src = 'https://via.placeholder.com/800x400?text=No+imagen';
+    });
+    console.debug('noticias.js: imagen usada ->', img.src);
 
     const body = document.createElement('div');
     body.className = 'p-4';
