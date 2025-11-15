@@ -12,7 +12,8 @@
   <!-- Fuentes -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <!-- Config Tailwind -->
@@ -58,9 +59,10 @@
       width: 260px;
       background: white;
       border-radius: 0.75rem;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.2);
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.2);
       padding: 0.5rem;
     }
+
     .translate-panel .lang-item {
       display: flex;
       align-items: center;
@@ -69,8 +71,14 @@
       border-radius: .5rem;
       cursor: pointer;
     }
-    .translate-panel .lang-item:hover { background: rgba(0,0,0,0.04); }
-    .translate-panel .lang-item.active { background: rgba(13,71,161,0.08); }
+
+    .translate-panel .lang-item:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .translate-panel .lang-item.active {
+      background: rgba(13, 71, 161, 0.08);
+    }
 
     .translate-panel::before {
       content: "";
@@ -89,10 +97,12 @@
 
 <body class="font-display">
 
-  <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
+  <div
+    class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
 
     <!-- HEADER -->
-    <div class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
+    <div
+      class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
 
       <!-- LOGO CENTRAL -->
       <div class="flex-1 flex justify-center">
@@ -104,13 +114,15 @@
 
         <!-- Botón idioma -->
         <div class="relative">
-          <button id="translateBtn" class="translate-btn flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+          <button id="translateBtn"
+            class="translate-btn flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             aria-label="Cambiar idioma">
             <span class="material-symbols-outlined">translate</span>
           </button>
 
           <!-- Panel -->
-          <div id="translatePanel" class="translate-panel hidden border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+          <div id="translatePanel"
+            class="translate-panel hidden border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
             <div class="text-sm font-semibold px-2 py-1">Idioma</div>
             <div id="langList" class="px-1 pb-1"></div>
             <div class="px-2 py-2 text-xs text-secondary-text-light dark:text-secondary-text-dark">
@@ -153,50 +165,58 @@
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
-            <p data-i18n="countdown.months" class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Meses</p>
+            <p data-i18n="countdown.months"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Meses</p>
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
-            <p data-i18n="countdown.days" class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Días</p>
+            <p data-i18n="countdown.days"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Días</p>
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
-            <p data-i18n="countdown.hours" class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Horas</p>
+            <p data-i18n="countdown.hours"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Horas</p>
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
             <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
-            <p data-i18n="countdown.minutes" class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Minutos</p>
+            <p data-i18n="countdown.minutes"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Minutos</p>
           </div>
         </div>
       </div>
 
       <!-- GRID -->
       <div class="grid grid-cols-2 gap-4 p-4 pt-0">
-        <a href="Noticias.html" class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+        <a href="Noticias.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
           <span class="material-symbols-outlined text-4xl dark:text-sky-400">feed</span>
           <h2 data-i18n="nav.news" class="text-base font-bold">Noticias</h2>
         </a>
 
-        <a href="Candidatos.html" class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+        <a href="Candidatos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
           <span class="material-symbols-outlined text-4xl dark:text-sky-400">campaign</span>
           <h2 data-i18n="nav.candidates" class="text-base font-bold">Candidatos</h2>
         </a>
 
-        <a href="Calendario_unido.html" class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+        <a href="Calendario_unido.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
           <span class="material-symbols-outlined text-4xl dark:text-sky-400">calendar_month</span>
           <h2 data-i18n="nav.calendar" class="text-base font-bold">Calendario</h2>
         </a>
 
-        <a href="Partido_politicos.html" class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+        <a href="Partido_politicos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
           <span class="material-symbols-outlined text-4xl dark:text-sky-400">groups</span>
           <h2 data-i18n="nav.parties" class="text-base font-bold">Partidos</h2>
         </a>
@@ -204,7 +224,8 @@
 
       <!-- UBICACION -->
       <div class="px-4 pb-4">
-        <a href="Ubicacion.html" class="flex items-center gap-4 p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+        <a href="Ubicacion.html"
+          class="flex items-center gap-4 p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
           <span class="material-symbols-outlined text-4xl">where_to_vote</span>
           <div class="flex flex-col">
             <h3 data-i18n="location.title" class="text-lg font-bold">Ubica tu Local de Votación</h3>
@@ -248,5 +269,5 @@
   </div>
 
 </body>
-</html>
 
+</html>

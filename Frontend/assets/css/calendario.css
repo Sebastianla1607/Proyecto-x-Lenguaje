@@ -10,23 +10,38 @@ body {
   min-height: max(884px, 100dvh);
 }
 
+/* Tema dinámico según filtro: define variables y clases para cambiar paleta */
+#calendar-root {
+  --accent: #FFCB05; /* color por defecto (Todos) */
+  --dot-color: var(--accent);
+  --outline-color: rgba(255, 203, 5, 0.95);
+  --card-accent-bg: #FFFBEB;
+}
+
+.theme-todos { --accent: #FFCB05; --dot-color: #FFCB05; --outline-color: rgba(255,203,5,0.95); --card-accent-bg: #FFFBEB; }
+.theme-votantes { --accent: #60A5FA; --dot-color: #60A5FA; --outline-color: rgba(96,165,250,0.95); --card-accent-bg: #EFF8FF; }
+.theme-miembros { --accent: #FB923C; --dot-color: #FB923C; --outline-color: rgba(251,146,60,0.95); --card-accent-bg: #FFF7ED; }
+
+/* Sobrescribir clases de color para usar la variable --accent y así cambiar paleta según tema */
+.bg-primary { background-color: var(--accent) !important; }
+.bg-filter-voter { background-color: var(--accent) !important; }
+.bg-filter-member { background-color: var(--accent) !important; }
+
 /* Small helper so the active button retains visual weight when toggled by JS */
 .filter-btn.bg-primary {
-  background-color: #FFCB05 !important;
+  background-color: var(--accent) !important;
 }
 .filter-btn.text-black {
   color: #000 !important;
 }
 
-/* Colores usados por el calendario dinámico */
-.bg-primary {
-  background-color: #FFCB05 !important;
+/* Transición suave para cambio de tema en botones */
+.filter-btn {
+  transition: background-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
 }
-.bg-filter-voter {
-  background-color: #60A5FA !important; /* azul */
-}
-.bg-filter-member {
-  background-color: #FB923C !important; /* naranja */
+.filter-btn:focus-visible {
+  outline: 2px solid rgba(13,18,27,0.08);
+  outline-offset: 2px;
 }
 
 .text-black {
@@ -35,7 +50,7 @@ body {
 
 /* Estilo para el día 'ahora' (actual) y para el día de votación en tiempo real */
 .now-day {
-  outline: 3px solid rgba(255, 203, 5, 0.95);
+  outline: 3px solid var(--outline-color);
   outline-offset: 2px;
 }
 

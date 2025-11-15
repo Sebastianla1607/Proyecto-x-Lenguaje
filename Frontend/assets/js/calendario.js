@@ -3,21 +3,38 @@
 
 (function () {
   const votingDate = new Date(2026, 3, 12); // 12 April 2026 (meses 0-indexados)
-  let current = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
+  // `current` guarda el mes visible. Inicializamos en el mes actual por defecto.
+  let current = new Date();
   let currentFilter = 'todos'; // 'todos' | 'votantes' | 'miembros'
 
   // Eventos extraídos de las páginas originales. Ajusta/añade según necesites.
   const events = [
     // 1 Febrero: cierre de padrón — también relevante para el sorteo/miembros
-    { date: '2026-02-01', title: 'Cierre de Padrón Electoral (plazo máximo para sorteo)', types: ['todos','miembros','votantes'] },
-    { date: '2026-02-11', title: 'Fecha límite: renuncia de candidatos y retiro de listas', types: ['todos','miembros'] },
-    { date: '2026-02-18', title: 'Sorteo de Miembros de Mesa', types: ['miembros'] },
-    { date: '2026-02-25', title: 'Capacitación Miembros de Mesa', types: ['miembros'] },
-    { date: '2026-04-12', title: 'Día de la Votación — 1ª Vuelta', types: ['todos', 'votantes'] },
-    { date: '2026-05-23', title: 'Día de la Votación — 2ª Fecha (anterior)', types: ['todos', 'votantes'] },
-    { date: '2026-06-22', title: 'Resultados Preliminares', types: ['todos'] },
-    { date: '2026-07-20', title: '2ª Vuelta', types: ['todos', 'votantes'] },
-    { date: '2026-06-23', title: 'Pago de Compensación', types: ['miembros'] }
+     // Eventos actualizados según solicitud del usuario (reemplazan los anteriores)
+     { date: '2025-12-26', title: 'Inicio: Impugnaciones y resolución de tachas a la cédula de sufragio', types: ['todos','votantes'], description: 'Inicio del período para impugnaciones y resolución de tachas a la cédula.' },
+     { date: '2026-01-15', title: 'Cierre: Impugnaciones y resolución de tachas a la cédula de sufragio', types: ['todos','votantes'], description: 'Cierre del período de impugnaciones y resoluciones.' },
+
+     // Publicación diseño de la cédula
+     { date: '2026-01-12', title: 'Publicación definitiva del diseño de cédula para las Elecciones Generales 2026', types: ['todos','votantes'] },
+     { date: '2026-01-22', title: 'Publicación definitiva del diseño de cédula (confirmación)', types: ['todos','votantes'] },
+
+     // Sorteo y proceso de miembros de mesa
+     { date: '2026-01-29', title: 'Sorteo de miembros de mesa', types: ['miembros'] },
+     { date: '2026-01-30', title: 'Inicio: Proceso de impugnación, apelaciones y resolución de tachas a miembros de mesa', types: ['miembros'], description: 'Periodo de impugnaciones y apelaciones para miembros de mesa.' },
+     { date: '2026-02-11', title: 'Cierre: Proceso de impugnación, apelaciones y resolución de tachas a miembros de mesa', types: ['miembros'] },
+
+     // Febrero: Sorteo de ubicación y publicación de lista de miembros
+     { date: '2026-02-01', title: 'Sorteo de ubicación de candidaturas o símbolos en la cédula de sufragio', types: ['todos'] },
+     { date: '2026-02-15', title: 'Publicación definitiva de la lista de miembros de mesa', types: ['miembros'] },
+
+     // Marzo: límite de retiro y 1ª jornada de capacitación
+     { date: '2026-03-29', title: 'Fecha límite: Retiro y/o renuncia de listas de candidatos', types: ['todos'] },
+     { date: '2026-03-29', title: '1ª jornada de capacitación a miembros de mesa para las Elecciones Generales 2026', types: ['miembros'] },
+
+     // Abril: simulacro, 2ª jornada y día de elecciones
+     { date: '2026-04-05', title: 'Simulacro del Sistema de Cómputo Electoral', types: ['miembros'] },
+     { date: '2026-04-12', title: '2ª jornada de capacitación a miembros de mesa', types: ['miembros'] },
+     { date: '2026-04-12', title: 'ELECCIONES GENERALES 2026', types: ['todos','votantes'], description: 'Día de Votación - Elecciones Generales 2026' }
   ];
 
   const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -98,25 +115,65 @@
     grid.innerHTML = html;
   }
 
+  // Calcula el countdown hasta votingDate en meses, días, horas y minutos
+  function calculateCountdown() {
+    const now = new Date();
+    let months = votingDate.getFullYear() - now.getFullYear();
+    months = months * 12 + (votingDate.getMonth() - now.getMonth());
+
+    let tempDate = new Date(now);
+    tempDate.setMonth(tempDate.getMonth() + months);
+
+    let days = Math.floor((votingDate.getTime() - tempDate.getTime()) / (1000 * 60 * 60 * 24));
+    if (days < 0) {
+      months--;
+      tempDate.setMonth(tempDate.getMonth() - 1);
+      days = Math.floor((votingDate.getTime() - tempDate.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    const remainingMs = votingDate.getTime() - now.getTime();
+    const hours = Math.floor((remainingMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Actualizar DOM si existe
+    const elMonths = document.getElementById('count-months');
+    const elDays = document.getElementById('count-days');
+    const elHours = document.getElementById('count-hours');
+    const elMinutes = document.getElementById('count-minutes');
+    if (elMonths) elMonths.textContent = String(Math.max(0, months)).padStart(2, '0');
+    if (elDays) elDays.textContent = String(Math.max(0, days)).padStart(2, '0');
+    if (elHours) elHours.textContent = String(Math.max(0, hours)).padStart(2, '0');
+    if (elMinutes) elMinutes.textContent = String(Math.max(0, minutes)).padStart(2, '0');
+  }
+
   // Genera dinámicamente los panels de eventos desde el array `events`
   function renderEventPanels() {
+    // Mostrar eventos próximos del mes actualmente visible, respetando el filtro activo
+    const year = current.getFullYear();
+    const month = current.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const monthStart = `${year}-${String(month + 1).padStart(2,'0')}-01`;
+    const monthEnd = `${year}-${String(month + 1).padStart(2,'0')}-${String(daysInMonth).padStart(2,'0')}`;
+
+    // para 'todos' incluimos cualquier evento dentro del mes; además agrupamos por tipo
     const groups = { todos: [], votantes: [], miembros: [] };
     for (const ev of events.slice().sort((a,b) => a.date.localeCompare(b.date))) {
-      const item = ev;
+      if (ev.date < monthStart || ev.date > monthEnd) continue; // fuera del mes
+      groups.todos.push(ev);
       if (Array.isArray(ev.types)) {
-        if (ev.types.includes('todos')) groups.todos.push(item);
-        if (ev.types.includes('votantes')) groups.votantes.push(item);
-        if (ev.types.includes('miembros')) groups.miembros.push(item);
+        if (ev.types.includes('votantes')) groups.votantes.push(ev);
+        if (ev.types.includes('miembros')) groups.miembros.push(ev);
       }
     }
 
+    // Para cada panel, renderizar solo los eventos del mes y según el filtro
     for (const key of ['todos','votantes','miembros']) {
       const container = document.getElementById('events-panel-' + key);
       if (!container) continue;
       const inner = document.createElement('div');
       inner.className = 'flex flex-col gap-3 event-list';
       if (!groups[key].length) {
-        inner.innerHTML = `<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">No hay eventos para esta categoría.</p>`;
+        inner.innerHTML = `<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">No hay eventos para esta categoría en ${monthNames[month]}.</p>`;
         container.innerHTML = '';
         container.appendChild(inner);
         continue;
@@ -124,6 +181,10 @@
       for (const ev of groups[key]) {
         const card = document.createElement('article');
         card.className = 'event-card';
+        let peopleHtml = '';
+        if (Array.isArray(ev.people) && ev.people.length) {
+          peopleHtml = `<div class="mt-2 text-sm text-slate-700 dark:text-slate-300"><strong>Miembros:</strong><ul class="ml-4 list-disc">${ev.people.map(p => `<li>${p}</li>`).join('')}</ul></div>`;
+        }
         card.innerHTML = `
           <div class="icon bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-50">
             <span class="material-symbols-outlined">${ev.icon || 'event'}</span>
@@ -132,6 +193,7 @@
             <div class="text-sm meta">${(new Date(ev.date)).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'})}</div>
             <div class="title">${ev.title}</div>
             ${ev.description ? `<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark mt-1">${ev.description}</p>` : ''}
+            ${peopleHtml}
             <div class="mt-2">
               <button class="event-action" data-evdate="${ev.date}">Ver en calendario</button>
             </div>
@@ -142,19 +204,7 @@
       container.appendChild(inner);
     }
 
-    // Delegación: escuchar clicks en botones 'Ver en calendario'
-    document.querySelectorAll('.event-action').forEach(b => {
-      b.addEventListener('click', (e) => {
-        const date = e.currentTarget.dataset.evdate;
-        if (date) {
-          // Mover calendario al mes y destacar el día
-          highlightDay(date);
-          // Dar foco al calendario
-          const grid = document.getElementById('calendar-grid');
-          if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-    });
+    // Nota: ahora usamos delegación global en `DOMContentLoaded` para manejar los clicks
   }
 
   // Resaltar un día (centrar mes y aplicar clase temporal)
@@ -181,6 +231,7 @@
   function changeMonth(delta) {
     current = new Date(current.getFullYear(), current.getMonth() + delta, 1);
     renderCalendar();
+    renderEventPanels();
   }
 
   // showPanel mantiene compatibilidad con botones previos
@@ -226,6 +277,17 @@
     }
 
     renderCalendar();
+    renderEventPanels();
+    // Aplicar clase de tema en el contenedor para cambiar paleta según filtro
+    try {
+      const root = document.getElementById('calendar-root');
+      if (root) {
+        root.classList.remove('theme-todos','theme-votantes','theme-miembros');
+        const themeMap = { todos: 'theme-todos', votantes: 'theme-votantes', miembros: 'theme-miembros' };
+        const theme = themeMap[currentFilter] || 'theme-todos';
+        root.classList.add(theme);
+      }
+    } catch (e) { console.debug('theme apply error', e); }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -243,11 +305,37 @@
     if (prev) prev.addEventListener('click', function () { changeMonth(-1); });
     if (next) next.addEventListener('click', function () { changeMonth(1); });
 
-    // Iniciar mostrando el mes de la votación y el panel 'todos'
-    current = new Date(votingDate.getFullYear(), votingDate.getMonth(), 1);
-    renderEventPanels();
-    window.showPanel('panel-todos');
+    // Iniciar mostrando el mes actual (no navegar automáticamente al mes de votación)
+    current = new Date();
     renderCalendar();
+    // Renderizar panels para el mes actual y activar 'todos' visualmente sin forzar smart-nav
+    renderEventPanels();
+    // Activar botón 'Todos' y mostrar su panel
+    const btns = document.getElementsByClassName('filter-btn');
+    for (const b of btns) { b.classList.remove('bg-primary', 'text-black', 'font-semibold'); }
+    if (btnTodos) btnTodos.classList.add('bg-primary', 'text-black', 'font-semibold');
+    const eventsPanels = document.getElementsByClassName('events-panel');
+    for (const ep of eventsPanels) { ep.classList.add('hidden'); }
+    const evTarget = document.getElementById('events-panel-todos');
+    if (evTarget) evTarget.classList.remove('hidden');
+    // Inicializar tema visual según el filtro por defecto
+    try {
+      const root = document.getElementById('calendar-root');
+      if (root) {
+        root.classList.remove('theme-todos','theme-votantes','theme-miembros');
+        root.classList.add('theme-todos');
+      }
+    } catch(e){ console.debug('theme init error', e); }
+    // Delegación global para botones 'Ver en calendario' (evita reañadir listeners tras cada render)
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest && e.target.closest('.event-action');
+      if (!btn) return;
+      const date = btn.dataset && btn.dataset.evdate;
+      if (!date) return;
+      highlightDay(date);
+      const grid = document.getElementById('calendar-grid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
     // Reloj en tiempo real y comprobación de día de votación
     function updateClock() {
       const now = new Date();
@@ -278,11 +366,13 @@
           renderCalendar();
         }
       }
-    }
+      // actualizar countdown
+      try { calculateCountdown(); } catch(e){ console.debug('countdown error', e); }
+      }
 
-    // Actualiza el reloj y el calendario cada segundo
-    updateClock();
-    setInterval(updateClock, 1000);
+      // Actualiza el reloj y el calendario cada segundo
+      updateClock();
+      setInterval(updateClock, 1000);
   });
 
 })();
