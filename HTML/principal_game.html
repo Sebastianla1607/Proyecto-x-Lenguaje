@@ -4,13 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Retate - Juegos</title>
+    <title>Selecciona tu Personaje</title>
+
+    <!-- Tailwind + Config -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
     <script>
         tailwind.config = {
             theme: {
@@ -21,166 +24,189 @@
                         "text-secondary": "#6B7280",
                         "background": "#F9FAFB",
                         "card": "#FFFFFF",
-                        "border": "#E5E7EB",
-                        "accent": "#FFCB05"
+                        "border": "#E5E7EB"
                     },
                     fontFamily: {
                         "display": ["Public Sans", "sans-serif"]
                     },
                     boxShadow: {
                         "card": "0 4px 12px rgba(0,0,0,0.05)"
-                    },
+                    }
                 },
-            },
+            }
         }
     </script>
+
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .material-symbols-outlined.filled {
-            font-variation-settings: 'FILL' 1;
         }
 
         body {
             font-family: 'Public Sans', sans-serif;
             background-color: #F9FAFB;
         }
+
+        /* Card gamer */
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #242824;
+            padding: 10px;
+            border-radius: 8px;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card_form {
+            position: relative;
+            width: 100%;
+            height: 12em;
+            border-radius: 6px;
+            background-color: #9147ff;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .card_form span {
+            position: absolute;
+            inset: 0;
+            padding: 5px 10px;
+            color: #fff;
+            display: flex;
+            align-items: flex-end;
+            font-size: 1.2em;
+            background-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .card:hover .card_form span,
+        .card:hover .card_data span {
+            opacity: 1;
+        }
+
+        .card_data {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card_data span {
+            color: #9147ff;
+            font-size: .9em;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .text_m {
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        .text_s {
+            color: #9147ff;
+            font-size: 0.7em;
+        }
+
+        .cube {
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover .cube {
+            transform: rotateX(90deg);
+        }
+
+        .side {
+            height: 1em;
+            font-weight: bold;
+        }
+
+        .front {
+            transform: translate3d(0,0,1em);
+        }
+
+        .top {
+            transform: rotateX(-90deg);
+        }
     </style>
 </head>
 
-<body class="bg-background text-text-primary">
-    <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
+<body>
 
-        <!-- Header -->
-        <header
-            class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border bg-white/90 p-4 backdrop-blur-sm shadow-sm">
-            <div class="justify-self-start">
-                <button onclick="history.back()"
-                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                </button>
-            </div>
-            <h1 class="text-center font-bold text-lg">Retate</h1>
-            <div class="flex items-center gap-4 justify-self-end">
-                <button id="notificationsBtn"
-                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition"
-                    aria-label="Notificaciones">
-                    <span class="material-symbols-outlined">notifications</span>
-                </button>
-            </div>
+    <div class="max-w-md mx-auto min-h-screen flex flex-col">
+
+        <header class="sticky top-0 z-10 bg-white p-4 border-b">
+            <h1 class="text-center font-bold">Elige tu Personaje</h1>
         </header>
 
-        <!-- Main content -->
-        <main class="flex-grow pb-24 p-4">
-            <div class="flex flex-col gap-4">
+        <main class="p-4">
+            <p class="text-center text-text-secondary mb-4">
+                ¡Apoya a tu favorito y haz que llegue al top 10!
+            </p>
 
-                <div class="relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl shadow-card transition-transform hover:scale-105 h-48 w-full bg-cover bg-center"
-                    style="background-image: url('../assets_juegos/img_juego/juego1.jpg');"
-                    onclick="window.location.href='infoquizz.html'">
-
-                    <div class="absolute inset-0 bg-black/60"></div>
-                    <div class="relative z-10 flex flex-col items-center justify-center gap-2 text-center">
-                        <span class="material-symbols-outlined text-4xl text-primary">quiz</span>
-                        <h2 class="text-2xl font-black text-white">InfoQuizz</h2>
-                        <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full">Jugar</button>
-                    </div>
-                </div>
-                <!-- Card 2: Ranking Electoral -->
-                <div class="relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl shadow-card transition-transform hover:scale-105 h-48 w-full bg-cover bg-center"
-                    style="background-image: url('../assets_juegos/img_juego/juego2.jpg');"
-                    onclick="window.location.href='select_personaje.html'">
-
-                    <div class="absolute inset-0 bg-black/30"></div>
-                    <div class="relative z-10 flex flex-col items-center justify-center gap-2 text-center">
-                        <span class="material-symbols-outlined text-4xl text-primary">emoji_events</span>
-                        <h2 class="text-2xl font-black text-white">Ranking Electoral</h2>
-                        <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full"
-                            style="pointer-events: none;">Jugar</button>
-                    </div>
-                </div>
-
-
-                <!-- Card 3: Próximamente -->
-                <div class="relative flex cursor-not-allowed flex-col items-center justify-center overflow-hidden rounded-xl shadow-card opacity-50 h-48 w-full bg-cover bg-center"
-                    style="background-image: url('../assets_juegos/img_juego/proximamente.jpg');">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                    <div class="relative z-10 flex flex-col items-center justify-center gap-2 text-center">
-                        <span class="material-symbols-outlined text-4xl text-white">help</span>
-                        <h2 class="text-xl font-bold uppercase text-white">Próximamente</h2>
-                        <button disabled
-                            class="mt-2 px-6 py-2 bg-gray-400 text-white font-bold rounded-full cursor-not-allowed">Próximamente</button>
-                    </div>
-                </div>
-
-            </div>
+            <div id="personajes-container" class="grid grid-cols-2 gap-4"></div>
         </main>
 
-        <!-- Footer -->
         <div id="site-footer"></div>
 
-        <!-- Notifications Modal -->
-        <div id="notificationsModal"
-            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
-            <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
-                <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
-                    <h3 class="text-lg font-bold">Notificaciones</h3>
-                    <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
-                </div>
-                <div id="notificationsContent"
-                    class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
-                    <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...
-                    </p>
-                </div>
-            </div>
-        </div>
-
         <script>
-                (function () {
-                    fetch('footer.html')
-                        .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-                        .then(html => { document.getElementById('site-footer').innerHTML = html; })
-                        .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
-                })();
+            // Cargar footer
+            fetch('footer.html')
+                .then(r => r.ok ? r.text() : "")
+                .then(html => document.getElementById("site-footer").innerHTML = html);
+        </script>
 
-            (function () {
-                const btn = document.getElementById('notificationsBtn');
-                const modal = document.getElementById('notificationsModal');
-                const closeBtn = document.getElementById('closeNotifications');
-                const content = document.getElementById('notificationsContent');
+        <!-- SCRIPT PRINCIPAL -->
+        <script src="script_game2.js"></script>
 
-                function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
-                function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+        <!-- REEMPLAZA mostrarPersonajes POR ESTE -->
+        <script>
+        function mostrarPersonajes() {
+            const cont = document.getElementById('personajes-container');
+            cont.innerHTML = "";
 
-                btn?.addEventListener('click', openModal);
-                closeBtn?.addEventListener('click', closeModal);
-                modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            personajes.forEach(p => {
+                cont.innerHTML += `
+                    <div class="card" onclick="seleccionarPersonaje(${p.id})">
+                        <div class="card_form" style="background-image:url('${p.foto_url}')">
+                            <span>${p.nombre}</span>
+                        </div>
 
-                async function loadNotifications() {
-                    try {
-                        const res = await fetch('../assets/data/noticias.json');
-                        if (!res.ok) throw new Error('No se pudo cargar');
-                        const data = await res.json();
-                        const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
-                        if (!items || items.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
-                        content.innerHTML = items.map(it => `
-                                                <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
-                                                    <div class="font-semibold">${it.title || it.titulo || ''}</div>
-                                                    <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}</div>
-                                                </div>
-                                            `).join('');
-                    } catch (err) {
-                        content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
-                        console.warn(err);
-                    }
-                }
-            })();
+                        <div class="card_data">
+                            <div class="text">
+                                <label class="text_m">${p.nombre}</label>
+
+                                <div class="cube text_s">
+                                    <label class="side front">Ver detalles</label>
+                                    <label class="side top">ID: ${p.id}</label>
+                                </div>
+                            </div>
+
+                            <span>Elegir</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
         </script>
 
     </div>
-</body>
 
+</body>
 </html>
