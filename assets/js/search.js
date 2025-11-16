@@ -92,8 +92,14 @@
           const name = (c.nombre || c.name || "").toLowerCase();
           const cargo = (c.cargo || "").toLowerCase();
           const city = (c.ciudad || "").toLowerCase();
+          const sigla = (c.sigla || c.party_sigla || "").toString().toLowerCase();
+          const partyName = (c.party_name || c.partido || c.party || "").toString().toLowerCase();
           return (
-            name.includes(term) || cargo.includes(term) || city.includes(term)
+            name.includes(term) ||
+            cargo.includes(term) ||
+            city.includes(term) ||
+            sigla.includes(term) ||
+            partyName.includes(term)
           );
         }).slice(0, 8);
         render(matches);
@@ -122,14 +128,15 @@ function filterMainList(term) {
   const anchors = list.querySelectorAll("a");
   const q = (term || "").toLowerCase();
   let visible = 0;
-  for (const a of anchors) {
-    const text = (a.innerText || "").toLowerCase();
+    for (const a of anchors) {
+    const text = (a.innerText || '').toLowerCase();
+    const dsig = (a.dataset && a.dataset.sigla ? a.dataset.sigla.toLowerCase() : '');
     if (!q || q.trim() === "") {
       a.style.display = "";
       visible++;
       continue;
     }
-    if (text.includes(q)) {
+    if (text.includes(q) || dsig.includes(q)) {
       a.style.display = "";
       visible++;
     } else {

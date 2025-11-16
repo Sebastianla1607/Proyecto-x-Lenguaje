@@ -71,11 +71,6 @@
                     <input id="searchInput" placeholder="Buscar por nombre o sigla..." autocomplete="off"
                         class="w-full bg-transparent px-3 py-2 focus:outline-none text-[#181611] dark:text-gray-100 dark:placeholder-gray-400">
                 </div>
-                <!-- Contenedor de resultados sugeridos -->
-                <ul id="searchResults"
-                    class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-auto rounded-lg bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700">
-                    <!-- items se generan dinámicamente -->
-                </ul>
             </div>
         </div>
         <!-- Se eliminó el contador numérico según petición del equipo -->
@@ -150,6 +145,67 @@
                                 }
                         })();
         </script>
+
+                        <!-- Buscador integrado por nombre y sigla (inserción automática) -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const searchInput = document.getElementById('searchInput');
+                                const listContainer = document.getElementById('candidates-list');
+                                if (!searchInput || !listContainer) return;
+
+                                // Reemplazar el input por un clon para eliminar listeners previos (evita duplicados)
+                                const newInput = searchInput.cloneNode(true);
+                                searchInput.parentNode.replaceChild(newInput, searchInput);
+
+                                let allCandidates = Array.isArray(globalThis.CANDIDATES_DATA) ? globalThis.CANDIDATES_DATA : [];
+
+                                // Escuchar eventos que indiquen que los candidatos ya fueron cargados
+                                document.addEventListener('candidatos:loaded', (e) => { allCandidates = Array.isArray(e.detail) ? e.detail : allCandidates; });
+                                document.addEventListener('candidatesLoaded', (e) => { allCandidates = Array.isArray(e.detail) ? e.detail : allCandidates; });
+
+                                function renderFilteredList(filtered) {
+                                    if (!Array.isArray(filtered) || filtered.length === 0) {
+                                        listContainer.innerHTML = `
+                                            <p class="text-center text-sm text-secondary-text-light dark:text-secondary-text-dark py-4">
+                                                No se encontraron resultados.
+                                            </p>`;
+                                        return;
+                                    }
+
+                                    listContainer.innerHTML = filtered.map(c => `
+                                        <a href="Candidato_Perfil.html?id=${encodeURIComponent(c.id || c.ID || c.id_candidato || '')}"
+                                            class="flex items-center gap-4 p-3 border border-border-light dark:border-border-dark rounded-xl bg-card-light dark:bg-card-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                                            <img src="${c.foto_url || c.photo || c.foto || '../assets/img/default-user.png'}"
+                                                class="w-14 h-14 rounded-full object-cover border border-border-light dark:border-border-dark" alt="${(c.nombre||c.name||'')}" />
+                                            <div>
+                                                <p class="font-bold text-lg">${(c.nombre||c.name||'Sin nombre')}</p>
+                                                <p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">${(c.sigla || c.party_name || c.partido || '—')}</p>
+                                            </div>
+                                        </a>
+                                    `).join('');
+                                }
+
+                                newInput.addEventListener('input', () => {
+                                    const text = (newInput.value || '').trim().toLowerCase();
+                                    if (!text) {
+                                        // Vacío: restaurar lista original si está disponible
+                                        if (Array.isArray(globalThis.CANDIDATES_DATA) && globalThis.CANDIDATES_DATA.length > 0) {
+                                            // Re-render the original list by dispatching the loaded event again
+                                            renderFilteredList(globalThis.CANDIDATES_DATA);
+                                        }
+                                        return;
+                                    }
+
+                                    const filtered = allCandidates.filter(c => {
+                                        const name = (c.nombre || c.name || '').toString().toLowerCase();
+                                        const sigla = (c.sigla || c.party_sigla || c.party_name || c.partido || '').toString().toLowerCase();
+                                        return name.includes(text) || (sigla && sigla.includes(text));
+                                    });
+
+                                    renderFilteredList(filtered);
+                                });
+                            });
+                        </script>
 </body>
 
 </html>

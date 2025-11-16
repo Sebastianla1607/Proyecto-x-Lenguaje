@@ -34,6 +34,8 @@
       // Enlaza a la página de detalle del partido con querystring `id`
       a.href = `Partido_Perfil.html?id=${encodeURIComponent(p.id ?? '')}`;
       a.setAttribute('data-party-id', p.id ?? '');
+      // Exponer la sigla también como atributo para búsquedas precisas
+      if (p.sigla) a.setAttribute('data-sigla', String(p.sigla));
 
       const img = document.createElement('img');
       img.className = 'logo';

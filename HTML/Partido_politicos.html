@@ -103,11 +103,6 @@
             <input id="searchInput" placeholder="Buscar por nombre o sigla..." autocomplete="off"
               class="w-full bg-transparent px-3 py-2 focus:outline-none text-[#181611] dark:text-gray-100 dark:placeholder-gray-400">
           </div>
-          <!-- Contenedor de resultados sugeridos -->
-          <ul id="searchResults"
-            class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-auto rounded-lg bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700">
-            <!-- items se generan dinámicamente -->
-          </ul>
         </div>
       </div>
     </header>
@@ -121,7 +116,7 @@
   </div>
 
 
-  <script>
+    <script>
     const input = document.getElementById("searchInput");
 
     input.addEventListener("input", () => {
@@ -129,8 +124,15 @@
       const parties = document.querySelectorAll('#partyList .party');
 
       for (const party of parties) {
-        const name = party.innerText.toLowerCase();
-        party.style.display = name.includes(text) ? "" : "none";
+        // Preferir buscar sobre el enlace/elemento renderizado para evitar falsos positivos
+        const a = party.querySelector('a');
+        const nameText = (a ? a.innerText : party.innerText || '').toLowerCase();
+        // leer sigla desde el atributo data-sigla (establecido por assets/js/partidos.js)
+        const sigla = (a && a.dataset && a.dataset.sigla) ? String(a.dataset.sigla).toLowerCase() : '';
+
+        // Match si el texto está en el nombre o en la sigla
+        const matched = (!text) || nameText.includes(text) || (sigla && sigla.includes(text));
+        party.style.display = matched ? "" : "none";
       }
     });
   </script>
