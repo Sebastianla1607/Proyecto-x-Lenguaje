@@ -53,24 +53,22 @@
 <body class="bg-background text-text-primary">
     <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
 
-        <!-- Header -->
-        <header
-            class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border bg-white/90 p-4 backdrop-blur-sm shadow-sm">
-            <div class="justify-self-start">
-                <button onclick="history.back()"
-                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition">
-                    <span class="material-symbols-outlined">arrow_back</span>
+        <!-- HEADER NUEVO INTEGRADO -->
+        <div class="sticky top-0 z-10 flex flex-col bg-white">
+            <div class="flex items-center p-4 pb-2 justify-between">
+                <button type="button" onclick="window.location.href='index.html'"
+                    class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800">
+                    <span class="material-symbols-outlined !text-2xl">arrow_back</span>
                 </button>
+                <!-- LOGO + TÍTULO -->
+                <div class="flex-1 flex flex-col items-center">
+                    <img src="/assets/img/ratate.png" alt="Logo" class="h-10 object-contain mb-1">
+
+                </div>
+                <div class="size-12 shrink-0"></div>
             </div>
-            <h1 class="text-center font-bold text-lg">Retate</h1>
-            <div class="flex items-center gap-4 justify-self-end">
-                <button id="notificationsBtn"
-                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition"
-                    aria-label="Notificaciones">
-                    <span class="material-symbols-outlined">notifications</span>
-                </button>
-            </div>
-        </header>
+        </div>
+
 
         <!-- Main content -->
         <main class="flex-grow pb-24 p-4">

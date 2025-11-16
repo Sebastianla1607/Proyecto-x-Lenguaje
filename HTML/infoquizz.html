@@ -54,17 +54,23 @@
     <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
 
         <!-- HEADER -->
-        <header class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border bg-card/90 p-4 backdrop-blur-sm shadow-sm">
-            <div class="justify-self-start">
-                <a href="principal_game.html">
-                    <button class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition">
-                        <span class="material-symbols-outlined">arrow_back</span>
-                    </button>
-                </a>
-            </div>
-            <h1 class="text-center font-bold text-lg">InfoQuizz</h1>
-            <div class="justify-self-end"></div>
-        </header>
+        <header class="sticky top-0 z-10 border-b border-border bg-card/90 p-4 backdrop-blur-sm shadow-sm">
+    <div class="flex items-center justify-between">
+        <!-- Botón de regresar -->
+        <button type="button" onclick="window.location.href='principal_game.html'"
+            class="flex items-center justify-start text-slate-800">
+            <span class="material-symbols-outlined !text-2xl">arrow_back</span>
+        </button>
+
+        <!-- LOGO + TÍTULO -->
+        <div class="flex-1 flex flex-col items-center">
+            <img src="/assets/img/infoQuiz.png" alt="Logo" class="h-10 object-contain mb-1">
+        </div>
+
+        <!-- Espacio a la derecha para balancear -->
+        <div class="w-12"></div>
+    </div>
+</header>
 
         <!-- MAIN -->
         <main class="flex flex-1 flex-col gap-6 pb-8 p-4">
