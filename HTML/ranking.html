@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking Top 10</title>
-    <link rel="stylesheet" href="assets/games/css_game/style_game2.css">
+    <link rel="stylesheet" href="">
 </head>
 <body>
     <header>
@@ -17,10 +17,13 @@
         </div>
     </main>
 
-    <footer>
-        <a href="select_personaje.html">Volver a seleccionar</a>
-    </footer>
 
+ <script>
+      fetch('footer.html')
+        .then(r => r.text())
+        .then(html => document.getElementById('site-footer').innerHTML = html)
+        .catch(err => console.warn("No se pudo cargar footer:", err));
+    </script>
     <script src="assets/games/js_game/script_game2.js"></script>
 </body>
 </html>
