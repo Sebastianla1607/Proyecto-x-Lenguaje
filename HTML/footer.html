@@ -1,60 +1,38 @@
 <div class="fixed bottom-0 left-0 right-0 z-10 mx-auto max-w-md">
     <div
         class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 px-4 pb-3 pt-2 backdrop-blur-md">
+
         <a data-page="index"
             class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400"
             href="index.html">
             <div class="flex h-8 items-center justify-center">
                 <span class="material-symbols-outlined">home</span>
             </div>
-            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Inicio</p>
         </a>
+
         <a data-page="calendario"
             class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400"
             href="Calendario_unido.html">
             <div class="flex h-8 items-center justify-center">
                 <span class="material-symbols-outlined">calendar_month</span>
             </div>
-            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Calendario</p>
         </a>
+
         <a data-page="candidatos"
             class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400"
             href="Candidatos.html">
             <div class="flex h-8 items-center justify-end">
                 <span class="material-symbols-outlined">campaign</span>
             </div>
-            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Candidatos</p>
         </a>
+
         <a data-page="partidos"
             class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400"
             href="Partido_politicos.html">
             <div class="flex h-8 items-center justify-center">
                 <span class="material-symbols-outlined">groups</span>
             </div>
-            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Partidos</p>
         </a>
+
     </div>
 </div>
-
-<script>
-    (function () {
-        try {
-            const anchors = document.querySelectorAll('[data-page]');
-            const path = (globalThis.location && globalThis.location.pathname) ? globalThis.location.pathname.split('/').pop().toLowerCase() : '';
-            const pageFromPath = path || 'index.html';
-
-            for (const a of anchors) {
-                const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
-                const page = a.dataset.page;
-                // determine active by matching href filename or page name
-                if (href === pageFromPath || (page === 'index' && (pageFromPath === '' || pageFromPath === 'index.html'))) {
-                    a.classList.remove('text-slate-500');
-                    a.classList.add('text-primary', 'font-semibold');
-                    a.setAttribute('aria-current', 'page');
-                }
-            }
-        } catch (e) {
-            console.warn('Footer active script error', e);
-        }
-    })();
-</script>
