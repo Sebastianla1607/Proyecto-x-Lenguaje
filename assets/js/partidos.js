@@ -31,7 +31,8 @@
 
       const a = document.createElement('a');
       a.className = 'item';
-      a.href = '#';
+      // Enlaza a la página de detalle del partido con querystring `id`
+      a.href = `Partido_Perfil.html?id=${encodeURIComponent(p.id ?? '')}`;
       a.setAttribute('data-party-id', p.id ?? '');
 
       const img = document.createElement('img');
