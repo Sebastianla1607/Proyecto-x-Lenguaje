@@ -55,21 +55,24 @@
 
 <body class="bg-background text-text-primary">
     <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
-        <!-- Header -->
+
+<!-- Header -->
         <header class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border bg-white/90 p-4 backdrop-blur-sm shadow-sm">
             <div class="justify-self-start">
                 <button onclick="history.back()" class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
             </div>
-            <h1 class="text-xl font-bold text-center">Noticias</h1>
+                <img src="../assets/img/noticia.png"
+     alt="Noticias"
+     class="mx-auto h-7 object-contain">
+
             <div class="flex items-center gap-4 justify-self-end">
                 <a href="Notifications.html" class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition">
                     <span class="material-symbols-outlined">notifications</span>
                 </a>
             </div>
         </header>
-
         <!-- Main content (dynamic) -->
         <main class="flex-grow pb-24">
             <div id="newsList" class="space-y-6 p-4">
