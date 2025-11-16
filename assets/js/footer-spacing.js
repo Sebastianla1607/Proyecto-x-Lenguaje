@@ -34,6 +34,37 @@
     }
   }
 
+  // Marca el enlace activo en el footer según la URL actual
+  function markActiveFooter() {
+    try {
+      const siteFooter = document.getElementById('site-footer');
+      if (!siteFooter) return;
+      const anchors = siteFooter.querySelectorAll('a[data-page]');
+      if (!anchors || anchors.length === 0) return;
+
+      const file = (window.location.pathname || '').split('/').pop().toLowerCase() || '';
+      let pageKey = '';
+      if (file.includes('index') || file === '') pageKey = 'index';
+      else if (file.includes('candid')) pageKey = 'candidatos';
+      else if (file.includes('calend')) pageKey = 'calendario';
+      else if (file.includes('partid')) pageKey = 'partidos';
+      else if (file.includes('noti')) pageKey = 'index'; // fallback
+
+      anchors.forEach(a => {
+        const p = (a.getAttribute('data-page') || '').toLowerCase();
+        if (p === pageKey) {
+          a.classList.add('footer-active');
+          a.setAttribute('aria-current', 'page');
+        } else {
+          a.classList.remove('footer-active');
+          a.removeAttribute('aria-current');
+        }
+      });
+    } catch (e) {
+      console.debug('markActiveFooter error:', e);
+    }
+  }
+
   // Observador para detectar cuando el footer es inyectado vía innerHTML
   function init() {
     const siteFooter = document.getElementById('site-footer');
@@ -43,7 +74,10 @@
       for (const m of mutations) {
         if (m.type === 'childList' && m.addedNodes.length) {
           // pequeño delay para que el layout se estabilice
-          setTimeout(updateFooterSpacing, 50);
+          setTimeout(() => {
+            updateFooterSpacing();
+            markActiveFooter();
+          }, 50);
           return;
         }
       }
@@ -56,10 +90,11 @@
     window.addEventListener('orientationchange', () => setTimeout(updateFooterSpacing, 120));
 
     // Intento inicial por si el footer ya estaba presente
-    if (siteFooter.children.length) setTimeout(updateFooterSpacing, 50);
+    if (siteFooter.children.length) setTimeout(() => { updateFooterSpacing(); markActiveFooter(); }, 50);
 
     // Exponer para pruebas/manual invocation
     window.updateFooterSpacing = updateFooterSpacing;
+    window.markActiveFooter = markActiveFooter;
   }
 
   // Ejecutar init tan pronto como el DOM esté disponible
