@@ -95,6 +95,25 @@
   </style>
 
 </head>
+  <!-- Mostrar tutorial una sola vez: si no se vio, redirige a Tutorial.html (solo desde la raíz/index) -->
+  <script>
+    (function(){
+      try {
+        const seen = localStorage.getItem('seenTutorial');
+        if (!seen) {
+          // Solo redirige si el usuario abrió la raíz o index.html
+          const last = (location.pathname || '').split('/').pop();
+          const isIndexRoot = last === '' || /index\.html$/i.test(last);
+          if (isIndexRoot && !/Tutorial\.html$/i.test(last)) {
+            location.replace('Tutorial.html');
+          }
+        }
+      } catch (e) {
+        // si localStorage no está disponible, no hacemos nada
+        console.warn('No se pudo acceder a localStorage para el tutorial:', e);
+      }
+    })();
+  </script>
 
 <body class="font-display">
 
