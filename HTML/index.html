@@ -131,16 +131,67 @@
           </div>
         </div>
 
-        <!-- Notificaciones -->
+        <!-- Notificaciones (ahora abre modal) -->
         <div class="flex w-12 items-center justify-end">
-          <a href="Notifications.html"
-            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0">
+          <button id="notificationsBtn"
+            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0"
+            aria-label="Notificaciones">
             <span class="material-symbols-outlined">notifications</span>
-          </a>
+          </button>
         </div>
 
       </div>
     </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
+      <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
+          <h3 class="text-lg font-bold">Notificaciones</h3>
+          <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="notificationsContent" class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
+          <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const btn = document.getElementById('notificationsBtn');
+        const modal = document.getElementById('notificationsModal');
+        const closeBtn = document.getElementById('closeNotifications');
+        const content = document.getElementById('notificationsContent');
+
+        function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
+        function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+        btn?.addEventListener('click', openModal);
+        closeBtn?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        async function loadNotifications() {
+          try {
+            const res = await fetch('../assets/data/noticias.json');
+            if (!res.ok) throw new Error('No se pudo cargar');
+            const data = await res.json();
+            const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
+            if (!items || items.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+            content.innerHTML = items.map(it => `
+              <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                <div class="font-semibold">${it.title || it.titulo || ''}</div>
+                <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}</div>
+              </div>
+            `).join('');
+          } catch (err) {
+            content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
+            console.warn(err);
+          }
+        }
+      })();
+    </script>
 
     <!-- MAIN -->
     <main class="flex-grow pb-24">

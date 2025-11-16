@@ -70,6 +70,67 @@ body {
     background: #333;
 }
 
+/* Estilos para notificaciones in-page (modal/toast) */
+#inpage-notifications { pointer-events: none; }
+#inpage-notifications .inpage-notification { pointer-events: auto; }
+#inpage-notifications .inpage-notification img { flex-shrink: 0; }
+
+/* Botón flotante global de notificaciones (siempre visible) */
+.global-notification-btn {
+  position: fixed;
+  right: 14px;
+  top: 14px; /* colocado en la parte superior */
+  z-index: 99999;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.12);
+  color: #0b1220;
+  text-decoration: none;
+}
+
+/* Variante para colocar el botón dentro del header (no fijo) */
+.header-notif-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+.global-notification-btn .material-symbols-outlined { font-size: 24px; }
+
+.global-notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #ef4444; /* rojo */
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 420px) {
+  .global-notification-btn { right: 10px; top: 10px; width:48px; height:48px; }
+}
+
+
 /* Estilo visible para el enlace activo en el footer inyectado */
 #site-footer .footer-active {
   color: #FFCB05 !important; /* color primario */
