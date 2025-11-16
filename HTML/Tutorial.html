@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bienvenido a Elecciones Perú 2026</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+                colors: {
+                  "primary": "#FFCB05",
+                  "background-light": "#FFFFFF",
+                  "background-dark": "#101622",
+                  "text-light": "#000000",
+                  "text-dark": "#F5F5F5",
+                  "card-light": "#FFFFFF",
+                  "card-dark": "#1A202C",
+                  "secondary-text-light": "#616f89",
+                  "secondary-text-dark": "#A0AEC0",
+                  "border-light": "#dbdfe6",
+                  "border-dark": "#4A5568",
+                  "accent-blue": "#0D47A1"
+                },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+    <style>
+      .bg-inactive {
+        background-color: #cbd5e1; /* gris claro, coincide con tailwind slate-300 */
+      }
+    </style>
+<style>
+    body {
+      min-height: 100dvh;
+    }
+  </style>
+  <style>
+    /* Oculta completamente el carrusel y su espacio visual, pero mantiene el DOM y el JS funcional */
+    #slidesTrack,
+    #indicators,
+    #slidesTrack *,
+    .tutorial-slide {
+      display: none !important;
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Main content container -->
+<main class="flex flex-col flex-grow justify-between p-4 pt-8 max-w-md mx-auto w-full">
+<!-- Top Section with Skip Button -->
+<div class="flex justify-end px-2">
+<button id="skipBtn" class="cursor-pointer rounded-xl h-10 px-4 bg-transparent text-text-light dark:text-text-dark text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Omitir</span>
+</button>
+</div>
+<!-- Central Content: Illustration and Text -->
+<div class="flex flex-col items-center justify-center text-center flex-grow px-2">
+<!-- Icon/Illustration -->
+<div class="flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 bg-primary/10 dark:bg-primary/20 rounded-full mb-8">
+<span class="material-symbols-outlined text-7xl sm:text-8xl text-primary">person_search</span>
+</div>
+<!-- Headline Text (dinámico) -->
+<h1 id="dynamicTitle" class="text-text-light dark:text-text-dark tracking-tight text-2xl sm:text-3xl font-bold leading-tight px-4 pb-3"></h1>
+<!-- Body Text (dinámico) -->
+<p id="dynamicText" class="text-text-light dark:text-text-dark text-sm sm:text-base font-normal leading-normal pb-3 pt-1 px-4 max-w-sm"></p>
+</div>
+<!-- Bottom Section: Indicators and Buttons -->
+<div class="w-full">
+<!-- Carousel slides -->
+<div class="w-full">
+  <div class="overflow-hidden">
+    <div id="slidesTrack" class="flex transition-transform duration-300 ease-in-out">
+      <!-- Slide 1 -->
+      <section class="tutorial-slide min-w-full p-4 flex flex-col items-center justify-center">
+        <div class="flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 bg-primary/10 dark:bg-primary/20 rounded-full mb-6">
+          <span class="material-symbols-outlined text-7xl sm:text-8xl text-primary">person_search</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-text-light dark:text-text-dark">Conoce a tus Candidatos</h2>
+        <p class="text-sm sm:text-base text-secondary-text-light dark:text-secondary-text-dark max-w-sm text-center">Encuentra y conoce toda la información sobre los candidatos presidenciales y congresales para tomar una decisión informada.</p>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="tutorial-slide min-w-full p-4 flex flex-col items-center justify-center">
+        <div class="flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 bg-card-light rounded-full mb-6">
+          <span class="material-symbols-outlined text-7xl sm:text-8xl text-accent-blue">article</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-text-light dark:text-text-dark">Detalles de Candidatos</h2>
+        <p class="text-sm sm:text-base text-secondary-text-light dark:text-secondary-text-dark max-w-sm text-center">Aprende a ver hojas de vida, planes electorales y comparar candidatos fácilmente.</p>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="tutorial-slide min-w-full p-4 flex flex-col items-center justify-center">
+        <div class="flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 bg-card-light rounded-full mb-6">
+          <span class="material-symbols-outlined text-7xl sm:text-8xl text-primary">feed</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-text-light dark:text-text-dark">Noticias y Calendario</h2>
+        <p class="text-sm sm:text-base text-secondary-text-light dark:text-secondary-text-dark max-w-sm text-center">Consulta las últimas noticias y las fechas clave del proceso electoral.</p>
+      </section>
+
+      <!-- Slide 4 -->
+      <section class="tutorial-slide min-w-full p-4 flex flex-col items-center justify-center">
+        <div class="flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 bg-card-light rounded-full mb-6">
+          <span class="material-symbols-outlined text-7xl sm:text-8xl text-primary">place</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-text-light dark:text-text-dark">Ubicación</h2>
+        <p class="text-sm sm:text-base text-secondary-text-light dark:text-secondary-text-dark max-w-sm text-center">Encuentra tu local de votación y usa el mapa para llegar fácilmente.</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Indicators -->
+  <div id="indicators" class="flex w-full flex-row items-center justify-center gap-3 py-4">
+    <button class="indicator h-2 w-2 rounded-full bg-primary" aria-label="slide-1"></button>
+    <button class="indicator h-2 w-2 rounded-full bg-inactive" aria-label="slide-2"></button>
+    <button class="indicator h-2 w-2 rounded-full bg-inactive" aria-label="slide-3"></button>
+    <button class="indicator h-2 w-2 rounded-full bg-inactive" aria-label="slide-4"></button>
+  </div>
+
+  <!-- Button Group -->
+  <div class="flex justify-stretch">
+    <div class="flex flex-1 gap-3 flex-wrap px-0 py-3 justify-center">
+      <button id="nextBtn" class="flex min-w-[84px] w-full max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em]">
+        <span id="nextLabel" class="truncate">Siguiente</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const track = document.getElementById('slidesTrack');
+    const slides = document.querySelectorAll('.tutorial-slide');
+    // Ajusta ancho dinámicamente según la cantidad de slides
+    track.style.width = `${slides.length * 100}%`;
+    const indicators = document.querySelectorAll('.indicator');
+    const nextBtn = document.getElementById('nextBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const nextLabel = document.getElementById('nextLabel');
+    let index = 0;
+
+    // Textos dinámicos asociados a cada slide (ampliado)
+    const titles = [
+      "Conoce a tus Candidatos",
+      "Detalles de Candidatos",
+      "Noticias y Calendario",
+      "Ubicación y Local de Votación",
+      "Modo Claro y Oscuro",
+      "Compara Candidatos Rápidamente",
+      "Guarda tus Favoritos",
+      "Notificaciones Inteligentes",
+      "Información Segura y Verificada"
+    ];
+
+    const texts = [
+      "Encuentra y conoce toda la información sobre los candidatos presidenciales y congresales para tomar una decisión informada.",
+      "Aprende a revisar hojas de vida, planes electorales y comparar candidatos fácilmente.",
+      "Consulta las últimas noticias y las fechas clave del proceso electoral.",
+      "Encuentra tu local de votación y usa el mapa para llegar fácilmente.",
+      "Activa el modo oscuro para una mejor lectura en ambientes con poca luz. Puedes cambiar el tema en cualquier momento desde el menú.",
+      "Usa la herramienta de comparación para ver diferencias entre propuestas, historial, experiencia y planes de gobierno.",
+      "Marca candidatos y noticias como favoritos para acceder rápidamente a ellos cuando lo necesites.",
+      "La app te avisará sobre fechas clave, noticias relevantes, cambios electorales y novedades oficiales.",
+      "Toda la información proviene de fuentes oficiales como ONPE, JNE y el Gobierno del Perú para garantizar precisión y transparencia."
+    ];
+
+    // Elementos del DOM para actualizar
+    const dynamicTitle = document.getElementById('dynamicTitle');
+    const dynamicText = document.getElementById('dynamicText');
+
+    function update() {
+      const percent = index * 100;
+      track.style.transform = `translateX(-${percent}%)`;
+      indicators.forEach((el,i) => {
+        el.classList.toggle('bg-primary', i === index);
+        el.classList.toggle('bg-inactive', i !== index);
+      });
+
+      // Actualiza textos dinámicos
+      if (dynamicTitle) dynamicTitle.textContent = titles[index] || '';
+      if (dynamicText) dynamicText.textContent = texts[index] || '';
+
+      if (index === slides.length - 1) {
+        nextLabel.textContent = 'Finalizar';
+      } else {
+        nextLabel.textContent = 'Siguiente';
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (index < slides.length - 1) {
+        index += 1;
+        update();
+      } else {
+        try { localStorage.setItem('seenTutorial', '1'); } catch (_) { }
+        globalThis.location.replace('index.html');
+      }
+    });
+
+    indicators.forEach((btn, i) => btn.addEventListener('click', () => { index = i; update(); }));
+
+    skipBtn?.addEventListener('click', () => {
+      try { localStorage.setItem('seenTutorial', '1'); } catch (_) { }
+      globalThis.location.replace('index.html');
+    });
+
+    // Initialize
+    // Ensure track width matches slides count (flex handles it), but reset transform
+    track.style.transform = 'translateX(0%)';
+    update();
+  })();
+</script>
+</body></html>
