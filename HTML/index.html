@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="manifest" href="/manifest.json"> <!--para el offline, no cambiar-->
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title data-i18n="title">Elecciones Perú 2026</title>
 
@@ -318,6 +319,16 @@
     <script src="../assets/js/i18n.js"></script>
 
   </div>
+  <script>
+    //esto lo conecta al service worker donde ya declaramos no tocar!
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("SW registrado"))
+      .catch(err => console.error("Error SW:", err));
+  });
+}
+</script>
 
 </body>
 
