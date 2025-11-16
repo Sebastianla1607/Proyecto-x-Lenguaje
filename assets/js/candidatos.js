@@ -45,7 +45,7 @@
         items = BUILTIN_CANDIDATES;
       }
 
-      if (countEl) countEl.textContent = items.length + ' candidatos encontrados';
+      if (countEl) countEl.textContent = 'Candidatos encontrados';
 
       const fragment = document.createDocumentFragment();
 
@@ -72,6 +72,8 @@
       function detectChamber(value) {
         const v = (value || '').toString().toLowerCase();
         if (!v) return '';
+        // Presidencia
+        if (v.includes('presid') || v.includes('presidente') || v.includes('presidencia')) return 'Presidencia';
         if (v.includes('parl') || v.includes('andino') || v.includes('parlamento')) return 'Parlamento Andino';
         if (v.includes('dip') || v.includes('diput')) return 'Cámara: Diputado(a)';
         if (v.includes('sen') || v.includes('senad')) return 'Cámara: Senado';
@@ -79,15 +81,27 @@
         return '';
       }
 
-      function badgeFromChamberText(chamberText) {
-        if (!chamberText) return '';
-        const t = chamberText.toString().toLowerCase();
-        if (t.includes('andino') || t.includes('parl')) return 'Parl. Andino';
-        if (t.includes('dip')) return 'Dip.';
-        if (t.includes('sen')) return 'Sen.';
-        if (t.includes('congres')) return 'Cong.';
-        return '';
-      }
+          function badgeFromChamberText(chamberText) {
+            if (!chamberText) return '';
+            const t = chamberText.toString().toLowerCase();
+            if (t.includes('andino') || t.includes('parl')) return 'Parl. Andino';
+              if (t.includes('presid')) return 'Presidencia';
+            if (t.includes('dip')) return 'Dip.';
+            if (t.includes('sen')) return 'Sen.';
+            if (t.includes('congres')) return 'Congreso';
+            return '';
+          }
+
+          // Devuelve clases de Tailwind para colorear la badge según el tipo
+          function badgeClassFromType(chamberText) {
+            const t = (chamberText || '').toString().toLowerCase();
+            if (t.includes('presid')) return 'bg-amber-100 text-amber-800';
+            if (t.includes('andino') || t.includes('parl')) return 'bg-indigo-100 text-indigo-800';
+            if (t.includes('dip')) return 'bg-green-100 text-green-800';
+            if (t.includes('sen')) return 'bg-red-100 text-red-800';
+            if (t.includes('congres')) return 'bg-blue-100 text-blue-800';
+            return 'bg-gray-100 text-gray-800';
+          }
 
       for (const c of items) {
         const id = c.id || c.ID || c.id_candidato || '0';
@@ -116,7 +130,7 @@
         pName.textContent = name;
         if (badgeText) {
           const b = document.createElement('span');
-          b.className = 'ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded bg-primary/20 text-primary';
+          b.className = 'ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded ' + badgeClassFromType(badgeText);
           b.textContent = badgeText;
           pName.appendChild(b);
         }
@@ -133,8 +147,7 @@
 
         a.appendChild(img);
         a.appendChild(div);
-        // keep id on anchor for debug
-        a.dataset.candidateId = String(id);
+        // no exposiciones de ID en el DOM (seguridad / privacidad)
         a.appendChild(span);
 
         fragment.appendChild(a);

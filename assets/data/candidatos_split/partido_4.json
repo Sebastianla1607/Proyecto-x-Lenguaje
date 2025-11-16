@@ -1,0 +1,18 @@
+[
+  {
+    "id": 8,
+    "nombre": "Cesar Acuña Peralta",
+    "edad": 71,
+    "ciudad": "Trujillo",
+    "partido_id": 4,
+    "cargo": "Presidente",
+    "tipo_candidatura": "Presidencial",
+    "nivel": "Nacional",
+    "plan_electoral": "Educación, desarrollo regional, apoyo a emprendedores",
+    "descripcion": "Ingeniero químico, empresario y político; fundador de la Universidad César Vallejo y líder de Alianza para el Progreso",
+    "hoja_vida": "Ha sido alcalde de Trujillo y gobernador regional de La Libertad; candidato presidencial en elecciones anteriores",
+    "actividades": null,
+    "foto_url": "https://i.postimg.cc/x82fW818/1-acuna-768x768.avif",
+    "created_at": "2025-11-15T23:12:52.483Z"
+  }
+]

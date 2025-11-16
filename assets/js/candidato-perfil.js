@@ -85,6 +85,8 @@
       function detectChamber(value, cargoText) {
         const v = (value || cargoText || '').toString().toLowerCase();
         if (!v) return '';
+        // Presidencia
+        if (v.includes('presid') || v.includes('presidente') || v.includes('presidencia')) return 'Presidencia';
         // Parlamento Andino
         if (v.includes('parl') || v.includes('andino') || v.includes('parlamento')) return 'Parlamento Andino';
         // Diputado / Diputada
@@ -170,16 +172,29 @@
         if (!chamberText) return '';
         const t = chamberText.toString().toLowerCase();
         if (t.includes('andino') || t.includes('parl')) return 'Parl. Andino';
+        if (t.includes('presid')) return 'Presidencia';
         if (t.includes('dip')) return 'Dip.';
         if (t.includes('sen')) return 'Sen.';
-        if (t.includes('congres')) return 'Cong.';
+        if (t.includes('congres')) return 'Congreso';
         return '';
+      }
+      // clases para colorear la badge según tipo
+      function badgeClassFromType(chamberText) {
+        const t = (chamberText || '').toString().toLowerCase();
+        if (t.includes('presid')) return 'bg-amber-100 text-amber-800';
+        if (t.includes('andino') || t.includes('parl')) return 'bg-indigo-100 text-indigo-800';
+        if (t.includes('dip')) return 'bg-green-100 text-green-800';
+        if (t.includes('sen')) return 'bg-red-100 text-red-800';
+        if (t.includes('congres')) return 'bg-blue-100 text-blue-800';
+        return 'bg-gray-100 text-gray-800';
       }
       const badgeText = badgeFromChamber(chamberText);
       const badgeEl = document.getElementById('candidate-badge');
       if (badgeEl) {
         if (badgeText) {
           badgeEl.textContent = badgeText;
+          // aplicar clases de color reconocibles
+          badgeEl.className = 'inline-block text-xs font-semibold px-2 py-0.5 rounded ' + badgeClassFromType(badgeText);
           badgeEl.classList.remove('hidden');
           badgeEl.setAttribute('aria-label', badgeText);
         } else {

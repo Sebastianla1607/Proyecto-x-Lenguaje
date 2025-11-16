@@ -1,0 +1,34 @@
+[
+  {
+    "id": 9,
+    "nombre": "Phillip Butters",
+    "edad": null,
+    "ciudad": "Lima",
+    "partido_id": 5,
+    "cargo": "Presidente",
+    "tipo_candidatura": "Presidencial",
+    "nivel": "Nacional",
+    "plan_electoral": "Privatizar Petro-Perú, seguridad y pena de muerte para delitos graves",
+    "descripcion": "Periodista y empresario mediático; figura pública conocida en Perú",
+    "hoja_vida": "Precandidato presidencial de Avanza País para 2026; propone reformas económicas y de seguridad",
+    "actividades": null,
+    "foto_url": "https://i.postimg.cc/Wpd019Vn/Combutters-3.png",
+    "created_at": "2025-11-15T23:12:52.483Z"
+  },
+  {
+    "id": 10,
+    "nombre": "Vladimir Cerrón",
+    "edad": 53,
+    "ciudad": "Ahuac, Junín",
+    "partido_id": 5,
+    "cargo": "Presidente",
+    "tipo_candidatura": "Presidencial",
+    "nivel": "Nacional",
+    "plan_electoral": "Redistribución, crítica al neoliberalismo, reforma social",
+    "descripcion": "Médico neurocirujano y político fundador de Perú Libre",
+    "hoja_vida": "Ha sido gobernador regional de Junín, líder ideológico de Perú Libre",
+    "actividades": null,
+    "foto_url": "https://i.postimg.cc/zvdJhwT5/R-(4).jpg",
+    "created_at": "2025-11-15T23:12:52.483Z"
+  }
+]

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="light" lang="es">
+
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -7,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script>
         tailwind.config = {
@@ -38,54 +40,68 @@
 </head>
 
 <body class="bg-white dark:bg-background-dark font-display">
-    <div id="calendar-root" class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+    <div id="calendar-root"
+        class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
         <div class="sticky top-0 z-10 flex flex-col bg-white dark:bg-background-dark">
             <div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between">
-                <button type="button" onclick="history.back()" class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800 dark:text-slate-200">
+                <button type="button" onclick="history.back()"
+                    class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800 dark:text-slate-200">
                     <span class="material-symbols-outlined !text-2xl">arrow_back</span>
                 </button>
-                <h2 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-900 dark:text-slate-50">Calendario Electoral 2026</h2>
+                <h2
+                    class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-900 dark:text-slate-50">
+                    Calendario Electoral 2026</h2>
                 <div class="size-12 shrink-0"></div>
             </div>
         </div>
 
-        
+
 
         <div class="px-4 pt-2 pb-4">
-            <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+            <div
+                class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
                 <div class="flex items-center justify-between pb-3">
-                    <button id="btn-prev-month" class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <button id="btn-prev-month"
+                        class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
                         <span class="material-symbols-outlined !text-xl">chevron_left</span>
                     </button>
                     <div class="flex flex-col items-center">
-                        <h3 id="mes-titulo" class="text-base font-semibold text-slate-900 dark:text-slate-50">Mes Año</h3>
+                        <h3 id="mes-titulo" class="text-base font-semibold text-slate-900 dark:text-slate-50">Mes Año
+                        </h3>
                         <p id="current-clock" class="text-xs text-slate-500 dark:text-slate-400 mt-1"></p>
                     </div>
-                    <div class="absolute top-3 right-3 bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-lg p-2 border border-slate-200 dark:border-slate-700 text-right">
+                    <div
+                        class="absolute top-3 right-3 bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-lg p-2 border border-slate-200 dark:border-slate-700 text-right">
                         <div class="grid grid-cols-4 gap-1 text-center text-xs">
                             <div class="flex flex-col items-center">
-                                <span id="count-months" class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
+                                <span id="count-months"
+                                    class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
                                 <span class="text-[10px] text-slate-600 dark:text-slate-400">Meses</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <span id="count-days" class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
+                                <span id="count-days"
+                                    class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
                                 <span class="text-[10px] text-slate-600 dark:text-slate-400">Días</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <span id="count-hours" class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
+                                <span id="count-hours"
+                                    class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
                                 <span class="text-[10px] text-slate-600 dark:text-slate-400">Horas</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <span id="count-minutes" class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
+                                <span id="count-minutes"
+                                    class="text-xs font-bold text-slate-900 dark:text-slate-50">00</span>
                                 <span class="text-[10px] text-slate-600 dark:text-slate-400">Min</span>
                             </div>
                         </div>
                     </div>
-                    <button id="btn-next-month" class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <button id="btn-next-month"
+                        class="flex size-8 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
                         <span class="material-symbols-outlined !text-xl">chevron_right</span>
                     </button>
                 </div>
-                <div class="grid grid-cols-7 gap-y-2 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
+                <div
+                    class="grid grid-cols-7 gap-y-2 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                     <div>L</div>
                     <div>M</div>
                     <div>M</div>
@@ -104,9 +120,13 @@
 
         <!-- Botones/pestañas (movidos debajo del calendario) -->
         <div class="flex justify-center gap-2 px-4 pt-4 pb-2">
-            <button id="btn-panel-todos" class="filter-btn flex-1 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-black">Todos</button>
-            <button id="btn-panel-votantes" class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Votantes</button>
-            <button id="btn-panel-miembros" class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Miembros de Mesa</button>
+            <button id="btn-panel-todos"
+                class="filter-btn flex-1 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-black">Todos</button>
+            <button id="btn-panel-votantes"
+                class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Votantes</button>
+            <button id="btn-panel-miembros"
+                class="filter-btn flex-1 rounded-full bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300">Miembros
+                de Mesa</button>
         </div>
 
         <!-- Secciones de eventos: copiadas de cada HTML original -->
@@ -120,48 +140,59 @@
             <div id="events-panel-todos" class="events-panel">
                 <div class="grid grid-cols-[auto_1fr] gap-x-4">
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-slate-900/10 dark:bg-slate-50/10 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-slate-900/10 dark:bg-slate-50/10 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">how_to_reg</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">01 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Cierre de Padrón Electoral</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día para el cambio de domicilio en DNI.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Cierre de Padrón
+                            Electoral</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día
+                            para el cambio de domicilio en DNI.</p>
                         <div class="mt-2 text-sm font-medium text-slate-900 dark:text-slate-50">Completado</div>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">groups</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">18 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de Miembros de Mesa</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección aleatoria de ciudadanos para las mesas de sufragio.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de
+                            Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección
+                            aleatoria de ciudadanos para las mesas de sufragio.</p>
                         <div class="mt-3 flex items-center justify-between">
                             <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 95 días</span>
-                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                            <button
+                                class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
                                 <span class="material-symbols-outlined !text-base">add_alarm</span>
                                 <span>Añadir</span>
                             </button>
                         </div>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-primary/20 dark:bg-primary/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">ballot</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 MAY 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la Votación: Primera Vuelta</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada electoral nacional para elegir a nuestras autoridades.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la
+                            Votación: Primera Vuelta</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada
+                            electoral nacional para elegir a nuestras autoridades.</p>
                         <div class="mt-3 flex items-center justify-between">
                             <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 120 días</span>
-                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                            <button
+                                class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
                                 <span class="material-symbols-outlined !text-base">add_alarm</span>
                                 <span>Añadir</span>
                             </button>
@@ -174,55 +205,68 @@
             <div id="events-panel-votantes" class="events-panel hidden">
                 <div class="grid grid-cols-[auto_1fr] gap-x-4">
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">how_to_reg</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">01 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Cierre de Padrón Electoral</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día para el cambio de domicilio en DNI — afecta a votantes y al sorteo de miembros.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Cierre de Padrón
+                            Electoral</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día
+                            para el cambio de domicilio en DNI — afecta a votantes y al sorteo de miembros.</p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">groups</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">18 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de Miembros de Mesa</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección aleatoria de ciudadanos para las mesas de sufragio.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Sorteo de
+                            Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Selección
+                            aleatoria de ciudadanos para las mesas de sufragio.</p>
                         <div class="mt-3 flex items-center justify-between">
                             <span class="text-sm font-semibold text-slate-900 dark:text-slate-50">Faltan 95 días</span>
-                            <button class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
+                            <button
+                                class="flex items-center gap-1.5 rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200">
                                 <span class="material-symbols-outlined !text-base">add_alarm</span>
                                 <span>Añadir</span>
                             </button>
                         </div>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="">
                             <span class="material-symbols-outlined !text-xl">ballot</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 MAY 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la Votación: Primera Vuelta</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada electoral nacional para elegir a nuestras autoridades.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la
+                            Votación: Primera Vuelta</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada
+                            electoral nacional para elegir a nuestras autoridades.</p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-voter/20 dark:bg-filter-voter/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">ballot</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">12 ABR 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la Votación — Primera Vuelta</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada electoral nacional — día principal de votación.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Día de la
+                            Votación — Primera Vuelta</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Jornada
+                            electoral nacional — día principal de votación.</p>
                     </div>
                 </div>
             </div>
@@ -231,62 +275,129 @@
             <div id="events-panel-miembros" class="events-panel hidden">
                 <div class="grid grid-cols-[auto_1fr] gap-x-4">
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">event_busy</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">01 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Plazo máximo para sorteo de Miembros de Mesa</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Fecha límite administrativa para completar procesos vinculados al sorteo.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Plazo máximo
+                            para sorteo de Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Fecha
+                            límite administrativa para completar procesos vinculados al sorteo.</p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">warning</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">11 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Límite para renuncia de candidatos y retiro de listas</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día para presentar renuncias o retirar listas electorales.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Límite para
+                            renuncia de candidatos y retiro de listas</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Último día
+                            para presentar renuncias o retirar listas electorales.</p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">school</span>
                         </div>
                         <div class="w-px grow bg-slate-300 dark:bg-slate-700"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">25 FEB 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Capacitación de Miembros de Mesa</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio de las jornadas de capacitación obligatorias.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Capacitación de
+                            Miembros de Mesa</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio de
+                            las jornadas de capacitación obligatorias.</p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <div class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
+                        <div
+                            class="flex size-10 items-center justify-center rounded-full bg-filter-member/20 dark:bg-filter-member/30 text-slate-900 dark:text-slate-50">
                             <span class="material-symbols-outlined !text-xl">payments</span>
                         </div>
                         <div class="w-px grow bg-transparent"></div>
                     </div>
                     <div class="flex flex-col pb-6">
                         <p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">23 JUN 2026</p>
-                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Pago de Compensación Económica</p>
-                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio del pago a los miembros de mesa que cumplieron su labor.</p>
+                        <p class="text-base font-bold leading-normal text-slate-900 dark:text-slate-50">Pago de
+                            Compensación Económica</p>
+                        <p class="mt-1 text-sm font-normal leading-normal text-slate-600 dark:text-slate-300">Inicio del
+                            pago a los miembros de mesa que cumplieron su labor.</p>
                     </div>
                 </div>
             </div>
 
         </main>
 
+        <section class="px-4 pb-4">
+            <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-slate-50">¿Eres votante o miembro de mesa y no sabes cuáles son tus responsabilidades ni tus derechos?</h3>
+
+            <article class="mb-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+                <h4 class="text-base font-semibold text-primary dark:text-primary mb-2">Votantes y Cédula</h4>
+                <div class="text-sm text-slate-700 dark:text-slate-300 space-y-2">
+                    <p class="font-medium">Tus derechos y deberes incluyen:</p>
+                    <ul class="list-disc ml-5 space-y-1">
+                        <li><strong>Votar libremente:</strong> Nadie puede forzarte a votar por una opción.</li>
+                        <li><strong>Verificar tu identidad:</strong> Muestra tu DNI/documento al Miembro de Mesa.</li>
+                        <li><strong>Instrucciones de marcado:</strong> Marca la cédula dentro del recuadro de tu candidato/partido preferido. No uses otros símbolos ni salgas del espacio permitido, o tu voto será nulo.</li>
+                        <li><strong>El voto es secreto:</strong> Respeta la cabina de votación como un espacio privado.</li>
+                        <li><strong>Reclama si es necesario:</strong> Si tu cédula está dañada, pide una nueva.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="mb-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+                <h4 class="text-base font-semibold text-primary dark:text-primary mb-2">Miembros de Mesa</h4>
+                <div class="text-sm text-slate-700 dark:text-slate-300 space-y-2">
+                    <p class="font-medium">Si fuiste sorteado, tus responsabilidades son:</p>
+                    <ul class="list-disc ml-5 space-y-1">
+                        <li><strong>Constituir la mesa:</strong> Llegar a la hora para iniciar el proceso de votación.</li>
+                        <li><strong>Garantizar la transparencia:</strong> Velar por la correcta instalación, votación y escrutinio.</li>
+                        <li><strong>Identificación:</strong> Verificar la identidad de los votantes usando el Padrón.</li>
+                        <li><strong>Capacitación obligatoria:</strong> Debes asistir a las jornadas de capacitación para conocer los procedimientos.</li>
+                        <li><strong>Derecho a compensación:</strong> Tienes derecho a la compensación económica que se ofrece por cumplir con tu deber.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="mb-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+                <h4 class="text-base font-semibold text-primary dark:text-primary mb-2">Marco legal electoral</h4>
+                <div class="text-sm text-slate-700 dark:text-slate-300">
+                    <p>Información sobre normativa electoral y enlaces oficiales. (Agregar referencias y enlaces legales según corresponda.)</p>
+                </div>
+            </article>
+
+            <article class="mb-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+                <h4 class="text-base font-semibold text-primary dark:text-primary mb-2">Recomendaciones de seguridad</h4>
+                <div class="text-sm text-slate-700 dark:text-slate-300 space-y-2">
+                    <p class="font-medium">Consejos para una jornada segura:</p>
+                    <ul class="list-disc ml-5 space-y-1">
+                        <li><strong>Documentación:</strong> Lleva siempre tu DNI o documento de identificación válido.</li>
+                        <li><strong>Horario:</strong> Revisa el horario recomendado o el turno asignado (si aplica) para evitar aglomeraciones.</li>
+                        <li><strong>Ubicación:</strong> Confirma tu local de votación con antelación.</li>
+                        <li><strong>Bioseguridad:</strong> Sigue las indicaciones sanitarias locales (uso de mascarilla, distanciamiento, etc.).</li>
+                        <li><strong>Emergencias:</strong> En caso de incidentes o anomalías, contacta al personal de la ONPE/autoridad electoral presente en el lugar.</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
         <div id="site-footer"></div>
+
+        <!-- Accordion behavior removed: sections are static now -->
         <script>
-          (function(){
-            fetch('footer.html')
-              .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-              .then(html => { document.getElementById('site-footer').innerHTML = html; })
-              .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
-          })();
+            (function () {
+                fetch('footer.html')
+                    .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+                    .then(html => { document.getElementById('site-footer').innerHTML = html; })
+                    .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+            })();
         </script>
 
     </div>

@@ -1,0 +1,11 @@
+{
+  "description": "Índice de archivos por partido_id",
+  "generated_at": "2025-11-16T00:00:00Z",
+  "partidos": {
+    "1": { "file": "partido_1.json", "count": 1 },
+    "2": { "file": "partido_2.json", "count": 1 },
+    "3": { "file": "partido_3.json", "count": 5 },
+    "4": { "file": "partido_4.json", "count": 1 },
+    "5": { "file": "partido_5.json", "count": 2 }
+  }
+}
