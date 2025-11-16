@@ -103,64 +103,83 @@
             return 'bg-gray-100 text-gray-800';
           }
 
-      for (const c of items) {
-        const id = c.id || c.ID || c.id_candidato || '0';
-        const name = c.name || c.nombre || c.nombre_completo || c.fullName || 'Sin nombre';
-        const party = c.party || c.partido || c.affiliation || (c.partido_id ? String(c.partido_id) : '');
-        const photo = c.photo || c.foto || c.avatar || c.image || c.foto_url || getPhotoFromName(name) || 'https://via.placeholder.com/96';
-        // detect chamber info (camara / parlamento)
-        const rawChamber = c.camara || c.camara_tipo || c.tipo || c.chamber || c.cargo || '';
-        const chamberText = detectChamber(rawChamber);
-        const badgeText = badgeFromChamberText(chamberText);
+      // queremos mapear partido_id -> nombre de partido cuando sea posible
+      const partidosLocal = '../assets/data/partidos.json';
+      const partiesById = {};
 
-        const a = document.createElement('a');
-        a.className = 'flex items-center gap-4 rounded-lg p-2 transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800';
-        // enlace al perfil con el id del candidato
-        a.href = `Candidato_Perfil.html?id=${encodeURIComponent(id)}`;
+      function renderItemsWithParties() {
+        for (let idx = 0; idx < items.length; idx++) {
+          const c = items[idx];
+          const id = c.id || c.ID || c.id_candidato || '0';
+          const name = c.name || c.nombre || c.nombre_completo || c.fullName || 'Sin nombre';
+          let party = c.party || c.partido || c.affiliation || '';
+          if (!party && (c.partido_id || c.partido_id === 0)) {
+            party = partiesById[String(c.partido_id)] || String(c.partido_id);
+          }
+          const photo = c.photo || c.foto || c.avatar || c.image || c.foto_url || getPhotoFromName(name) || 'https://via.placeholder.com/96';
+          const rawChamber = c.camara || c.camara_tipo || c.tipo || c.chamber || c.cargo || '';
+          const chamberText = detectChamber(rawChamber);
+          const badgeText = badgeFromChamberText(chamberText);
 
-        const img = document.createElement('img');
-        img.alt = name;
-        img.className = 'h-14 w-14 rounded-full object-cover';
-        img.src = photo;
+          const a = document.createElement('a');
+          a.className = 'flex items-center gap-4 rounded-lg p-2 transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800';
+          a.href = `Candidato_Perfil.html?id=${encodeURIComponent(id)}`;
 
-        const div = document.createElement('div');
-        const pName = document.createElement('p');
-        pName.className = 'font-bold text-text-light dark:text-text-dark';
-        // Name and optional short badge
-        pName.textContent = name;
-        if (badgeText) {
-          const b = document.createElement('span');
-          b.className = 'ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded ' + badgeClassFromType(badgeText);
-          b.textContent = badgeText;
-          pName.appendChild(b);
+          const img = document.createElement('img');
+          img.alt = name;
+          img.className = 'h-14 w-14 rounded-full object-cover';
+          img.src = photo;
+
+          const div = document.createElement('div');
+          const pName = document.createElement('p');
+          pName.className = 'font-bold text-text-light dark:text-text-dark';
+          pName.textContent = name;
+          if (badgeText) {
+            const b = document.createElement('span');
+            b.className = 'ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded ' + badgeClassFromType(badgeText);
+            b.textContent = badgeText;
+            pName.appendChild(b);
+          }
+          const pParty = document.createElement('p');
+          pParty.className = 'text-sm text-secondary-text-light dark:text-secondary-text-dark';
+          pParty.textContent = party;
+
+          div.appendChild(pName);
+          div.appendChild(pParty);
+
+          const span = document.createElement('span');
+          span.className = 'material-symbols-outlined ml-auto text-secondary-text-light dark:text-secondary-text-dark';
+          span.textContent = 'arrow_forward_ios';
+
+          a.appendChild(img);
+          a.appendChild(div);
+          a.appendChild(span);
+
+          fragment.appendChild(a);
         }
-        const pParty = document.createElement('p');
-        pParty.className = 'text-sm text-secondary-text-light dark:text-secondary-text-dark';
-        pParty.textContent = party;
 
-        div.appendChild(pName);
-        div.appendChild(pParty);
+        listEl.innerHTML = '';
+        listEl.appendChild(fragment);
 
-        const span = document.createElement('span');
-        span.className = 'material-symbols-outlined ml-auto text-secondary-text-light dark:text-secondary-text-dark';
-        span.textContent = 'arrow_forward_ios';
-
-        a.appendChild(img);
-        a.appendChild(div);
-        // no exposiciones de ID en el DOM (seguridad / privacidad)
-        a.appendChild(span);
-
-        fragment.appendChild(a);
+        // Exponer los datos cargados para que otros scripts (e.g. buscador) los reutilicen
+        try {
+          globalThis.CANDIDATES_DATA = items;
+          document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: items }));
+        } catch (e) { console.debug('No se pudo publicar candidatos en globalThis', e); }
       }
 
-      listEl.innerHTML = '';
-      listEl.appendChild(fragment);
-
-      // Exponer los datos cargados para que otros scripts (e.g. buscador) los reutilicen
-      try{
-        globalThis.CANDIDATES_DATA = items;
-        document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: items }));
-      }catch(e){ console.debug('No se pudo publicar candidatos en globalThis', e); }
+      // intentar cargar partidos localmente; si falla, renderizar usando ids / campos existentes
+      fetch(partidosLocal)
+        .then((r) => (r.ok ? r.json() : []))
+        .then((pr) => {
+          if (Array.isArray(pr)) {
+            for (const p of pr) {
+              if (p && (p.id || p.id === 0)) partiesById[String(p.id)] = p.nombre || '';
+            }
+          }
+        })
+        .catch((e) => console.debug('No se pudo cargar partidos local', e))
+        .finally(() => renderItemsWithParties());
     })
     .catch((err) => {
       console.error('Error cargando candidatos:', err);

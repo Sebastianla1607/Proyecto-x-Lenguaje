@@ -1,5 +1,23 @@
 [
   {
+    "id": 43,
+    "nombre": "Keiko Fujimori",
+    "edad": 49,
+    "ciudad": "Lima",
+    "partido_id": 1,
+    "cargo": "Presidenta",
+    "tipo_candidatura": "Presidencial",
+    "nivel": "Nacional",
+    "plan_electoral": "Seguridad ciudadana y estabilidad económica",
+    "descripcion": "Candidata con experiencia electoral",
+    "hoja_vida": "Estudios en administración",
+    "actividades": "Giras nacionales y conferencias",
+    "foto_url": "https://i.postimg.cc/SRVzXT7m/pers-Keiko-Fujimori121216811183.jpg",
+    "Ubicación mesa electoral": "Aun no definida",
+    "Propuestas": "Aun no definida",
+    "created_at": "2025-11-16T01:19:05.758Z"
+  },
+  {
     "id": 1,
     "nombre": "Keiko Fujimori",
     "edad": 49,
@@ -105,7 +123,7 @@
     "tipo_candidatura": "Pre-candidato",
     "nivel": "Nacional",
     "plan_electoral": "Revisar concesiones estatales, descentralización, seguridad ciudadana sin pena de muerte",
-    "descripcion": "Político acciopopulista",
+    "descripcion": "Político acciopulista",
     "hoja_vida": "Precandidato presidencial de Acción Popular para 2026; propone fortalecer capacidades regionales y abordar problemas estructurales del país",
     "actividades": null,
     "foto_url": "https://i.postimg.cc/PqZZnLMn/OIP-(1).webp",
@@ -158,22 +176,5 @@
     "actividades": null,
     "foto_url": "https://i.postimg.cc/zvdJhwT5/R-(4).jpg",
     "created_at": "2025-11-15T23:12:52.483Z"
-  }
-  ,
-  {
-    "id": 43,
-    "nombre": "Keiko Fujimori",
-    "edad": 49,
-    "ciudad": "Lima",
-    "partido_id": 1,
-    "cargo": "Presidenta",
-    "tipo_candidatura": "Presidencial",
-    "nivel": "Nacional",
-    "plan_electoral": "Seguridad ciudadana y estabilidad económica",
-    "descripcion": "Candidata con experiencia electoral",
-    "hoja_vida": "Estudios en administración",
-    "actividades": "Giras nacionales y conferencias",
-    "foto_url": "https://i.postimg.cc/SRVzXT7m/pers-Keiko-Fujimori121216811183.jpg",
-    "created_at": "2025-11-16T01:19:05.758Z"
   }
 ]

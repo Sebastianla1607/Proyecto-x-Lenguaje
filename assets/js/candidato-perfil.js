@@ -80,6 +80,9 @@
       const edad = candidate.edad ? candidate.edad + ' años' : '';
       const ciudad = candidate.ciudad || '';
       const cargo = candidate.cargo || '';
+      const tipoCandidatura = candidate.tipo_candidatura || candidate.tipo || '';
+      const nivel = candidate.nivel || '';
+      const createdAt = candidate.created_at || candidate.createdAt || candidate.creado || '';
       // Detect chamber (Diputado / Senado) from explicit field or inferred from cargo
       const rawChamber = candidate.camara || candidate.camara_tipo || candidate.tipo || candidate.chamber || '';
       function detectChamber(value, cargoText) {
@@ -105,9 +108,55 @@
 
       setText('candidate-name', name);
         currentCandidateName = name;
-      setText('candidate-party', party);
+      // resolver partido usando partido_id si es necesario
+      (function resolveAndSetParty() {
+        const partidosLocal = '../assets/data/partidos.json';
+        if (party && party.trim()) {
+          setText('candidate-party', party);
+          return;
+        }
+        const pid = candidate.partido_id || candidate.party_id || candidate.partidoId || candidate.partido || null;
+        if (!pid) {
+          setText('candidate-party', '');
+          return;
+        }
+        fetch(partidosLocal)
+          .then((r) => (r.ok ? r.json() : []))
+          .then((pr) => {
+            if (Array.isArray(pr)) {
+              const found = pr.find((p) => String(p.id) === String(pid));
+              if (found) {
+                setText('candidate-party', found.nombre || found.name || '');
+                return;
+              }
+            }
+            // fallback: mostrar id si no se encuentra nombre
+            setText('candidate-party', String(pid));
+          })
+          .catch((e) => {
+            console.debug('No se pudo cargar partidos para perfil', e);
+            setText('candidate-party', String(pid));
+          });
+      })();
       setText('candidate-description', descripcion || plan || '—');
-      setText('candidate-personal', [edad, ciudad].filter(Boolean).join(', '));
+      // Información personal ampliada: edad, ciudad, tipo y nivel
+      const personalParts = [edad, ciudad];
+      if (tipoCandidatura) personalParts.push(tipoCandidatura);
+      if (nivel) personalParts.push(nivel);
+      setText('candidate-personal', personalParts.filter(Boolean).join(' · '));
+      // created at (fecha de creación del registro)
+      if (createdAt) {
+        const createdEl = document.getElementById('candidate-created');
+        if (createdEl) {
+          try {
+            const d = new Date(createdAt);
+            createdEl.textContent = 'Registro: ' + (isNaN(d.getTime()) ? createdAt : d.toLocaleString());
+            createdEl.className = 'text-xs text-gray-500 dark:text-gray-400';
+          } catch (e) {
+            createdEl.textContent = 'Registro: ' + createdAt;
+          }
+        }
+      }
       // populate chamber field if present
       const chamberText = detectChamber(rawChamber, cargo);
       setText('candidate-chamber', chamberText || '—');
@@ -229,6 +278,17 @@
         act.textContent = actividades;
         planEl.appendChild(act);
       }
+
+      // Rellenar Formación / Experiencia / Historial si existen elementos
+      const eduEl = document.getElementById('candidate-education');
+      const expEl = document.getElementById('candidate-experience');
+      const histEl = document.getElementById('candidate-history');
+      const educationText = candidate.formacion_academica || candidate.educacion || candidate.hoja_vida || '';
+      const experienceText = candidate.experiencia_laboral || candidate.experiencia || candidate.actividades || '';
+      const historyText = candidate.historial_politico || candidate.historial || candidate.descripcion || '';
+      if (eduEl) eduEl.textContent = educationText || '—';
+      if (expEl) expEl.textContent = experienceText || '—';
+      if (histEl) histEl.textContent = historyText || '—';
 
       // photo
       const photo = candidate.photo || candidate.foto || candidate.avatar || candidate.foto_url || getPhotoFromName(name) || 'https://via.placeholder.com/300';
