@@ -14,11 +14,33 @@ body { font-family: 'Work Sans', sans-serif; background-color:#f8f8f5; display:f
 .opcion-btn { cursor:pointer; transition: all 0.2s; }
 .opcion-btn:hover { transform:scale(1.02); }
 </style>
-<script src="../assets/games/js_game/preguntas.js" defer></script>
-<script defer>
+
+<script>
+/* --- Preguntas incluidas directamente --- */
+const preguntas = [
+  { pregunta: "¿Cuál es la edad mínima para ser miembro de mesa en Perú?", opciones: ["18 años", "20 años", "25 años", "30 años"], correcta: 0 },
+  { pregunta: "¿Qué documento es obligatorio para votar en Perú?", opciones: ["DNI", "Pasaporte", "Licencia de conducir", "Carné universitario"], correcta: 0 },
+  { pregunta: "¿Qué institución organiza las elecciones en Perú?", opciones: ["ONPE", "RENIEC", "JNE", "Ministerio del Interior"], correcta: 0 },
+  { pregunta: "Si eres miembro de mesa, ¿qué debes hacer antes de la jornada electoral?", opciones: ["Recibir capacitación de la ONPE", "Ir a la municipalidad", "Votar por adelantado", "Ninguna acción"], correcta: 0 },
+  { pregunta: "¿Cuál es la función principal de un miembro de mesa?", opciones: ["Organizar y supervisar la votación en su mesa", "Votar por sus vecinos", "Llevar los votos a su casa", "Hacer propaganda política"], correcta: 0 },
+  { pregunta: "¿Qué sucede si un miembro de mesa no asiste el día de las elecciones sin justificación?", opciones: ["Puede ser multado", "Nada, solo pierde el día", "Recibe un premio", "Sigue siendo miembro de mesa"], correcta: 0 },
+  { pregunta: "¿Cuántos miembros de mesa se necesitan por mesa electoral?", opciones: ["3", "5", "7", "10"], correcta: 0 },
+  { pregunta: "¿Qué derecho tiene un ciudadano en el día de las elecciones?", opciones: ["Votar de manera secreta y libre", "Ser candidato automáticamente", "Obligar a otros a votar", "Cobrar por votar"], correcta: 0 },
+  { pregunta: "¿Qué significa sufragio universal?", opciones: ["Todos los ciudadanos mayores de 18 años pueden votar", "Solo los adultos con trabajo pueden votar", "Solo hombres mayores de 21 años", "Solo personas con DNI emitido en Lima"], correcta: 0 },
+  { pregunta: "¿Qué documento deben entregar los miembros de mesa al finalizar la jornada?", opciones: ["Acta de escrutinio", "Boleta electoral", "DNI de los votantes", "Formulario de inscripción"], correcta: 0 }
+];
+
+/* --- Lógica del quiz --- */
 document.addEventListener("DOMContentLoaded", () => {
-  const data = JSON.parse(localStorage.getItem("preguntaDelDia"));
-  if (!data) { alert("No hay pregunta del día. Regresa a InfoQuizz."); window.location.href="infoquizz.html"; return; }
+
+  // Intentar cargar pregunta del día desde localStorage
+  let data = JSON.parse(localStorage.getItem("preguntaDelDia"));
+  
+  // Si no hay data, tomar primera pregunta por defecto
+  if (!data) {
+    data = { indice: 0 };
+    localStorage.setItem("preguntaDelDia", JSON.stringify(data));
+  }
 
   const pregunta = preguntas[data.indice];
   document.getElementById("pregunta").textContent = pregunta.pregunta;
@@ -29,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let tiempo = 15;
   const temporizadorElem = document.getElementById("temporizador");
   temporizadorElem.textContent = tiempo;
+
   const intervalo = setInterval(() => {
     tiempo--;
     temporizadorElem.textContent = tiempo;
@@ -61,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 </head>
+
 <body>
 <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
   <h2 class="text-xl font-bold mb-4">Pregunta del Día</h2>
