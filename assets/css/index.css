@@ -7,6 +7,12 @@ body {
   min-height: max(884px, 100dvh);
 }
 
+/* Reservar espacio para el footer fijo en la parte inferior
+     Evita que el contenido (p. ej. lista de candidatos) quede tapado. */
+body {
+    padding-bottom: 80px;
+}
+
 /* Small helper styles in case Tailwind isn't fully configured */
 .header { text-align: center; padding: 1rem; }
 .countdown { display:flex; gap:1rem; justify-content:center; }
