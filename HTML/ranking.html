@@ -1,42 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking Top 10</title>
-    <link rel="stylesheet" href="">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking Top 10</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#FFCB05",
+                "text-primary": "#1F2937",
+                "text-secondary": "#6B7280",
+                "background": "#F9FAFB",
+                "card": "#FFFFFF",
+                "border": "#E5E7EB",
+                "accent": "#FFCB05"
+            },
+            fontFamily: {
+                "display": ["Public Sans", "sans-serif"]
+            },
+            boxShadow: {
+                "card": "0 4px 12px rgba(0,0,0,0.05)"
+            }
+        }
+    }
+}
+</script>
+<style>
+body { font-family: 'Public Sans', sans-serif; background-color: #F9FAFB; }
+
+.list-item {
+    transition: transform 0.2s;
+}
+.list-item:hover {
+    transform: scale(1.02);
+}
+</style>
 </head>
-<body>
-    HEADER NUEVO INTEGRADO -->
-        <div class="sticky top-0 z-10 flex flex-col bg-white">
-            <div class="flex items-center p-4 pb-2 justify-between">
-                <button type="button" onclick="window.location.href='principal_game.html'"
-                    class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800">
-                    <span class="material-symbols-outlined !text-2xl">arrow_back</span>
-                </button>
-                <!-- LOGO + TÍTULO -->
-                <div class="flex-1 flex flex-col items-center">
-                    <img src="/assets/img/ranking.png" alt="Logo" class="h-10 object-contain mb-1">
+<body class="bg-background text-text-primary">
 
-                </div>
-                <div class="size-12 shrink-0"></div>
-            </div>
-        </div>
+<div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
 
+  <!-- HEADER -->
+  <header class="sticky top-0 z-10 border-b border-border bg-card/90 p-4 backdrop-blur-sm shadow-sm">
+    <div class="flex items-center justify-between">
+      <button type="button" onclick="window.location.href='principal_game.html'" class="flex items-center justify-start text-slate-800">
+        <span class="material-symbols-outlined !text-2xl">arrow_back</span>
+      </button>
+      <div class="flex-1 flex flex-col items-center">
+        <img src="/assets/img/ranking.png" alt="Ranking" class="h-10 object-contain mb-1">
+      </div>
+      <div class="w-12"></div>
+    </div>
+  </header>
 
-    <main>
-        <div id="top10-container" class="grid-top10">
-            <!-- Top 10 se genera aquí -->
-        </div>
-    </main>
+  <!-- MAIN -->
+  <main class="flex flex-1 flex-col gap-4 pb-8 p-4">
+    <h1 class="text-2xl font-bold text-center mb-6">Top 10 Personajes</h1>
+    <ul id="top10-container" class="flex flex-col gap-4"></ul>
+  </main>
 
+  <!-- Footer -->
+  <div id="site-footer"></div>
 
- <script>
-      fetch('footer.html')
-        .then(r => r.text())
-        .then(html => document.getElementById('site-footer').innerHTML = html)
-        .catch(err => console.warn("No se pudo cargar footer:", err));
-    </script>
-    <script src="assets/games/js_game/script_game2.js"></script>
+</div>
+
+<script>
+fetch('footer.html')
+  .then(r => r.ok ? r.text() : "")
+  .then(html => { document.getElementById('site-footer').innerHTML = html; })
+  .catch(err => console.warn('No se pudo cargar footer.html:', err));
+</script>
+
+<script>
+function cargarTop10() {
+    fetch('https://api-nodepost-production.up.railway.app/candidatos')
+        .then(res => res.json())
+        .then(data => {
+            const votosLocal = JSON.parse(localStorage.getItem("votosLocal") || "{}");
+            data.forEach(p => p.votos = votosLocal[p.id] || 0);
+
+            const top10 = data.sort((a,b) => b.votos - a.votos).slice(0,10);
+
+            const cont = document.getElementById('top10-container');
+            cont.innerHTML = "";
+
+            top10.forEach((p, index) => {
+                const li = document.createElement('li');
+                li.className = "list-item flex items-center bg-card p-4 rounded-xl shadow-card gap-4";
+
+                li.innerHTML = `
+                    <span class="font-bold text-lg w-6 text-center">${index+1}</span>
+                    <img src="${p.foto_url}" alt="${p.nombre}" class="h-16 w-16 rounded-full border-2 border-border object-cover">
+                    <div class="flex-1 flex flex-col">
+                        <span class="font-bold text-lg">${p.nombre}</span>
+                        <span class="text-sm text-text-secondary">${p.votos} voto${p.votos === 1 ? '' : 's'}</span>
+                    </div>
+                `;
+                cont.appendChild(li);
+            });
+        })
+        .catch(err => console.error("Error cargando API:", err));
+}
+
+cargarTop10();
+</script>
+
 </body>
 </html>

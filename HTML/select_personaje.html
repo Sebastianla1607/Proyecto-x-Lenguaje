@@ -37,9 +37,8 @@
         }
     </script>
 
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
@@ -47,18 +46,15 @@
 
     <div class="max-w-md mx-auto min-h-screen flex flex-col">
 
-        <!-- HEADER NUEVO INTEGRADO -->
+        <!-- HEADER -->
         <div class="sticky top-0 z-10 flex flex-col bg-white">
             <div class="flex items-center p-4 pb-2 justify-between">
                 <button type="button" onclick="history.back()"
                     class="mr-2 flex size-12 shrink-0 items-center justify-start text-slate-800">
                     <span class="material-symbols-outlined !text-2xl">arrow_back</span>
                 </button>
-                <!-- LOGO + TÍTULO -->
                 <div class="flex-1 flex flex-col items-center">
-                    <img src="/assets/img/elige_a_tu_candidato.png" alt="Logo"
-                        class="h-10 object-contain mb-1">
-
+                    <img src="/assets/img/elige_a_tu_candidato.png" alt="Logo" class="h-10 object-contain mb-1">
                 </div>
                 <div class="size-12 shrink-0"></div>
             </div>
@@ -82,6 +78,16 @@
         <!-- TARJETAS DE PERSONAJES -->
         <script>
             let personajes = [];
+
+            // Limpiar voto si pasó 1 minuto
+            (function() {
+                const ultimoVoto = localStorage.getItem("ultimoVoto");
+                const ahora = Date.now();
+                const minuto = 1 * 60 * 1000;
+                if (ultimoVoto && (ahora - ultimoVoto >= minuto)) {
+                    localStorage.removeItem("ultimoVoto");
+                }
+            })();
 
             function cargarPersonajes() {
                 fetch('https://api-nodepost-production.up.railway.app/candidatos')
@@ -119,20 +125,28 @@
             function seleccionarPersonaje(id) {
                 const ultimoVoto = localStorage.getItem("ultimoVoto");
                 const ahora = Date.now();
+                const minuto = 1 * 60 * 1000;
 
-                if (ultimoVoto && (ahora - ultimoVoto) < 5 * 60 * 1000) {
-                    const s = Math.ceil((5 * 60 * 1000 - (ahora - ultimoVoto)) / 1000);
-                    alert(`Debes esperar ${s} segundos para votar de nuevo.`);
-                    return;
+                if (ultimoVoto) {
+                    const tiempoTranscurrido = ahora - ultimoVoto;
+                    if (tiempoTranscurrido < minuto) {
+                        // Redirigir directo a ranking si sigue activo
+                        window.location.href = "ranking.html";
+                        return;
+                    }
                 }
 
                 const personaje = personajes.find(p => p.id === id);
                 if (!personaje) return;
 
-                personaje.votos++;
+                let votosLocal = JSON.parse(localStorage.getItem("votosLocal") || "{}");
+                votosLocal[id] = (votosLocal[id] || 0) + 1;
+                localStorage.setItem("votosLocal", JSON.stringify(votosLocal));
+
                 localStorage.setItem("ultimoVoto", ahora);
 
                 alert(`Has apoyado a ${personaje.nombre}`);
+                window.location.href = "ranking.html";
             }
 
             cargarPersonajes();
