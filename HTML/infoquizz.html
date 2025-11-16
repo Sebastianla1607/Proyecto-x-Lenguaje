@@ -1,149 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InfoQuizz</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InfoQuizz</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FFCB05",
-                        "text-primary": "#1F2937",
-                        "text-secondary": "#6B7280",
-                        "background": "#F9FAFB",
-                        "card": "#FFFFFF",
-                        "border": "#E5E7EB",
-                        "accent": "#FFCB05"
-                    },
-                    fontFamily: {
-                        "display": ["Public Sans", "sans-serif"]
-                    },
-                    boxShadow: {
-                        "card": "0 4px 12px rgba(0,0,0,0.05)"
-                    }
-                }
-            }
-        }
-    </script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#FFCB05",
+        "text-primary": "#1F2937",
+        "text-secondary": "#6B7280",
+        "background": "#F9FAFB",
+        "card": "#FFFFFF",
+        "border": "#E5E7EB",
+        "accent": "#FFCB05"
+      },
+      fontFamily: {
+        "display": ["Public Sans", "sans-serif"]
+      },
+      boxShadow: {
+        "card": "0 4px 12px rgba(0,0,0,0.05)"
+      }
+    }
+  }
+}
+</script>
 
-    <style>
-        body {
-            font-family: 'Public Sans', sans-serif;
-            background-color: #F9FAFB;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .material-symbols-outlined.filled {
-            font-variation-settings: 'FILL' 1;
-        }
-    </style>
+<style>
+body { font-family: 'Public Sans', sans-serif; background-color: #F9FAFB; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+</style>
 </head>
 
 <body class="bg-background text-text-primary">
 
-    <div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
+<div class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col overflow-x-hidden">
 
-        <!-- HEADER -->
-        <header class="sticky top-0 z-10 border-b border-border bg-card/90 p-4 backdrop-blur-sm shadow-sm">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-10 border-b border-border bg-card/90 p-4 backdrop-blur-sm shadow-sm">
     <div class="flex items-center justify-between">
-        <!-- Botón de regresar -->
-        <button type="button" onclick="window.location.href='principal_game.html'"
-            class="flex items-center justify-start text-slate-800">
-            <span class="material-symbols-outlined !text-2xl">arrow_back</span>
-        </button>
-
-        <!-- LOGO + TÍTULO -->
-        <div class="flex-1 flex flex-col items-center">
-            <img src="/assets/img/infoQuiz.png" alt="Logo" class="h-10 object-contain mb-1">
-        </div>
-
-        <!-- Espacio a la derecha para balancear -->
-        <div class="w-12"></div>
+      <button type="button" onclick="window.location.href='principal_game.html'"
+        class="flex items-center justify-start text-slate-800">
+        <span class="material-symbols-outlined !text-2xl">arrow_back</span>
+      </button>
+      <div class="flex-1 flex flex-col items-center">
+        <img src="/assets/img/infoQuiz.png" alt="Logo" class="h-10 object-contain mb-1">
+      </div>
+      <div class="w-12"></div>
     </div>
-</header>
+  </header>
 
-        <!-- MAIN -->
-        <main class="flex flex-1 flex-col gap-6 pb-8 p-4">
+  <!-- MAIN -->
+  <main class="flex flex-1 flex-col gap-6 pb-8 p-4">
 
-            <!-- Tarjeta de Progreso -->
-            <section class="flex flex-col items-center gap-4 text-center">
-                <h2 class="text-2xl font-bold">Racha de <span id="racha">0</span> días</h2>
-                <p class="text-sm text-text-secondary">Sigue así para subir de nivel.</p>
+    <!-- Tarjeta de Progreso -->
+    <section class="flex flex-col items-center gap-4 text-center">
+      <h2 class="text-2xl font-bold">Racha de <span id="racha">0</span> días</h2>
+      <p class="text-sm text-text-secondary">Sigue así para subir de nivel.</p>
 
-                <div class="flex gap-4 text-sm">
-                    <p>Puntos: <span id="puntos">0</span></p>
-                    <p>Nivel: <span id="nivel">Hierro</span></p>
-                </div>
+      <div class="flex gap-4 text-sm">
+        <p>Puntos: <span id="puntos">0</span></p>
+        <p>Nivel: <span id="nivel">Hierro</span></p>
+      </div>
 
-                <button id="btn-pregunta"
-                    class="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-lg font-bold text-text-primary shadow-card transition-transform active:scale-95">
-                    <span class="material-symbols-outlined text-2xl">quiz</span>
-                    <span>Pregunta del Día</span>
-                </button>
-            </section>
+      <button id="btn-pregunta"
+        class="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-lg font-bold text-text-primary shadow-card transition-transform active:scale-95">
+        <span class="material-symbols-outlined text-2xl">quiz</span>
+        <span>Pregunta del Día</span>
+      </button>
+    </section>
 
-            <!-- Colección de Medallas -->
-            <h2 class="text-2xl font-bold">Tu Colección de Insignias</h2>
-            <div class="flex overflow-x-auto gap-4 pb-2">
-                <!-- Medalla desbloqueada -->
-                <div class="flex flex-col items-center min-w-[150px] bg-card p-4 rounded-xl shadow-card text-center">
-                    <span class="material-symbols-outlined text-4xl text-primary">emoji_events</span>
-                    <p class="font-medium">Nivel: Hierro</p>
-                    <p class="text-sm text-text-secondary">Racha: 1 día</p>
-                </div>
-
-                <!-- Medalla bloqueada -->
-                <div class="flex flex-col items-center min-w-[150px] bg-card/50 p-4 rounded-xl shadow-card text-center">
-                    <span class="material-symbols-outlined text-4xl text-text-secondary">lock</span>
-                    <p class="font-medium">Nivel: Bronce</p>
-                    <p class="text-sm text-text-secondary">Racha: 10 días</p>
-                </div>
-            </div>
-
-            <section class="p-4 bg-card rounded-xl shadow-card mb-6 text-center">
-                <h2 class="text-xl font-bold mb-2">Cómo funciona InfoQuizz</h2>
-                <p class="text-sm mb-2 text-text-secondary">
-                    Cada día tendrás una pregunta diaria. Si la respondes correctamente, tu racha aumenta.
-                </p>
-                <p class="text-sm mb-2 text-text-secondary">
-                    Cada 10 días tu medalla se mejora: Hierro → Bronce → Plata → Oro → Diamante.
-                </p>
-                <p class="text-sm mb-2 text-text-secondary">
-                    Mantén tu racha y mejora tus medallas. ¡Solo quienes lleguen al rango Diamante podrán obtener tu certificado de
-                    conocimiento electoral!
-                </p>
-                <div class="mt-4 rounded-full bg-primary px-4 py-2 shadow-card inline-block">
-                    <p class="text-text-primary font-bold text-sm">Recompensa máxima: Certificado Electoral 🏆</p>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- Footer dinámico -->
-        <div id="site-footer"></div>
-
+    <!-- Colección de Medallas -->
+    <h2 class="text-2xl font-bold">Tu Colección de Insignias</h2>
+    <div class="flex overflow-x-auto gap-4 pb-2">
+      <div class="flex flex-col items-center min-w-[150px] bg-card p-4 rounded-xl shadow-card text-center">
+        <span class="material-symbols-outlined text-4xl text-primary">emoji_events</span>
+        <p class="font-medium">Nivel: Hierro</p>
+        <p class="text-sm text-text-secondary">Racha: 1 día</p>
+      </div>
+      <div class="flex flex-col items-center min-w-[150px] bg-card/50 p-4 rounded-xl shadow-card text-center">
+        <span class="material-symbols-outlined text-4xl text-text-secondary">lock</span>
+        <p class="font-medium">Nivel: Bronce</p>
+        <p class="text-sm text-text-secondary">Racha: 10 días</p>
+      </div>
     </div>
 
-    <script>
-        fetch('footer.html')
-            .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-            .then(html => { document.getElementById('site-footer').innerHTML = html; })
-            .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
-    </script>
+    <section class="p-4 bg-card rounded-xl shadow-card mb-6 text-center">
+      <h2 class="text-xl font-bold mb-2">Cómo funciona InfoQuizz</h2>
+      <p class="text-sm mb-2 text-text-secondary">
+        Cada día tendrás una pregunta diaria. Si la respondes correctamente, tu racha aumenta.
+      </p>
+      <p class="text-sm mb-2 text-text-secondary">
+        Cada 10 días tu medalla se mejora: Hierro → Bronce → Plata → Oro → Diamante.
+      </p>
+      <p class="text-sm mb-2 text-text-secondary">
+        Mantén tu racha y mejora tus medallas. ¡Solo quienes lleguen al rango Diamante podrán obtener tu certificado!
+      </p>
+      <div class="mt-4 rounded-full bg-primary px-4 py-2 shadow-card inline-block">
+        <p class="text-text-primary font-bold text-sm">Recompensa máxima: Certificado Electoral 🏆</p>
+      </div>
+    </section>
 
-    <script src="/assets/games/js_game/progreso.js"></script>
-    <script src="/assets/games/js_game/preguntas.js"></script>
-    <script src="/assets/games/js_game/script_game1.js"></script>
+  </main>
+
+  <div id="site-footer"></div>
+
+</div>
+
+<script>
+fetch('footer.html')
+  .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+  .then(html => { document.getElementById('site-footer').innerHTML = html; })
+  .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+</script>
+
+<script src="/assets/games/js_game/progreso.js"></script>
+<script src="/assets/games/js_game/preguntas.js"></script>
+<script src="/assets/games/js_game/script_game1.js"></script>
 
 </body>
 </html>
