@@ -16,7 +16,7 @@
   if (!listEl) return;
 
   listEl.innerHTML = '<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">Cargando...</p>';
-
+  
   // Intentar la API remota primero; si no hay datos válidos, usar JSON local; si eso falla, usar BUILTIN_CANDIDATES
   fetch(api)
     .then((res) => (res.ok ? res.json() : Promise.reject(new Error('Error en la respuesta'))))
