@@ -64,7 +64,9 @@
             </div>
             <h1 class="text-center font-bold text-lg">Retate</h1>
             <div class="flex items-center gap-4 justify-self-end">
-                <button id="notificationsBtn" class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition" aria-label="Notificaciones">
+                <button id="notificationsBtn"
+                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-primary hover:bg-gray-100 transition"
+                    aria-label="Notificaciones">
                     <span class="material-symbols-outlined">notifications</span>
                 </button>
             </div>
@@ -88,16 +90,16 @@
                 <!-- Card 2: Ranking Electoral -->
                 <div class="relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl shadow-card transition-transform hover:scale-105 h-48 w-full bg-cover bg-center"
                     style="background-image: url('../assets_juegos/img_juego/juego2.jpg');"
-                    onclick="window.location.href='ranking.html'">
+                    onclick="window.location.href='select_personaje.html'">
 
                     <div class="absolute inset-0 bg-black/30"></div>
                     <div class="relative z-10 flex flex-col items-center justify-center gap-2 text-center">
                         <span class="material-symbols-outlined text-4xl text-primary">emoji_events</span>
                         <h2 class="text-2xl font-black text-white">Ranking Electoral</h2>
-                        <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full">Jugar</button>
+                        <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full"
+                            style="pointer-events: none;">Jugar</button>
                     </div>
                 </div>
-
 
 
                 <!-- Card 3: Próximamente -->
@@ -115,67 +117,70 @@
             </div>
         </main>
 
-                <!-- Footer -->
-                <div id="site-footer"></div>
+        <!-- Footer -->
+        <div id="site-footer"></div>
 
-                <!-- Notifications Modal -->
-                <div id="notificationsModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
-                    <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
-                        <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
-                            <h3 class="text-lg font-bold">Notificaciones</h3>
-                            <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-                                <span class="material-symbols-outlined">close</span>
-                            </button>
-                        </div>
-                        <div id="notificationsContent" class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
-                            <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...</p>
-                        </div>
-                    </div>
+        <!-- Notifications Modal -->
+        <div id="notificationsModal"
+            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
+            <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
+                    <h3 class="text-lg font-bold">Notificaciones</h3>
+                    <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
                 </div>
+                <div id="notificationsContent"
+                    class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
+                    <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...
+                    </p>
+                </div>
+            </div>
+        </div>
 
-                <script>
-                                (function () {
-                                        fetch('footer.html')
-                                                .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-                                                .then(html => { document.getElementById('site-footer').innerHTML = html; })
-                                                .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
-                                })();
+        <script>
+                (function () {
+                    fetch('footer.html')
+                        .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+                        .then(html => { document.getElementById('site-footer').innerHTML = html; })
+                        .catch(err => { console.warn('No se pudo cargar footer.html:', err); });
+                })();
 
-                                (function () {
-                                    const btn = document.getElementById('notificationsBtn');
-                                    const modal = document.getElementById('notificationsModal');
-                                    const closeBtn = document.getElementById('closeNotifications');
-                                    const content = document.getElementById('notificationsContent');
+            (function () {
+                const btn = document.getElementById('notificationsBtn');
+                const modal = document.getElementById('notificationsModal');
+                const closeBtn = document.getElementById('closeNotifications');
+                const content = document.getElementById('notificationsContent');
 
-                                    function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
-                                    function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+                function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
+                function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
 
-                                    btn?.addEventListener('click', openModal);
-                                    closeBtn?.addEventListener('click', closeModal);
-                                    modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+                btn?.addEventListener('click', openModal);
+                closeBtn?.addEventListener('click', closeModal);
+                modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-                                    async function loadNotifications() {
-                                        try {
-                                            const res = await fetch('../assets/data/noticias.json');
-                                            if (!res.ok) throw new Error('No se pudo cargar');
-                                            const data = await res.json();
-                                            const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
-                                            if (!items || items.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
-                                            content.innerHTML = items.map(it => `
+                async function loadNotifications() {
+                    try {
+                        const res = await fetch('../assets/data/noticias.json');
+                        if (!res.ok) throw new Error('No se pudo cargar');
+                        const data = await res.json();
+                        const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
+                        if (!items || items.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+                        content.innerHTML = items.map(it => `
                                                 <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
                                                     <div class="font-semibold">${it.title || it.titulo || ''}</div>
                                                     <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}</div>
                                                 </div>
                                             `).join('');
-                                        } catch (err) {
-                                            content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
-                                            console.warn(err);
-                                        }
-                                    }
-                                })();
-                </script>
+                    } catch (err) {
+                        content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
+                        console.warn(err);
+                    }
+                }
+            })();
+        </script>
 
-        </div>
+    </div>
 </body>
 
 </html>
