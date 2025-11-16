@@ -95,4 +95,66 @@
     "foto_url": "https://i.imgur.com/foto_jorge.png",
     "created_at": "2025-11-15T07:18:15.916Z"
   }
+,
+  {
+    "id": 124,
+    "nombre": "Ejemplo Diputado",
+    "partido": "Partido Y",
+    "cargo": "Candidato a diputado",
+    "foto_url": "https://via.placeholder.com/96",
+    "camara": "Parlamento Andino",
+    "created_at": "2025-11-15T07:18:15.916Z"
+  }
+  ,
+  {
+    "id": 125,
+    "nombre": "Ejemplo Dip. 2",
+    "edad": 42,
+    "ciudad": "Trujillo",
+    "partido": "Partido Z",
+    "cargo": "Candidato a diputado",
+    "tipo_candidatura": "Congresal",
+    "nivel": "Regional",
+    "plan_electoral": "Desarrollo local y empleo",
+    "descripcion": "Perfil orientado a desarrollo regional",
+    "hoja_vida": "Economía - Universidad Nacional",
+    "actividades": "Foros regionales",
+    "foto_url": "https://via.placeholder.com/96",
+    "camara": "Diputado",
+    "created_at": "2025-11-15T07:20:00.000Z"
+  },
+  {
+    "id": 126,
+    "nombre": "Ejemplo Senador",
+    "edad": 58,
+    "ciudad": "Arequipa",
+    "partido": "Partido A",
+    "cargo": "Candidato a senador",
+    "tipo_candidatura": "Senatorial",
+    "nivel": "Nacional",
+    "plan_electoral": "Políticas de salud pública",
+    "descripcion": "Trayectoria en salud pública",
+    "hoja_vida": "Médico - Universidad X",
+    "actividades": "Campañas de salud",
+    "foto_url": "https://via.placeholder.com/96",
+    "camara": "Senador",
+    "created_at": "2025-11-15T07:21:00.000Z"
+  },
+  {
+    "id": 127,
+    "nombre": "Ejemplo Cong.",
+    "edad": 46,
+    "ciudad": "Cusco",
+    "partido": "Partido B",
+    "cargo": "Candidato al Congreso",
+    "tipo_candidatura": "Congresal",
+    "nivel": "Nacional",
+    "plan_electoral": "Educación y cultura",
+    "descripcion": "Trabajo en cultura comunitaria",
+    "hoja_vida": "Antropología - Universidad Y",
+    "actividades": "Proyectos culturales",
+    "foto_url": "https://via.placeholder.com/96",
+    "camara": "Congreso",
+    "created_at": "2025-11-15T07:22:00.000Z"
+  }
 ]

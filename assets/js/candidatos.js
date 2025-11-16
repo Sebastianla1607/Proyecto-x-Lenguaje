@@ -68,11 +68,36 @@
         return null;
       }
 
+      // chamber detection helpers (moved to outer scope to avoid redefining per-item)
+      function detectChamber(value) {
+        const v = (value || '').toString().toLowerCase();
+        if (!v) return '';
+        if (v.includes('parl') || v.includes('andino') || v.includes('parlamento')) return 'Parlamento Andino';
+        if (v.includes('dip') || v.includes('diput')) return 'Cámara: Diputado(a)';
+        if (v.includes('sen') || v.includes('senad')) return 'Cámara: Senado';
+        if (v.includes('congres') || v.includes('congresista')) return 'Congreso';
+        return '';
+      }
+
+      function badgeFromChamberText(chamberText) {
+        if (!chamberText) return '';
+        const t = chamberText.toString().toLowerCase();
+        if (t.includes('andino') || t.includes('parl')) return 'Parl. Andino';
+        if (t.includes('dip')) return 'Dip.';
+        if (t.includes('sen')) return 'Sen.';
+        if (t.includes('congres')) return 'Cong.';
+        return '';
+      }
+
       for (const c of items) {
         const id = c.id || c.ID || c.id_candidato || '0';
         const name = c.name || c.nombre || c.nombre_completo || c.fullName || 'Sin nombre';
         const party = c.party || c.partido || c.affiliation || (c.partido_id ? String(c.partido_id) : '');
         const photo = c.photo || c.foto || c.avatar || c.image || c.foto_url || getPhotoFromName(name) || 'https://via.placeholder.com/96';
+        // detect chamber info (camara / parlamento)
+        const rawChamber = c.camara || c.camara_tipo || c.tipo || c.chamber || c.cargo || '';
+        const chamberText = detectChamber(rawChamber);
+        const badgeText = badgeFromChamberText(chamberText);
 
         const a = document.createElement('a');
         a.className = 'flex items-center gap-4 rounded-lg p-2 transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800';
@@ -87,7 +112,14 @@
         const div = document.createElement('div');
         const pName = document.createElement('p');
         pName.className = 'font-bold text-text-light dark:text-text-dark';
+        // Name and optional short badge
         pName.textContent = name;
+        if (badgeText) {
+          const b = document.createElement('span');
+          b.className = 'ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded bg-primary/20 text-primary';
+          b.textContent = badgeText;
+          pName.appendChild(b);
+        }
         const pParty = document.createElement('p');
         pParty.className = 'text-sm text-secondary-text-light dark:text-secondary-text-dark';
         pParty.textContent = party;
@@ -113,15 +145,15 @@
 
       // Exponer los datos cargados para que otros scripts (e.g. buscador) los reutilicen
       try{
-        window.CANDIDATES_DATA = items;
+        globalThis.CANDIDATES_DATA = items;
         document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: items }));
-      }catch(e){ console.debug('No se pudo publicar candidatos en window', e); }
+      }catch(e){ console.debug('No se pudo publicar candidatos en globalThis', e); }
     })
     .catch((err) => {
       console.error('Error cargando candidatos:', err);
       listEl.innerHTML = '<p class="text-sm text-red-600">Error cargando candidatos.</p>';
       if (countEl) countEl.textContent = 'Error';
       // Exponer fallback para que el buscador pueda funcionar
-      try{ window.CANDIDATES_DATA = BUILTIN_CANDIDATES; document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: BUILTIN_CANDIDATES })); }catch(e){}
+      try{ globalThis.CANDIDATES_DATA = BUILTIN_CANDIDATES; document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: BUILTIN_CANDIDATES })); }catch(e){ console.debug('No se pudo publicar fallback candidatos', e); }
     });
 })();

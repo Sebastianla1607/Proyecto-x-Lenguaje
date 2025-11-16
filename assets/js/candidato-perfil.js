@@ -80,6 +80,21 @@
       const edad = candidate.edad ? candidate.edad + ' años' : '';
       const ciudad = candidate.ciudad || '';
       const cargo = candidate.cargo || '';
+      // Detect chamber (Diputado / Senado) from explicit field or inferred from cargo
+      const rawChamber = candidate.camara || candidate.camara_tipo || candidate.tipo || candidate.chamber || '';
+      function detectChamber(value, cargoText) {
+        const v = (value || cargoText || '').toString().toLowerCase();
+        if (!v) return '';
+        // Parlamento Andino
+        if (v.includes('parl') || v.includes('andino') || v.includes('parlamento')) return 'Parlamento Andino';
+        // Diputado / Diputada
+        if (v.includes('dip') || v.includes('diput')) return 'Cámara: Diputado(a)';
+        // Senado
+        if (v.includes('sen') || v.includes('senad')) return 'Cámara: Senado';
+        // Congreso general
+        if (v.includes('congres') || v.includes('congresista')) return 'Congreso';
+        return value || cargoText || '';
+      }
       const plan = candidate.plan_electoral || candidate.plan || 'Sin plan publicado.';
       const descripcion = candidate.descripcion || '';
       const hoja = candidate.hoja_vida || candidate.hojaDeVida || 'No disponible.';
@@ -90,6 +105,30 @@
       setText('candidate-party', party);
       setText('candidate-description', descripcion || plan || '—');
       setText('candidate-personal', [edad, ciudad].filter(Boolean).join(', '));
+      // populate chamber field if present
+      const chamberText = detectChamber(rawChamber, cargo);
+      setText('candidate-chamber', chamberText || '—');
+      // compute and show short badge near the name (Parl. Andino, Dip., Sen.)
+      function badgeFromChamber(chamberText) {
+        if (!chamberText) return '';
+        const t = chamberText.toString().toLowerCase();
+        if (t.includes('andino') || t.includes('parl')) return 'Parl. Andino';
+        if (t.includes('dip')) return 'Dip.';
+        if (t.includes('sen')) return 'Sen.';
+        if (t.includes('congres')) return 'Cong.';
+        return '';
+      }
+      const badgeText = badgeFromChamber(chamberText);
+      const badgeEl = document.getElementById('candidate-badge');
+      if (badgeEl) {
+        if (badgeText) {
+          badgeEl.textContent = badgeText;
+          badgeEl.classList.remove('hidden');
+          badgeEl.setAttribute('aria-label', badgeText);
+        } else {
+          badgeEl.classList.add('hidden');
+        }
+      }
 
       // plan section
       const planEl = document.getElementById('candidate-plan');
