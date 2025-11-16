@@ -7,6 +7,12 @@ body {
   min-height: max(884px, 100dvh);
 }
 
+/* Reservar espacio para el footer fijo en la parte inferior
+     Evita que el contenido (p. ej. lista de candidatos) quede tapado. */
+body {
+    padding-bottom: 80px;
+}
+
 /* Small helper styles in case Tailwind isn't fully configured */
 .header { text-align: center; padding: 1rem; }
 .countdown { display:flex; gap:1rem; justify-content:center; }
@@ -62,4 +68,25 @@ body {
 
 .dark .translate-panel li:hover {
     background: #333;
+}
+
+/* Estilo visible para el enlace activo en el footer inyectado */
+#site-footer .footer-active {
+  color: #FFCB05 !important; /* color primario */
+  font-weight: 700 !important;
+  background: rgba(255, 203, 5, 0.08);
+  border-radius: 0.5rem;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#site-footer .footer-active .material-symbols-outlined {
+  color: #FFCB05 !important;
+}
+
+/* Asegurar contraste en dark mode */
+.dark #site-footer .footer-active {
+  background: rgba(255, 203, 5, 0.06);
 }
