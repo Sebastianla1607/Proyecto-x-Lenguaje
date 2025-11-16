@@ -3,21 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Diario</title>
+<title>Pregunta del Día</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 <style>
-  body { font-family: 'Work Sans', sans-serif; background-color: #f8f8f5; display:flex; align-items:center; justify-content:center; min-height:100vh; }
-  .temporizador { width: 3rem; height: 3rem; border-radius: 50%; border: 4px solid #f9f506; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #181811; transition: all 0.2s ease; }
-  .temporizador.alerta { border-color: #ff0000; color: #ff0000; animation: parpadeo 0.5s infinite; }
-  @keyframes parpadeo {0%,100% {opacity:1;} 50% {opacity:0.5;}}
+  body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: #f8f8f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+  }
+  .temporizador {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 4px solid #f9f506;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #181811;
+    transition: all 0.2s ease;
+  }
+  .temporizador.alerta {
+    border-color: #ff0000;
+    color: #ff0000;
+    animation: parpadeo 0.5s infinite;
+  }
+  @keyframes parpadeo {
+    0%,100% {opacity:1;}
+    50% {opacity:0.5;}
+  }
 </style>
+<!-- Cargar preguntas primero -->
+<script src="/assets/games/js_game/preguntas.js" defer></script>
+<script defer>
+document.addEventListener("DOMContentLoaded", () => {
+  const data = JSON.parse(localStorage.getItem("preguntaDelDia"));
+  if (!data) {
+    alert("No hay pregunta del día. Regresa a InfoQuizz.");
+    window.location.href = "infoquizz.html";
+    return;
+  }
+
+  const pregunta = preguntas[data.indice];
+
+  const pregElem = document.getElementById("pregunta");
+  pregElem.textContent = pregunta.pregunta;
+
+  const botones = document.querySelectorAll(".opcion-btn");
+
+  botones.forEach((btn, i) => {
+    btn.textContent = pregunta.opciones[i];
+    btn.disabled = false;
+    btn.classList.remove("bg-green-200","bg-red-200");
+
+    btn.addEventListener("click", () => {
+      const correcto = i === pregunta.correcta;
+      btn.classList.add(correcto ? "bg-green-200" : "bg-red-200");
+
+      // Desactivar todos
+      botones.forEach(b => b.disabled = true);
+
+      // Mostrar feedback
+      const feedback = document.getElementById("feedback");
+      feedback.textContent = correcto ? "¡Correcto!" : "Incorrecto.";
+      feedback.classList.remove("hidden");
+      feedback.classList.add(correcto ? "text-green-600" : "text-red-600");
+
+      // Guardar puntos y progreso si quieres (opcional)
+      let progreso = JSON.parse(localStorage.getItem("progreso")) || { puntos:0, racha:0, nivel:"Hierro" };
+      if(correcto) {
+        progreso.puntos++;
+        if (progreso.puntos >= 100) progreso.nivel = "Diamante";
+        else if (progreso.puntos >= 50) progreso.nivel = "Oro";
+        else if (progreso.puntos >= 20) progreso.nivel = "Plata";
+        else if (progreso.puntos >= 10) progreso.nivel = "Bronce";
+        else progreso.nivel = "Hierro";
+        localStorage.setItem("progreso", JSON.stringify(progreso));
+      }
+
+      // Redirigir a infoquizz después de 1.5 segundos
+      setTimeout(() => {
+        window.location.href = "infoquizz.html";
+      }, 1500);
+    });
+  });
+});
+</script>
 </head>
 <body>
 <div class="bg-white dark:bg-zinc-800 rounded-xl shadow-lg w-full max-w-md p-6">
   <div class="flex justify-between items-center mb-4">
     <h2 class="text-xl font-bold">Pregunta del Día</h2>
-    <div id="temporizador" class="temporizador">15</div>
   </div>
   <p id="pregunta" class="text-lg font-medium mb-6">Cargando pregunta...</p>
 
@@ -29,90 +109,6 @@
   </div>
 
   <div id="feedback" class="mt-4 hidden p-3 rounded-lg"></div>
-  <button id="btn-continuar" class="mt-4 w-full bg-black text-white font-bold py-2 rounded-lg hidden">Continuar</button>
 </div>
-
-<script>
-const preguntas = [
-  { pregunta: "¿Cuántos congresistas se eligen en Lima?", opciones: ["30", "36", "130", "25"], correcta: 1 },
-  { pregunta: "Edad mínima para ser miembro de mesa", opciones: ["18", "20", "25", "30"], correcta: 0 }
-];
-
-let preguntaActual = 0;
-let tiempo = 15;
-let temporizadorInterval;
-
-function cargarPregunta() {
-  const preg = preguntas[preguntaActual];
-  document.getElementById('pregunta').textContent = preg.pregunta;
-  const botones = document.querySelectorAll('.opcion-btn');
-  botones.forEach((btn, i) => {
-    btn.textContent = preg.opciones[i];
-    btn.disabled = false;
-    btn.classList.remove('bg-green-200','bg-red-200');
-  });
-  document.getElementById('feedback').classList.add('hidden');
-  document.getElementById('btn-continuar').classList.add('hidden');
-  tiempo = 15;
-  const tempElem = document.getElementById('temporizador');
-  tempElem.textContent = tiempo;
-  tempElem.classList.remove('alerta');
-  temporizadorInterval = setInterval(actualizarTemporizador, 1000);
-}
-
-function actualizarTemporizador() {
-  tiempo--;
-  const tempElem = document.getElementById('temporizador');
-  tempElem.textContent = tiempo;
-  if(tiempo <= 5) tempElem.classList.add('alerta');
-  if(tiempo <= 0) {
-    clearInterval(temporizadorInterval);
-    mostrarFeedback(false, "Tiempo agotado. No se suman puntos.");
-  }
-}
-
-function mostrarFeedback(correcto, mensaje) {
-  const feedback = document.getElementById('feedback');
-  feedback.textContent = mensaje;
-  feedback.classList.remove('hidden');
-  feedback.classList.add(correcto ? 'text-green-600' : 'text-red-600');
-  document.querySelectorAll('.opcion-btn').forEach(btn => btn.disabled = true);
-  document.getElementById('btn-continuar').classList.remove('hidden');
-
-  if(correcto) {
-    // Actualizar progreso
-    let progreso = JSON.parse(localStorage.getItem("progreso")) || { puntos:0, racha:0, nivel:"Hierro", fechaUltimaPregunta:null };
-    progreso.puntos++;
-    if (progreso.puntos >= 100) progreso.nivel = "Diamante";
-    else if (progreso.puntos >= 50) progreso.nivel = "Oro";
-    else if (progreso.puntos >= 20) progreso.nivel = "Plata";
-    else if (progreso.puntos >= 10) progreso.nivel = "Bronce";
-    else progreso.nivel = "Hierro";
-    localStorage.setItem("progreso", JSON.stringify(progreso));
-  }
-}
-
-document.querySelectorAll('.opcion-btn').forEach((btn, i) => {
-  btn.addEventListener('click', () => {
-    clearInterval(temporizadorInterval);
-    const correcto = i === preguntas[preguntaActual].correcta;
-    if(correcto) btn.classList.add('bg-green-200');
-    else btn.classList.add('bg-red-200');
-    mostrarFeedback(correcto, correcto ? "¡Respuesta Correcta!" : "Respuesta Incorrecta.");
-  });
-});
-
-document.getElementById('btn-continuar').addEventListener('click', () => {
-  preguntaActual++;
-  if(preguntaActual >= preguntas.length) {
-    alert("Has completado tu pregunta diaria. ¡Vuelve mañana!");
-    window.location.href = "index.html";
-  } else {
-    cargarPregunta();
-  }
-});
-
-cargarPregunta();
-</script>
 </body>
 </html>

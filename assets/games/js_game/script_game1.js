@@ -46,3 +46,29 @@ document.getElementById("btn-pregunta").addEventListener("click", () => {
 
   alert("Pregunta del día desbloqueada (aún falta la pantalla de preguntas)");
 });
+
+document.getElementById("btn-pregunta").addEventListener("click", () => {
+  const hoy = new Date().toISOString().split("T")[0];
+  if(progreso.fechaUltimaPregunta === hoy) {
+    alert("Ya respondiste la pregunta de hoy");
+    return;
+  }
+
+  // Guardar fecha y sumar racha si es consecutiva
+  const ayer = new Date();
+  ayer.setDate(ayer.getDate() - 1);
+  const fechaAyer = ayer.toISOString().split("T")[0];
+  progreso.racha = progreso.fechaUltimaPregunta === fechaAyer ? progreso.racha + 1 : 1;
+  progreso.fechaUltimaPregunta = hoy;
+  progreso.puntos++; // por responder (suponemos correcta)
+
+  // Elegir pregunta aleatoria del día
+  const indicePregunta = Math.floor(Math.random() * preguntas.length);
+  const pregDia = preguntas[indicePregunta];
+
+  // Guardar índice para referencia futura
+  localStorage.setItem("preguntaDelDia", JSON.stringify({ indice: indicePregunta }));
+
+  // Redirigir a la pantalla de preguntas
+  window.location.href = "quizz.html";
+});
