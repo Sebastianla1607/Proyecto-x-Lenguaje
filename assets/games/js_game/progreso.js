@@ -1,3 +1,4 @@
+// progreso.js
 let progreso = JSON.parse(localStorage.getItem("progreso")) || {
   racha: 0,
   fechaUltimaPregunta: null,

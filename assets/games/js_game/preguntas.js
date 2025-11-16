@@ -49,30 +49,5 @@ const preguntas = [
     pregunta: "¿Qué documento deben entregar los miembros de mesa al finalizar la jornada?",
     opciones: ["Acta de escrutinio", "Boleta electoral", "DNI de los votantes", "Formulario de inscripción"],
     correcta: 0
-  },
-  {
-    pregunta: "¿Qué sanción puede recibir un ciudadano que intenta votar usando un DNI falso?",
-    opciones: ["Multa y pena de cárcel", "Solo advertencia", "Ser obligado a pagar por votar", "No hay sanción"],
-    correcta: 0
-  },
-  {
-    pregunta: "¿Qué información debe garantizar un miembro de mesa?",
-    opciones: ["Secreto del voto", "Resultados preliminares de la votación antes de tiempo", "Preferencias políticas de los vecinos", "Propaganda de candidatos"],
-    correcta: 0
-  },
-  {
-    pregunta: "¿Quién supervisa que las elecciones sean transparentes?",
-    opciones: ["Jurado Nacional de Elecciones (JNE)", "Municipalidad", "Ministerio de Educación", "Ministerio del Interior"],
-    correcta: 0
-  },
-  {
-    pregunta: "¿Qué deben hacer los votantes antes de ingresar a la mesa de votación?",
-    opciones: ["Presentar su DNI y firmar la lista de electores", "Tomar una foto del local", "Llevar propaganda política", "Traer lápiz y papel"],
-    correcta: 0
-  },
-  {
-    pregunta: "¿Qué es obligatorio para todos los votantes el día de la elección?",
-    opciones: ["Votar de manera libre y responsable", "Ser miembro de mesa", "Conocer todos los candidatos", "Llevar su propio presidente de mesa"],
-    correcta: 0
   }
 ];
