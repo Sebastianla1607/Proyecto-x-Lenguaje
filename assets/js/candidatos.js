@@ -110,10 +110,18 @@
 
       listEl.innerHTML = '';
       listEl.appendChild(fragment);
+
+      // Exponer los datos cargados para que otros scripts (e.g. buscador) los reutilicen
+      try{
+        window.CANDIDATES_DATA = items;
+        document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: items }));
+      }catch(e){ console.debug('No se pudo publicar candidatos en window', e); }
     })
     .catch((err) => {
       console.error('Error cargando candidatos:', err);
       listEl.innerHTML = '<p class="text-sm text-red-600">Error cargando candidatos.</p>';
       if (countEl) countEl.textContent = 'Error';
+      // Exponer fallback para que el buscador pueda funcionar
+      try{ window.CANDIDATES_DATA = BUILTIN_CANDIDATES; document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: BUILTIN_CANDIDATES })); }catch(e){}
     });
 })();

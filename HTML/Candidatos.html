@@ -8,8 +8,12 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <style>
+            .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+        </style>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -40,22 +44,42 @@
 
 
 <body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
-    <main class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
-        <header class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border-light bg-card-light/90 p-4 backdrop-blur-sm">
+    <main
+        class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+        <header
+            class="sticky top-0 z-10 grid grid-cols-3 items-center border-b border-border-light bg-card-light/90 p-4 backdrop-blur-sm">
             <div class="justify-self-start">
-                <button onclick="history.back()" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                <button onclick="history.back()"
+                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
             </div>
             <h2 class="text-xl font-bold text-text-light dark:text-text-dark text-center">Presidenciales</h2>
             <div class="flex items-center gap-4 justify-self-end">
-                <a href="Notifications.html" class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
+                <a href="Notifications.html"
+                    class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark hover:bg-gray-100 transition">
                     <span class="material-symbols-outlined">notifications</span>
                 </a>
             </div>
         </header>
+        <!-- Buscador de candidatos -->
+        <div class="px-4 pb-4">
+            <div class="relative">
+                <div class="flex items-center rounded-xl border-2 border-elcomercio-yellow bg-white dark:bg-black/30">
+                    <span class="material-symbols-outlined pl-4 text-[#8a8060]">search</span>
+                    <input id="searchInput" placeholder="Buscar por nombre o sigla..." autocomplete="off"
+                        class="w-full bg-transparent px-3 py-2 focus:outline-none text-[#181611] dark:text-gray-100 dark:placeholder-gray-400">
+                </div>
+                <!-- Contenedor de resultados sugeridos -->
+                <ul id="searchResults"
+                    class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-auto rounded-lg bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700">
+                    <!-- items se generan dinámicamente -->
+                </ul>
+            </div>
+        </div>
         <div class="px-4 pt-4">
-            <p id="candidate-count" class="text-sm text-secondary-text-light dark:text-secondary-text-dark">Cargando candidatos...</p>
+            <p id="candidate-count" class="text-sm text-secondary-text-light dark:text-secondary-text-dark">Cargando
+                candidatos...</p>
         </div>
         <div id="candidates-list" class="flex flex-col px-4 gap-3">
             <!-- Lista cargada desde API externa -->
@@ -65,17 +89,18 @@
     <div id="site-footer"></div>
 
     <script src="../assets/js/candidatos.js"></script>
+    <script src="../assets/js/search.js"></script>
     <script>
-        (function() {
-            fetch('footer.html')
-                .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
-                .then(html => {
-                    document.getElementById('site-footer').innerHTML = html;
-                })
-                .catch(err => {
-                    console.warn('No se pudo cargar footer.html:', err);
-                });
-        })();
+            (function () {
+                fetch('footer.html')
+                    .then(r => r.ok ? r.text() : Promise.reject('No encontrado'))
+                    .then(html => {
+                        document.getElementById('site-footer').innerHTML = html;
+                    })
+                    .catch(err => {
+                        console.warn('No se pudo cargar footer.html:', err);
+                    });
+            })();
     </script>
 </body>
 
