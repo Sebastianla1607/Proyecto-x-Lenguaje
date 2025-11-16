@@ -104,6 +104,10 @@
           <p id="candidate-chamber" class="text-gray-900 dark:text-gray-100 text-sm font-normal leading-normal">—</p>
         </div>
         <div class="col-span-2 grid grid-cols-subgrid border-t border-t-gray-200 dark:border-t-gray-700 py-5">
+          <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Ubicación exacta de mesa</p>
+          <p id="candidate-table-location" class="text-gray-900 dark:text-gray-100 text-sm font-normal leading-normal">—</p>
+        </div>
+        <div class="col-span-2 grid grid-cols-subgrid border-t border-t-gray-200 dark:border-t-gray-700 py-5">
           <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Formación Académica</p>
           <p class="text-gray-900 dark:text-gray-100 text-sm font-normal leading-normal">Universidad del Pacífico,
             Economía</p>
@@ -119,6 +123,20 @@
           </p>
         </div>
       </div>
+      <!-- Apartado RF3.2: Ubicación exacta de mesa (sección dedicada con acciones) -->
+      <div class="px-4 py-4 border-t border-t-gray-200 dark:border-t-gray-700">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Ubicación exacta de mesa</h3>
+        <div id="candidate-table-section" class="text-gray-700 dark:text-gray-300">
+          <p id="candidate-table-location-full" class="text-gray-900 dark:text-gray-100 text-sm">—</p>
+          <div class="mt-3 flex items-center gap-3">
+            <a id="candidate-map-link" href="#" target="_blank" rel="noopener" class="hidden text-sm font-medium text-primary underline">Ver en Google Maps</a>
+            <a id="candidate-ubicacion-link" href="#" target="_blank" rel="noopener" class="hidden text-sm font-medium text-primary underline">Ver en Ubicación</a>
+            <button id="copy-table-location" class="hidden text-sm px-3 py-1 rounded bg-gray-100 dark:bg-gray-800">Copiar dirección</button>
+            <span id="candidate-table-note" class="text-xs text-gray-500 dark:text-gray-400">(Información sujeta a disponibilidad)</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Collapsible Section / Accordion for Plan de Gobierno (New Component) -->
       <div class="px-4 py-2">
         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">Plan de Gobierno</h3>
@@ -138,7 +156,7 @@
         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">Actividades Recientes</h3>
         <div class="space-y-4">
           <div class="rounded-lg bg-white dark:bg-gray-800/50 overflow-hidden ring-1 ring-gray-200 dark:ring-gray-700">
-            <img class="w-full h-40 object-cover" data-alt="Candidata hablando en un evento comunitario"
+            <img alt="Candidata hablando en un evento comunitario" class="w-full h-40 object-cover" data-alt="Candidata hablando en un evento comunitario"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC2zDiFF3MpZQGaVStdFUdjsodRXfwyzTsnXujxXA-MFKXtXrlIo1dcbX9emgUv4xJmv5I7xViV7_buSA8KDtB-_cVHx7GTeO2EPYcTInwNr5GRD2C_v9vBGz5dctYaVOz1Go9Xd0nNLQCEQDRC3UvqRiplXM5mjGjn-ckm476UX877EPd94OVmiMIebtk7QDtQzvWnJX1y6_R2KS0iyosQcEIODXFtZYk8d34PHjzxws10ERtWeSG_yqPlp1QmOS8MAiuEJ9Z_VU" />
             <div class="p-4">
               <h4 class="font-bold text-gray-800 dark:text-gray-200">Visita a Comunidad en Villa El Salvador</h4>
@@ -147,7 +165,7 @@
             </div>
           </div>
           <div class="rounded-lg bg-white dark:bg-gray-800/50 overflow-hidden ring-1 ring-gray-200 dark:ring-gray-700">
-            <img class="w-full h-40 object-cover" data-alt="Reunión con empresarios"
+            <img alt="Reunión con empresarios" class="w-full h-40 object-cover" data-alt="Reunión con empresarios"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOeaxI-cogidfYucr3vIsfdiULHVnnVNfEYjDmwWT6IkuDvCQcbX6doAEGf58S2EyJk5X8GwxV5iFlfxpVsyoGHtynv_sT6XwG0BDYLgRH_bWoSPWYAUK4ulmKARnSNshlIYdZerFjIL4CZnfedjHIY1fy0Sx8-Kvcfdq5PTLh7FuVtRv0aFfLTcUrBuYt7sT875COZFpEjqZ7PKrTWNUVFDwxTJ6BcSuCcg3hqWX4HfS_4sB1pEOf4QuJw4kEXxGNN9LRiWzCTzo" />
             <div class="p-4">
               <h4 class="font-bold text-gray-800 dark:text-gray-200">Reunión con gremios empresariales</h4>

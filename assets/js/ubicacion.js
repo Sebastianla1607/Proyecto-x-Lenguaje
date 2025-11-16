@@ -28,6 +28,7 @@ const UBICACION_FALLBACK = [
 ];
 
 let map, markersLayer, routeLine, userMarker;
+let highlightLayer;
 
 async function tryFetchJson(url) {
   try {
@@ -148,6 +149,15 @@ function selectLocationOnMap({ lat, lon, title }) {
   clearRoute();
   try {
     map.setView([lat, lon], 16);
+    // add a highlighted marker for the selected target
+    try {
+      if (!highlightLayer) highlightLayer = L.layerGroup().addTo(map);
+      highlightLayer.clearLayers();
+      const circle = L.circleMarker([lat, lon], { radius: 8, color: '#ff6f00', fillColor: '#ffcc66', fillOpacity: 0.9 }).addTo(highlightLayer);
+      circle.bindPopup(`<strong>${title || 'Destino'}</strong>`).openPopup();
+    } catch(e) {
+      console.debug('highlight marker error', e);
+    }
     if (userMarker) userMarker.addTo(map);
     routeLine = null;
     // intentar geolocalizar para dibujar ruta simple
@@ -162,6 +172,7 @@ function selectLocationOnMap({ lat, lon, title }) {
       }, () => {
         // si falla geolocalización, solo centrar
         map.setView([lat, lon], 16);
+        try { if (highlightLayer) highlightLayer.eachLayer(l => l.openPopup && l.openPopup()); } catch(e){}
       }, { maximumAge: 60000, timeout: 5000 });
     }
     setStatus(`seleccionado: ${title}`);
@@ -184,6 +195,51 @@ function applySearch(list) {
   });
 }
 
+function processInitialParams(list) {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const plat = params.get('lat');
+    const plon = params.get('lon') || params.get('lng');
+    const query = params.get('query') || params.get('q');
+    const title = params.get('title') || params.get('nombre');
+    if (plat && plon) {
+      const lat = parseFloat(plat);
+      const lon = parseFloat(plon);
+      if (!isNaN(lat) && !isNaN(lon)) {
+        // center map on provided coordinates
+        selectLocationOnMap({ lat, lon, title: title || 'Ubicación' });
+        return;
+      }
+    }
+    if (query && Array.isArray(list) && list.length) {
+      const term = query.toString().toLowerCase();
+      const found = list.find(l => (((l.nombre||l.name||'') + ' ' + (l.direccion||l.address||'')).toString().toLowerCase().includes(term)));
+      if (found) {
+        const lat = found.lat || found.latitude || found.latitud;
+        const lon = found.lon || found.longitude || found.longitud || found.lng;
+        if (lat && lon) {
+          selectLocationOnMap({ lat: parseFloat(lat), lon: parseFloat(lon), title: found.nombre || found.name || query });
+          return;
+        }
+        // if found but no coords, populate search input so user can see the card
+        const input = document.getElementById('loc-search');
+        if (input) {
+          input.value = query;
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      } else {
+        const input = document.getElementById('loc-search');
+        if (input) {
+          input.value = query;
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    }
+  } catch (e) {
+    console.debug('processInitialParams error', e);
+  }
+}
+
 async function loadAndRender() {
   let list = null;
   let source = 'fallback';
@@ -198,6 +254,7 @@ async function loadAndRender() {
     renderLocations(list);
     setStatus(source);
     applySearch(list);
+    processInitialParams(list);
     return;
   }
 
@@ -209,6 +266,7 @@ async function loadAndRender() {
     renderLocations(list);
     setStatus(source);
     applySearch(list);
+    processInitialParams(list);
     return;
   }
 
@@ -219,6 +277,7 @@ async function loadAndRender() {
   renderLocations(list);
   setStatus(source);
   applySearch(list);
+  processInitialParams(list);
 }
 
 // inicializa cuando el documento esté listo

@@ -99,6 +99,7 @@
       const descripcion = candidate.descripcion || '';
       const hoja = candidate.hoja_vida || candidate.hojaDeVida || 'No disponible.';
       const actividades = candidate.actividades || candidate.activities || 'No disponible.';
+      const ubicacionMesa = candidate.ubicacion_mesa || candidate.ubicacion || candidate.mesa || candidate.table_location || '';
 
       setText('candidate-name', name);
         currentCandidateName = name;
@@ -108,6 +109,62 @@
       // populate chamber field if present
       const chamberText = detectChamber(rawChamber, cargo);
       setText('candidate-chamber', chamberText || '—');
+      // populate table location (short row)
+      setText('candidate-table-location', ubicacionMesa || '—');
+      // populate the dedicated RF3.2 apartado (full text + actions)
+      const fullLocationEl = document.getElementById('candidate-table-location-full');
+      if (fullLocationEl) fullLocationEl.textContent = ubicacionMesa || '—';
+
+      const mapLink = document.getElementById('candidate-map-link');
+      const copyBtn = document.getElementById('copy-table-location');
+      const ubicacionPageLink = document.getElementById('candidate-ubicacion-link');
+      // detect coordinates if provided
+      const lat = candidate.lat || candidate.latitude || candidate.latitud || candidate.latitud_gps || candidate.LAT || '';
+      const lng = candidate.lng || candidate.longitude || candidate.long || candidate.longitud || candidate.LON || '';
+      if (ubicacionMesa) {
+        // build maps link: prefer coordinates if available
+        let href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ubicacionMesa);
+        if (lat && lng) href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat + ',' + lng);
+        if (mapLink) {
+          mapLink.href = href;
+          mapLink.classList.remove('hidden');
+        }
+        // also build internal Ubicacion.html link to center the app's map
+        if (ubicacionPageLink) {
+          try {
+            let ubicHref = '';
+            if (lat && lng) {
+              ubicHref = `Ubicacion.html?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}&title=${encodeURIComponent(name)}`;
+            } else {
+              // fallback to a text query (search) so Ubicacion page can filter
+              ubicHref = `Ubicacion.html?query=${encodeURIComponent(ubicacionMesa || name)}&title=${encodeURIComponent(name)}`;
+            }
+            ubicacionPageLink.href = ubicHref;
+            ubicacionPageLink.classList.remove('hidden');
+          } catch (e) {
+            console.warn('Error building ubicacion page link', e);
+          }
+        }
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          // attach click listener (use once)
+          copyBtn.addEventListener('click', async () => {
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(ubicacionMesa);
+                alert('Dirección copiada al portapapeles');
+              } else {
+                prompt('Copia la dirección:', ubicacionMesa);
+              }
+            } catch (e) {
+              prompt('Copia la dirección:', ubicacionMesa);
+            }
+          });
+        }
+      } else {
+        if (mapLink) mapLink.classList.add('hidden');
+        if (copyBtn) copyBtn.classList.add('hidden');
+      }
       // compute and show short badge near the name (Parl. Andino, Dip., Sen.)
       function badgeFromChamber(chamberText) {
         if (!chamberText) return '';
