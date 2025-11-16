@@ -68,4 +68,4 @@ curl -sS https://api-nodepost-production.up.railway.app/noticias | jq .
 
 Si quieres que haga algún ajuste automático adicional (ej. añadir `.nvmrc`, más secrets, o instrucciones para CI específicas), dime cuál y lo implemento.
 # Proyecto-x-Lenguaje
-le dimos duro hasta el fianl
+le dimos duro hasta el final
