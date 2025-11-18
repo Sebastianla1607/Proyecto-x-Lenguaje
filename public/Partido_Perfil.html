@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil del Partido</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#f2b90d', 'background-light': '#f8f8f5', 'background-dark': '#221e10' }, fontFamily: { display: ['Public Sans', 'sans-serif'] } } } };
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        .party-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 9999px;
+            background-size: cover;
+            background-position: center
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
+        <header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4">
+            <div class="flex items-center">
+                <button id="back-btn" class="mr-3 text-[#181611] dark:text-gray-100"><span
+                        class="material-symbols-outlined">arrow_back</span></button>
+                <div class="flex-1 text-center">
+                    <img src="../assets/img/perfil_de_partido.png" alt="Perfil del partido"
+                        class="inline-block w-60 h-auto" />
+                </div>
+            </div>
+        </header>
+
+        <main class="p-4">
+            <div class="flex items-center gap-4">
+                <div id="party-photo" class="party-photo" data-alt="Logo del partido" style="background-image:url('')">
+                </div>
+                <div>
+                    <h2 id="party-name" class="text-2xl font-bold">Cargando...</h2>
+                    <p id="party-sigla" class="text-gray-600">—</p>
+                </div>
+            </div>
+
+            <section class="mt-4">
+                <h3 class="font-bold">Descripción</h3>
+                <p id="party-description" class="text-gray-800 dark:text-gray-200">Cargando...</p>
+            </section>
+
+            <section class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-bold">Ideología</h4>
+                    <p id="party-ideologia">—</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Líder</h4>
+                    <p id="party-lider">—</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Fundación</h4>
+                    <p id="party-fecha">—</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Estado</h4>
+                    <p id="party-estado">—</p>
+                </div>
+            </section>
+
+            <section class="mt-4">
+                <h4 class="font-bold">Sitio web</h4>
+                <a id="party-sitio" class="text-blue-600 break-all" href="#">—</a>
+            </section>
+
+        </main>
+    </div>
+    <div id="site-footer"></div>
+    <script>
+        (function () { fetch('../HTML/footer.html').then(r => r.ok ? r.text() : Promise.reject('No encontrado')).then(html => { document.getElementById('site-footer').innerHTML = html }).catch(err => console.warn('No se pudo cargar footer.html:', err)); })();
+    </script>
+    <script src="../assets/js/partido-detalle.js"></script>
+</body>
+
+</html>
