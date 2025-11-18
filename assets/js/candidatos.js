@@ -82,8 +82,18 @@
   const partySiglaById = {};
 
   function render(items) {
+    // ordenar alfabéticamente por nombre antes de renderizar
+    const sorted = Array.isArray(items)
+      ? items.slice().sort((a, b) => {
+          const an = (a.nombre || a.name || '').toString();
+          const bn = (b.nombre || b.name || '').toString();
+          return an.localeCompare(bn, 'es', { sensitivity: 'base' });
+        })
+      : [];
+
     const frag = document.createDocumentFragment();
-    for (const c of items) {
+    // reconstruir fragment usando lista ordenada
+    for (const c of sorted) {
       const id = c.id || c.ID || c.id_candidato || '0';
       const name = c.name || c.nombre || c.nombre_completo || c.fullName || 'Sin nombre';
       let partyName = c.party || c.partido || c.affiliation || '';
@@ -159,11 +169,11 @@
     listEl.innerHTML = '';
     listEl.appendChild(frag);
 
-    if (countEl) countEl.textContent = `${items.length} Candidatos encontrados`;
+    if (countEl) countEl.textContent = `${sorted.length} Candidatos encontrados`;
 
     try {
-      globalThis.CANDIDATES_DATA = items;
-      document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: items }));
+      globalThis.CANDIDATES_DATA = sorted;
+      document.dispatchEvent(new CustomEvent('candidatos:loaded', { detail: sorted }));
     } catch (e) { console.debug('No se pudo publicar candidatos en globalThis', e); }
   }
 

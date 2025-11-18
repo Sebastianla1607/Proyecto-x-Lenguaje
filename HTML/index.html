@@ -92,6 +92,19 @@
       border-right: 8px solid transparent;
       border-bottom: 8px solid white;
     }
+    /* Estilos específicos para los recuadros del contador (meses, días, horas, minutos) */
+    #count-months-container,
+    #count-days-container,
+    #count-hours-container,
+    #count-minutes-container {
+      background-color: #81D4FA; /* celeste claro (modo claro) */
+    }
+    .dark #count-months-container,
+    .dark #count-days-container,
+    .dark #count-hours-container,
+    .dark #count-minutes-container {
+      background-color: #29B6F6; /* celeste más intenso (modo dark) */
+    }
   </style>
 
 </head>
@@ -314,7 +327,7 @@
 
         <div class="flex gap-4 pb-4">
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-months-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.months"
@@ -322,7 +335,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-days-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.days"
@@ -330,7 +343,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-hours-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.hours"
@@ -338,7 +351,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-minutes-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.minutes"

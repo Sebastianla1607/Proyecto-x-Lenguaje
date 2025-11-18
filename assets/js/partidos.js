@@ -24,8 +24,17 @@
   if (!partyList) return console.warn('No se encontró #partyList en la página');
 
   function render(parties){
+    // ordenar alfabéticamente por nombre antes de renderizar
+    const sorted = Array.isArray(parties)
+      ? parties.slice().sort((a, b) => {
+          const an = (a.nombre || a.name || '').toString();
+          const bn = (b.nombre || b.name || '').toString();
+          return an.localeCompare(bn, 'es', { sensitivity: 'base' });
+        })
+      : [];
+
     partyList.innerHTML = '';
-    for (const p of parties) {
+    for (const p of sorted) {
       const li = document.createElement('li');
       li.className = 'party';
 
@@ -33,9 +42,9 @@
       a.className = 'item';
       // Enlaza a la página de detalle del partido con querystring `id`
       a.href = `Partido_Perfil.html?id=${encodeURIComponent(p.id ?? '')}`;
-      a.setAttribute('data-party-id', p.id ?? '');
+      a.dataset.partyId = p.id ?? '';
       // Exponer la sigla también como atributo para búsquedas precisas
-      if (p.sigla) a.setAttribute('data-sigla', String(p.sigla));
+      if (p.sigla) a.dataset.sigla = String(p.sigla);
 
       const img = document.createElement('img');
       img.className = 'logo';

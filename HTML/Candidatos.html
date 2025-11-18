@@ -172,7 +172,14 @@
                                         return;
                                     }
 
-                                    listContainer.innerHTML = filtered.map(c => `
+                                    // ordenar alfabeticamente antes de renderizar
+                                    const sortedFiltered = filtered.slice().sort((a,b)=>{
+                                        const an = (a.nombre || a.name || '').toString();
+                                        const bn = (b.nombre || b.name || '').toString();
+                                        return an.localeCompare(bn, 'es', { sensitivity: 'base' });
+                                    });
+
+                                    listContainer.innerHTML = sortedFiltered.map(c => `
                                         <a href="Candidato_Perfil.html?id=${encodeURIComponent(c.id || c.ID || c.id_candidato || '')}"
                                             class="flex items-center gap-4 p-3 border border-border-light dark:border-border-dark rounded-xl bg-card-light dark:bg-card-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition">
                                             <img src="${c.foto_url || c.photo || c.foto || '../assets/img/default-user.png'}"
