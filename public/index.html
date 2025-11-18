@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="manifest" href="/manifest.json"> <!--para el offline, no cambiar-->
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title data-i18n="title">Elecciones Perú 2026</title>
 
@@ -91,6 +92,19 @@
       border-right: 8px solid transparent;
       border-bottom: 8px solid white;
     }
+    /* Estilos específicos para los recuadros del contador (meses, días, horas, minutos) */
+    #count-months-container,
+    #count-days-container,
+    #count-hours-container,
+    #count-minutes-container {
+      background-color: #81D4FA; /* celeste claro (modo claro) */
+    }
+    .dark #count-months-container,
+    .dark #count-days-container,
+    .dark #count-hours-container,
+    .dark #count-minutes-container {
+      background-color: #29B6F6; /* celeste más intenso (modo dark) */
+    }
   </style>
 
 </head>
@@ -150,16 +164,148 @@
           </div>
         </div>
 
-        <!-- Notificaciones -->
+        <!-- Notificaciones (ahora abre modal) -->
         <div class="flex w-12 items-center justify-end">
-          <a href="Notifications.html"
-            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0">
+          <button id="notificationsBtn"
+            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0"
+            aria-label="Notificaciones">
             <span class="material-symbols-outlined">notifications</span>
-          </a>
+          </button>
         </div>
 
       </div>
     </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
+      <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
+          <h3 class="text-lg font-bold">Notificaciones</h3>
+          <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="notificationsContent" class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
+          <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const btn = document.getElementById('notificationsBtn');
+        const modal = document.getElementById('notificationsModal');
+        const closeBtn = document.getElementById('closeNotifications');
+        const content = document.getElementById('notificationsContent');
+
+        function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
+        function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+        btn?.addEventListener('click', openModal);
+        closeBtn?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        async function loadNotifications() {
+          const primaryUrl = 'https://api.transparencia.org.pe/app-publicaciones/dc-Informe%202_Sem%C3%A1foro%20Democr%C3%A1tico.pdf';
+          // Notificación fija (RPP) que aparece siempre primero
+          const fixedNotifications = [
+            {
+              title: 'Elecciones 2026: partidos inscritos y en proceso',
+              excerpt: 'RPP Noticias — Conoce cuáles son los partidos inscritos y los que están en proceso de inscripción.',
+              url: 'https://rpp.pe/politica/elecciones/elecciones-2026-conoce-cuales-son-los-partidos-politicos-inscritos-y-los-que-estan-en-proceso-de-inscripcion-noticia-1572877'
+            }
+          ];
+
+          // Intentamos primero la API externa indicada por el usuario
+          try {
+            const res = await fetch(primaryUrl, { mode: 'cors' });
+            if (!res.ok) throw new Error('Respuesta no OK desde API primaria');
+            const contentType = (res.headers.get('content-type') || '').toLowerCase();
+
+            // Si la API devuelve JSON, parseamos y mostramos elementos (con la notificación fija al inicio)
+            if (contentType.includes('application/json')) {
+              const data = await res.json();
+              const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
+              const merged = [...fixedNotifications, ...items];
+              if (!merged || merged.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+              content.innerHTML = merged.map(it => `
+                <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                  <div class="font-semibold">${it.title || it.titulo || ''}</div>
+                  <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}
+                    ${it.url ? `<div class="mt-1"><a href="${it.url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>` : ''}
+                  </div>
+                </div>
+              `).join('');
+              return;
+            }
+
+            // Si la API devuelve PDF, mostramos la notificación fija y el visor/enlace al PDF
+            if (contentType.includes('application/pdf')) {
+              content.innerHTML = `
+                <div class="p-2">
+                  <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                    <div class="font-semibold">${fixedNotifications[0].title}</div>
+                    <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${fixedNotifications[0].excerpt}
+                      <div class="mt-1"><a href="${fixedNotifications[0].url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>
+                    </div>
+                  </div>
+                  <p class="text-sm mb-2 text-secondary-text-light dark:text-secondary-text-dark">Se encontró un informe en PDF en la fuente indicada.</p>
+                  <div class="flex gap-2">
+                    <a href="${primaryUrl}" target="_blank" rel="noopener" class="px-3 py-2 rounded bg-primary text-text-light">Abrir informe (PDF)</a>
+                    <button id="embedPdfBtn" class="px-3 py-2 rounded border">Ver dentro</button>
+                  </div>
+                  <div id="pdfViewer" class="mt-3"></div>
+                </div>
+              `;
+
+              // Intentar embedir en un iframe si es posible
+              const embedBtn = document.getElementById('embedPdfBtn');
+              embedBtn?.addEventListener('click', () => {
+                const viewer = document.getElementById('pdfViewer');
+                viewer.innerHTML = `<iframe src="${primaryUrl}" class="w-full h-80 border" frameborder="0"></iframe>`;
+              });
+              return;
+            }
+
+            // Para otros tipos, intentamos mostrar la notificación fija y un enlace directo a la fuente
+            content.innerHTML = `
+              <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                <div class="font-semibold">${fixedNotifications[0].title}</div>
+                <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${fixedNotifications[0].excerpt}
+                  <div class="mt-1"><a href="${fixedNotifications[0].url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>
+                </div>
+              </div>
+              <p class="text-sm mt-2">Fuente encontrada en <a href="${primaryUrl}" target="_blank" rel="noopener" class="text-primary">${primaryUrl}</a></p>
+            `;
+            return;
+          } catch (error_) {
+            console.warn('Fallo al cargar desde API primaria:', error_);
+            // Si falla la API externa, caemos al archivo local de noticias
+          }
+
+          // Fallback: cargar noticias locales y anteponer la notificación fija
+          try {
+            const res2 = await fetch('../assets/data/noticias.json');
+            if (!res2.ok) throw new Error('No se pudo cargar noticias locales');
+            const data2 = await res2.json();
+            const items2 = Array.isArray(data2) ? data2.slice(0, 6) : (data2?.noticias || []);
+            const merged2 = [...fixedNotifications, ...items2];
+            if (!merged2 || merged2.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+            content.innerHTML = merged2.map(it => `
+              <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                <div class="font-semibold">${it.title || it.titulo || ''}</div>
+                <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}
+                  ${it.url ? `<div class="mt-1"><a href="${it.url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>` : ''}
+                </div>
+              </div>
+            `).join('');
+          } catch (error__) {
+            content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
+            console.warn('Fallo al cargar noticias locales:', error__);
+          }
+        }
+      })();
+    </script>
 
     <!-- MAIN -->
     <main class="flex-grow pb-24">
@@ -181,7 +327,7 @@
 
         <div class="flex gap-4 pb-4">
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-months-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.months"
@@ -189,7 +335,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-days-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.days"
@@ -197,7 +343,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-hours-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.hours"
@@ -205,7 +351,7 @@
           </div>
 
           <div class="flex grow flex-col items-stretch gap-2">
-            <div class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+            <div id="count-minutes-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
               <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
             </div>
             <p data-i18n="countdown.minutes"
@@ -286,6 +432,16 @@
     <script src="../assets/js/i18n.js"></script>
 
   </div>
+  <script>
+    //esto lo conecta al service worker donde ya declaramos no tocar!
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("SW registrado"))
+      .catch(err => console.error("Error SW:", err));
+  });
+}
+</script>
 
 </body>
 

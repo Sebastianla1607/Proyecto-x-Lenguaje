@@ -1,183 +1,448 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="light" lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <title data-i18n="title">Elecciones Perú 2026</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { primary: "#FFCB05", "background-light": "#FFFFFF", "background-dark": "#101622", "text-light": "#000000", "text-dark": "#F5F5F5", "card-light": "#FFFFFF", "card-dark": "#1A202C", "secondary-text-light": "#616f89", "secondary-text-dark": "#A0AEC0", "border-light": "#dbdfe6", "border-dark": "#4A5568", "accent-blue": "#0D47A1" }, fontFamily: { display: ["Public Sans", "sans-serif"] } } } }</script>
-    <link rel="stylesheet" href="../assets/css/index.css">
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
-        }
+  <meta charset="utf-8" />
+  <link rel="manifest" href="/manifest.json"> <!--para el offline, no cambiar-->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title data-i18n="title">Elecciones Perú 2026</title>
 
-        .translate-panel {
-            position: fixed;
-            right: 1rem;
-            top: 4.25rem;
-            z-index: 60;
-            width: 260px;
-            background: #fff;
-            border-radius: .75rem;
-            box-shadow: 0 10px 30px rgba(2, 6, 23, .2);
-            padding: .5rem
-        }
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-        .translate-panel .lang-item {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .5rem;
-            border-radius: .5rem;
-            cursor: pointer
-        }
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-        .translate-panel .lang-item:hover {
-            background: rgba(0, 0, 0, .04)
-        }
+  <!-- Config Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#FFCB05",
+            "background-light": "#FFFFFF",
+            "background-dark": "#101622",
+            "text-light": "#000000",
+            "text-dark": "#F5F5F5",
+            "card-light": "#FFFFFF",
+            "card-dark": "#1A202C",
+            "secondary-text-light": "#616f89",
+            "secondary-text-dark": "#A0AEC0",
+            "border-light": "#dbdfe6",
+            "border-dark": "#4A5568",
+            "accent-blue": "#0D47A1"
+          },
+          fontFamily: {
+            "display": ["Public Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
 
-        .translate-panel .lang-item.active {
-            background: rgba(13, 71, 161, .08)
-        }
+  <link rel="stylesheet" href="../assets/css/index.css">
 
-        .translate-panel::before {
-            content: "";
-            position: absolute;
-            top: -8px;
-            right: 12px;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid #fff
-        }
-    </style>
-    <script defer="defer" src="/static/js/main.c730a5af.js"></script>
-    <link href="/static/css/main.cbcfcc11.css" rel="stylesheet">
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .translate-panel {
+      position: fixed;
+      right: 1rem;
+      top: 4.25rem;
+      z-index: 60;
+      width: 260px;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.2);
+      padding: 0.5rem;
+    }
+
+    .translate-panel .lang-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem;
+      border-radius: .5rem;
+      cursor: pointer;
+    }
+
+    .translate-panel .lang-item:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .translate-panel .lang-item.active {
+      background: rgba(13, 71, 161, 0.08);
+    }
+
+    .translate-panel::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid white;
+    }
+    /* Estilos específicos para los recuadros del contador (meses, días, horas, minutos) */
+    #count-months-container,
+    #count-days-container,
+    #count-hours-container,
+    #count-minutes-container {
+      background-color: #81D4FA; /* celeste claro (modo claro) */
+    }
+    .dark #count-months-container,
+    .dark #count-days-container,
+    .dark #count-hours-container,
+    .dark #count-minutes-container {
+      background-color: #29B6F6; /* celeste más intenso (modo dark) */
+    }
+  </style>
+
 </head>
-<script>!function () { try { if (!localStorage.getItem("seenTutorial")) { const t = (location.pathname || "").split("/").pop(); ("" === t || /index\.html$/i.test(t)) && !/Tutorial\.html$/i.test(t) && location.replace("Tutorial.html") } } catch (t) { console.warn("No se pudo acceder a localStorage para el tutorial:", t) } }()</script>
+  <!-- Mostrar tutorial una sola vez: si no se vio, redirige a Tutorial.html (solo desde la raíz/index) -->
+  <script>
+    (function(){
+      try {
+        const seen = localStorage.getItem('seenTutorial');
+        if (!seen) {
+          // Solo redirige si el usuario abrió la raíz o index.html
+          const last = (location.pathname || '').split('/').pop();
+          const isIndexRoot = last === '' || /index\.html$/i.test(last);
+          if (isIndexRoot && !/Tutorial\.html$/i.test(last)) {
+            location.replace('Tutorial.html');
+          }
+        }
+      } catch (e) {
+        // si localStorage no está disponible, no hacemos nada
+        console.warn('No se pudo acceder a localStorage para el tutorial:', e);
+      }
+    })();
+  </script>
 
 <body class="font-display">
+
+  <div
+    class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
+
+    <!-- HEADER -->
     <div
-        class="relative mx-auto flex h-auto min-h-screen w-full max-w-md flex-col bg-white dark:bg-background-dark overflow-x-hidden">
-        <div
-            class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
-            <div class="flex-1 flex justify-center"><img src="../assets/img/logo.png" alt="Nisqamanta"
-                    class="h-8 object-contain" /></div>
-            <div class="flex items-center gap-2">
-                <div class="relative"><button id="translateBtn"
-                        class="translate-btn flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-                        aria-label="Cambiar idioma"><span class="material-symbols-outlined">translate</span></button>
-                    <div id="translatePanel"
-                        class="translate-panel hidden border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
-                        <div class="text-sm font-semibold px-2 py-1">Idioma</div>
-                        <div id="langList" class="px-1 pb-1"></div>
-                        <div class="px-2 py-2 text-xs text-secondary-text-light dark:text-secondary-text-dark">El idioma
-                            se guarda y se aplica a todas las páginas.</div>
-                    </div>
-                </div>
-                <div class="flex w-12 items-center justify-end"><a href="Notifications.html"
-                        class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0"><span
-                            class="material-symbols-outlined">notifications</span></a></div>
+      class="sticky top-0 z-10 flex items-center bg-card-light dark:bg-card-dark p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
+
+      <!-- LOGO CENTRAL -->
+      <div class="flex-1 flex justify-center">
+        <img src="../assets/img/logo.png" alt="Nisqamanta" class="h-8 object-contain" />
+      </div>
+
+      <!-- BOTONES -->
+      <div class="flex items-center gap-2">
+
+        <!-- Botón idioma -->
+        <div class="relative">
+          <button id="translateBtn"
+            class="translate-btn flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Cambiar idioma">
+            <span class="material-symbols-outlined">translate</span>
+          </button>
+
+          <!-- Panel -->
+          <div id="translatePanel"
+            class="translate-panel hidden border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+            <div class="text-sm font-semibold px-2 py-1">Idioma</div>
+            <div id="langList" class="px-1 pb-1"></div>
+            <div class="px-2 py-2 text-xs text-secondary-text-light dark:text-secondary-text-dark">
+              El idioma se guarda y se aplica a todas las páginas.
             </div>
+          </div>
         </div>
-        <main class="flex-grow pb-24">
-            <div class="p-4 pt-6">
-                <h1 data-i18n="hero.title" class="text-text-light dark:text-text-dark text-3xl font-bold text-center">Tu
-                    Guía para las Elecciones Generales 2026</h1>
-                <p data-i18n="hero.subtitle"
-                    class="text-secondary-text-light dark:text-secondary-text-dark text-center mt-2">Infórmate y
-                    participa. Todo lo que necesitas saber.</p>
-            </div>
-            <div class="p-4 pt-2">
-                <h3 data-i18n="countdown.title"
-                    class="text-text-light dark:text-text-dark text-lg font-bold text-center pb-2">Faltan para el día de
-                    la elección</h3>
-                <div class="flex gap-4 pb-4">
-                    <div class="flex grow flex-col items-stretch gap-2">
-                        <div
-                            class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-                            <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
-                        </div>
-                        <p data-i18n="countdown.months"
-                            class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Meses
-                        </p>
-                    </div>
-                    <div class="flex grow flex-col items-stretch gap-2">
-                        <div
-                            class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-                            <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
-                        </div>
-                        <p data-i18n="countdown.days"
-                            class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Días</p>
-                    </div>
-                    <div class="flex grow flex-col items-stretch gap-2">
-                        <div
-                            class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-                            <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
-                        </div>
-                        <p data-i18n="countdown.hours"
-                            class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Horas
-                        </p>
-                    </div>
-                    <div class="flex grow flex-col items-stretch gap-2">
-                        <div
-                            class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
-                            <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
-                        </div>
-                        <p data-i18n="countdown.minutes"
-                            class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Minutos
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4 p-4 pt-0"><a href="Noticias.html"
-                    class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105"><span
-                        class="material-symbols-outlined text-4xl dark:text-sky-400">feed</span>
-                    <h2 data-i18n="nav.news" class="text-base font-bold">Noticias</h2>
-                </a><a href="Candidatos.html"
-                    class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105"><span
-                        class="material-symbols-outlined text-4xl dark:text-sky-400">campaign</span>
-                    <h2 data-i18n="nav.candidates" class="text-base font-bold">Candidatos</h2>
-                </a><a href="Calendario_unido.html"
-                    class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105"><span
-                        class="material-symbols-outlined text-4xl dark:text-sky-400">calendar_month</span>
-                    <h2 data-i18n="nav.calendar" class="text-base font-bold">Calendario</h2>
-                </a><a href="Partido_politicos.html"
-                    class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105"><span
-                        class="material-symbols-outlined text-4xl dark:text-sky-400">groups</span>
-                    <h2 data-i18n="nav.parties" class="text-base font-bold">Partidos</h2>
-                </a></div>
-            <div class="px-4 pb-4"><a href="Ubicacion.html"
-                    class="flex items-center gap-4 p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105"><span
-                        class="material-symbols-outlined text-4xl">where_to_vote</span>
-                    <div class="flex flex-col">
-                        <h3 data-i18n="location.title" class="text-lg font-bold">Ubica tu Local de Votación</h3>
-                        <p data-i18n="location.subtitle" class="text-sm">Consulta dónde te toca votar con tu DNI.</p>
-                    </div><span class="material-symbols-outlined ml-auto">arrow_forward_ios</span>
-                </a></div>
-            <div class="p-4">
-                <div class="rounded-xl border p-4 bg-card-light dark:bg-card-dark">
-                    <div class="flex items-center gap-3 mb-2"><span
-                            class="material-symbols-outlined text-primary dark:text-sky-400">lightbulb</span>
-                        <h3 data-i18n="didyouknow.title" class="text-lg font-bold">¿Sabías que?</h3>
-                    </div>
-                    <p data-i18n="didyouknow.content">El voto en blanco se diferencia del voto viciado.</p>
-                </div>
-            </div>
-        </main>
-        <div id="site-footer"></div>
-        <script>fetch("footer.html").then(e => e.text()).then(e => document.getElementById("site-footer").innerHTML = e).catch(e => console.warn("No se pudo cargar footer:", e))</script>
-        <script src="../assets/js/index-timer.js" defer="defer"></script>
-        <script src="../assets/js/i18n.js"></script>
+
+        <!-- Notificaciones (ahora abre modal) -->
+        <div class="flex w-12 items-center justify-end">
+          <button id="notificationsBtn"
+            class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-text-light dark:text-text-dark gap-2 text-base font-bold p-0"
+            aria-label="Notificaciones">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4 py-6">
+      <div class="max-w-md w-full bg-card-light dark:bg-card-dark rounded-xl shadow-lg overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
+          <h3 class="text-lg font-bold">Notificaciones</h3>
+          <button id="closeNotifications" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="notificationsContent" class="p-4 max-h-64 overflow-auto text-sm text-secondary-text-light dark:text-secondary-text-dark">
+          <p class="text-center text-xs text-secondary-text-light dark:text-secondary-text-dark">Cargando...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const btn = document.getElementById('notificationsBtn');
+        const modal = document.getElementById('notificationsModal');
+        const closeBtn = document.getElementById('closeNotifications');
+        const content = document.getElementById('notificationsContent');
+
+        function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); loadNotifications(); }
+        function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+        btn?.addEventListener('click', openModal);
+        closeBtn?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        async function loadNotifications() {
+          const primaryUrl = 'https://api.transparencia.org.pe/app-publicaciones/dc-Informe%202_Sem%C3%A1foro%20Democr%C3%A1tico.pdf';
+          // Notificación fija (RPP) que aparece siempre primero
+          const fixedNotifications = [
+            {
+              title: 'Elecciones 2026: partidos inscritos y en proceso',
+              excerpt: 'RPP Noticias — Conoce cuáles son los partidos inscritos y los que están en proceso de inscripción.',
+              url: 'https://rpp.pe/politica/elecciones/elecciones-2026-conoce-cuales-son-los-partidos-politicos-inscritos-y-los-que-estan-en-proceso-de-inscripcion-noticia-1572877'
+            }
+          ];
+
+          // Intentamos primero la API externa indicada por el usuario
+          try {
+            const res = await fetch(primaryUrl, { mode: 'cors' });
+            if (!res.ok) throw new Error('Respuesta no OK desde API primaria');
+            const contentType = (res.headers.get('content-type') || '').toLowerCase();
+
+            // Si la API devuelve JSON, parseamos y mostramos elementos (con la notificación fija al inicio)
+            if (contentType.includes('application/json')) {
+              const data = await res.json();
+              const items = Array.isArray(data) ? data.slice(0, 6) : (data?.noticias || []);
+              const merged = [...fixedNotifications, ...items];
+              if (!merged || merged.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+              content.innerHTML = merged.map(it => `
+                <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                  <div class="font-semibold">${it.title || it.titulo || ''}</div>
+                  <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}
+                    ${it.url ? `<div class="mt-1"><a href="${it.url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>` : ''}
+                  </div>
+                </div>
+              `).join('');
+              return;
+            }
+
+            // Si la API devuelve PDF, mostramos la notificación fija y el visor/enlace al PDF
+            if (contentType.includes('application/pdf')) {
+              content.innerHTML = `
+                <div class="p-2">
+                  <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                    <div class="font-semibold">${fixedNotifications[0].title}</div>
+                    <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${fixedNotifications[0].excerpt}
+                      <div class="mt-1"><a href="${fixedNotifications[0].url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>
+                    </div>
+                  </div>
+                  <p class="text-sm mb-2 text-secondary-text-light dark:text-secondary-text-dark">Se encontró un informe en PDF en la fuente indicada.</p>
+                  <div class="flex gap-2">
+                    <a href="${primaryUrl}" target="_blank" rel="noopener" class="px-3 py-2 rounded bg-primary text-text-light">Abrir informe (PDF)</a>
+                    <button id="embedPdfBtn" class="px-3 py-2 rounded border">Ver dentro</button>
+                  </div>
+                  <div id="pdfViewer" class="mt-3"></div>
+                </div>
+              `;
+
+              // Intentar embedir en un iframe si es posible
+              const embedBtn = document.getElementById('embedPdfBtn');
+              embedBtn?.addEventListener('click', () => {
+                const viewer = document.getElementById('pdfViewer');
+                viewer.innerHTML = `<iframe src="${primaryUrl}" class="w-full h-80 border" frameborder="0"></iframe>`;
+              });
+              return;
+            }
+
+            // Para otros tipos, intentamos mostrar la notificación fija y un enlace directo a la fuente
+            content.innerHTML = `
+              <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                <div class="font-semibold">${fixedNotifications[0].title}</div>
+                <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${fixedNotifications[0].excerpt}
+                  <div class="mt-1"><a href="${fixedNotifications[0].url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>
+                </div>
+              </div>
+              <p class="text-sm mt-2">Fuente encontrada en <a href="${primaryUrl}" target="_blank" rel="noopener" class="text-primary">${primaryUrl}</a></p>
+            `;
+            return;
+          } catch (error_) {
+            console.warn('Fallo al cargar desde API primaria:', error_);
+            // Si falla la API externa, caemos al archivo local de noticias
+          }
+
+          // Fallback: cargar noticias locales y anteponer la notificación fija
+          try {
+            const res2 = await fetch('../assets/data/noticias.json');
+            if (!res2.ok) throw new Error('No se pudo cargar noticias locales');
+            const data2 = await res2.json();
+            const items2 = Array.isArray(data2) ? data2.slice(0, 6) : (data2?.noticias || []);
+            const merged2 = [...fixedNotifications, ...items2];
+            if (!merged2 || merged2.length === 0) { content.innerHTML = '<p class="text-center text-sm">No hay notificaciones.</p>'; return; }
+            content.innerHTML = merged2.map(it => `
+              <div class="py-2 border-b last:border-b-0 border-border-light dark:border-border-dark">
+                <div class="font-semibold">${it.title || it.titulo || ''}</div>
+                <div class="text-xs text-secondary-text-light dark:text-secondary-text-dark mt-1">${it.excerpt || it.summary || it.descripcion || ''}
+                  ${it.url ? `<div class="mt-1"><a href="${it.url}" target="_blank" rel="noopener" class="text-primary">Leer más</a></div>` : ''}
+                </div>
+              </div>
+            `).join('');
+          } catch (error__) {
+            content.innerHTML = '<p class="text-center text-sm text-red-500">Error al cargar notificaciones.</p>';
+            console.warn('Fallo al cargar noticias locales:', error__);
+          }
+        }
+      })();
+    </script>
+
+    <!-- MAIN -->
+    <main class="flex-grow pb-24">
+
+      <div class="p-4 pt-6">
+        <h1 data-i18n="hero.title" class="text-text-light dark:text-text-dark text-3xl font-bold text-center">
+          Tu Guía para las Elecciones Generales 2026
+        </h1>
+        <p data-i18n="hero.subtitle" class="text-secondary-text-light dark:text-secondary-text-dark text-center mt-2">
+          Infórmate y participa. Todo lo que necesitas saber.
+        </p>
+      </div>
+
+      <!-- CONTADOR -->
+      <div class="p-4 pt-2">
+        <h3 data-i18n="countdown.title" class="text-text-light dark:text-text-dark text-lg font-bold text-center pb-2">
+          Faltan para el día de la elección
+        </h3>
+
+        <div class="flex gap-4 pb-4">
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div id="count-months-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-months" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.months"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Meses</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div id="count-days-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-days" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.days"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Días</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div id="count-hours-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-hours" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.hours"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Horas</p>
+          </div>
+
+          <div class="flex grow flex-col items-stretch gap-2">
+            <div id="count-minutes-container" class="flex h-16 grow items-center justify-center rounded-xl px-3 bg-primary dark:bg-primary/20">
+              <p id="count-minutes" class="text-text-light dark:text-primary text-4xl font-black">0</p>
+            </div>
+            <p data-i18n="countdown.minutes"
+              class="text-center text-secondary-text-light dark:text-secondary-text-dark text-sm">Minutos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="grid grid-cols-2 gap-4 p-4 pt-0">
+        <a href="Noticias.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">feed</span>
+          <h2 data-i18n="nav.news" class="text-base font-bold">Noticias</h2>
+        </a>
+
+        <a href="Candidatos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">campaign</span>
+          <h2 data-i18n="nav.candidates" class="text-base font-bold">Candidatos</h2>
+        </a>
+
+        <a href="Calendario_unido.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">calendar_month</span>
+          <h2 data-i18n="nav.calendar" class="text-base font-bold">Calendario</h2>
+        </a>
+
+        <a href="Partido_politicos.html"
+          class="flex flex-col items-center p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl dark:text-sky-400">groups</span>
+          <h2 data-i18n="nav.parties" class="text-base font-bold">Partidos</h2>
+        </a>
+      </div>
+
+      <!-- UBICACION -->
+      <div class="px-4 pb-4">
+        <a href="Ubicacion.html"
+          class="flex items-center gap-4 p-4 rounded-xl border bg-card-light dark:bg-card-dark hover:scale-105">
+          <span class="material-symbols-outlined text-4xl">where_to_vote</span>
+          <div class="flex flex-col">
+            <h3 data-i18n="location.title" class="text-lg font-bold">Ubica tu Local de Votación</h3>
+            <p data-i18n="location.subtitle" class="text-sm">Consulta dónde te toca votar con tu DNI.</p>
+          </div>
+          <span class="material-symbols-outlined ml-auto">arrow_forward_ios</span>
+        </a>
+      </div>
+
+      <!-- SABÍAS QUE -->
+      <div class="p-4">
+        <div class="rounded-xl border p-4 bg-card-light dark:bg-card-dark">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-primary dark:text-sky-400">lightbulb</span>
+            <h3 data-i18n="didyouknow.title" class="text-lg font-bold">¿Sabías que?</h3>
+          </div>
+          <p data-i18n="didyouknow.content">
+            El voto en blanco se diferencia del voto viciado.
+          </p>
+        </div>
+      </div>
+
+    </main>
+
+    <div id="site-footer"></div>
+
+    <!-- Cargar footer -->
+    <script>
+      fetch('footer.html')
+        .then(r => r.text())
+        .then(html => document.getElementById('site-footer').innerHTML = html)
+        .catch(err => console.warn("No se pudo cargar footer:", err));
+    </script>
+
+    <!-- Temporizador -->
+    <script src="../assets/js/index-timer.js" defer></script>
+
+    <!-- i18n -->
+    <script src="../assets/js/i18n.js"></script>
+
+  </div>
+  <script>
+    //esto lo conecta al service worker donde ya declaramos no tocar!
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("SW registrado"))
+      .catch(err => console.error("Error SW:", err));
+  });
+}
+</script>
+
 </body>
 
 </html>
