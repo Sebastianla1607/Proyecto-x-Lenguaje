@@ -71,7 +71,7 @@
     date.innerText = 'Publicado: ' + formatDate(n.fecha);
 
     const likeBtn = document.createElement('button');
-    likeBtn.className = 'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-accent transition-colors hover:bg-yellow-50';
+    likeBtn.className = 'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-accent transition-colors hover:bg-sky-50';
     likeBtn.innerHTML = '<span class="material-symbols-outlined text-xl">favorite</span><span class="text-sm font-medium">Me gusta</span>';
     likeBtn.onclick = (e)=>{
       e.stopPropagation();
@@ -80,11 +80,11 @@
       if(liked){
         likeBtn.dataset.liked = '0';
         icon.innerText = 'favorite';
-        likeBtn.classList.remove('bg-yellow-100');
+        likeBtn.classList.remove('bg-sky-100');
       } else {
         likeBtn.dataset.liked = '1';
         icon.innerText = 'favorite';
-        likeBtn.classList.add('bg-yellow-100');
+        likeBtn.classList.add('bg-sky-100');
       }
     };
 

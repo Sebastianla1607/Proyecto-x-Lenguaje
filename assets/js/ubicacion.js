@@ -166,7 +166,7 @@ function selectLocationOnMap({ lat, lon, title }) {
         const start = [pos.coords.latitude, pos.coords.longitude];
         const end = [lat, lon];
         if (routeLine) try { map.removeLayer(routeLine); } catch(e){}
-        routeLine = L.polyline([start, end], { color: 'var(--tw-color-primary, #FFCB05)' , weight: 3, dashArray: '5,8' }).addTo(map);
+        routeLine = L.polyline([start, end], { color: 'var(--tw-color-primary, #29B6F6)' , weight: 3, dashArray: '5,8' }).addTo(map);
         const bounds = L.latLngBounds([start, end]);
         map.fitBounds(bounds, { padding: [60, 60] });
       }, () => {

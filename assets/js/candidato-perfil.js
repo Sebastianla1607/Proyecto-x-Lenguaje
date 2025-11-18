@@ -230,7 +230,7 @@
       // clases para colorear la badge según tipo
       function badgeClassFromType(chamberText) {
         const t = (chamberText || '').toString().toLowerCase();
-        if (t.includes('presid')) return 'bg-amber-100 text-amber-800';
+        if (t.includes('presid')) return 'bg-sky-100 text-sky-800';
         if (t.includes('andino') || t.includes('parl')) return 'bg-indigo-100 text-indigo-800';
         if (t.includes('dip')) return 'bg-green-100 text-green-800';
         if (t.includes('sen')) return 'bg-red-100 text-red-800';

@@ -12,13 +12,13 @@ body {
 
 /* Tema dinámico según filtro: define variables y clases para cambiar paleta */
 #calendar-root {
-  --accent: #FFCB05; /* color por defecto (Todos) */
+  --accent: #29B6F6; /* color por defecto (Todos) */
   --dot-color: var(--accent);
-  --outline-color: rgba(255, 203, 5, 0.95);
-  --card-accent-bg: #FFFBEB;
+  --outline-color: rgba(41,182,246,0.95);
+  --card-accent-bg: #E1F5FE;
 }
 
-.theme-todos { --accent: #FFCB05; --dot-color: #FFCB05; --outline-color: rgba(255,203,5,0.95); --card-accent-bg: #FFFBEB; }
+.theme-todos { --accent: #29B6F6; --dot-color: #29B6F6; --outline-color: rgba(41,182,246,0.95); --card-accent-bg: #E1F5FE; }
 .theme-votantes { --accent: #60A5FA; --dot-color: #60A5FA; --outline-color: rgba(96,165,250,0.95); --card-accent-bg: #EFF8FF; }
 .theme-miembros { --accent: #FB923C; --dot-color: #FB923C; --outline-color: rgba(251,146,60,0.95); --card-accent-bg: #FFF7ED; }
 
